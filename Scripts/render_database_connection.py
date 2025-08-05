@@ -125,6 +125,20 @@ class RenderPharmacyDatabase:
             print(f"❌ Daily summary record not found for {pharmacy_code} on {report_date}")
             return False
         
+        # First, delete existing sales details for this pharmacy/date to avoid duplicates
+        delete_query = """
+        DELETE FROM sales_details 
+        WHERE pharmacy_id = (SELECT id FROM pharmacies WHERE pharmacy_code = %s) 
+        AND report_date = %s
+        """
+        
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(delete_query, (pharmacy_code, report_date))
+                print(f"🗑️  Cleared existing sales details for {pharmacy_code} on {report_date}")
+        except Exception as e:
+            print(f"⚠️  Warning: Could not clear existing sales details: {e}")
+        
         # Insert sales details
         query = """
         INSERT INTO sales_details (
