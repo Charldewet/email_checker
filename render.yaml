@@ -1,3 +1,8 @@
+databases:
+  - name: pharmacy-reports
+    databaseName: pharmacy_reports
+    user: pharmacy_user
+
 services:
   - type: web
     name: pharmacy-email-monitor
