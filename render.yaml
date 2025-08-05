@@ -3,7 +3,7 @@ services:
     name: pharmacy-email-monitor
     env: python
     plan: starter
-    buildCommand: pip install -r Scripts/requirements.txt
+    buildCommand: pip install -r Scripts/requirements_render.txt
     startCommand: python Scripts/app.py
     envVars:
       - key: DATABASE_URL
@@ -13,4 +13,4 @@ services:
       - key: REITZ_GMAIL_APP_PASSWORD
         value: dkcj ixgf vhkf jupx
       - key: PYTHON_VERSION
-        value: 3.11.8 
+        value: 3.13.4 
