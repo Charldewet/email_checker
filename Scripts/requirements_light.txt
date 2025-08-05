@@ -1,0 +1,37 @@
+# Pharmacy Database System Requirements - Optimized for Render
+# Using pre-compiled wheels and lighter versions for faster deployment
+
+# Database
+psycopg2-binary>=2.9.0,<3.0.0
+
+# Web Framework
+flask>=2.3.0,<3.0.0
+flask-cors>=4.0.0,<5.0.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# PDF Processing - using lighter version
+PyMuPDF>=1.23.0,<1.24.0
+
+# Data Processing - lighter versions
+pandas>=2.0.0,<3.0.0
+
+# Date/Time Handling
+python-dateutil>=2.8.0
+
+# Scheduling
+schedule>=1.2.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Built-in modules (no need to install):
+# - imaplib (email processing)
+# - email (email processing) 
+# - json (data processing)
+# - pathlib (file handling)
+# - os (system operations)
+# - datetime (date/time)
+# - logging (logging)
+# - threading (background tasks) 
