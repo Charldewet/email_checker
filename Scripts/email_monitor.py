@@ -284,11 +284,24 @@ class PharmacyEmailMonitor:
     def insert_combined_data_into_database(self):
         """Insert combined data into the Render database"""
         try:
-            # Load combined data from JSON files
+            # Try to use the insert_data_to_database script directly
+            logger.info("Using direct database insertion script...")
+            try:
+                from insert_data_to_database import main as insert_main
+                insert_main()
+                logger.info("✅ Data inserted using direct insertion script")
+                return
+            except Exception as e:
+                logger.error(f"Direct insertion failed: {e}")
+            
+            # Fallback: Load combined data from JSON files
             combined_data = self.load_combined_data()
             
             if not combined_data:
                 logger.warning("No combined data found to insert")
+                # Try to list available JSON files for debugging
+                json_files = list(Path('.').glob('*.json'))
+                logger.info(f"Available JSON files: {[f.name for f in json_files]}")
                 return
             
             logger.info(f"Inserting data for {len(combined_data)} pharmacy/date combinations")
@@ -296,8 +309,11 @@ class PharmacyEmailMonitor:
             success_count = 0
             for key, data in combined_data.items():
                 try:
+                    # Extract the data properly for insertion
+                    insert_data = self.prepare_data_for_insertion(data)
+                    
                     # Insert daily summary
-                    if self.db.insert_daily_summary(**data):
+                    if self.db.insert_daily_summary(**insert_data):
                         success_count += 1
                         logger.info(f"✅ Inserted data for {key}")
                     else:
@@ -309,6 +325,60 @@ class PharmacyEmailMonitor:
             
         except Exception as e:
             logger.error(f"❌ Database insertion failed: {e}")
+    
+    def prepare_data_for_insertion(self, data):
+        """Prepare combined data for database insertion"""
+        try:
+            # If data is nested (from complete_pipeline_data.json), extract the fields
+            if isinstance(data, dict):
+                insert_data = {}
+                
+                # Extract basic info
+                insert_data['pharmacy_code'] = data.get('pharmacy', 'UNKNOWN')
+                insert_data['report_date'] = data.get('date', '2025-08-04')
+                
+                # Extract from trading summary
+                trading = data.get('trading_summary', {})
+                insert_data['stock_opening'] = trading.get('stock_opening')
+                insert_data['stock_closing'] = trading.get('stock_closing')
+                insert_data['purchases'] = trading.get('purchases')
+                insert_data['adjustments'] = trading.get('adjustments')
+                insert_data['cost_of_sales'] = trading.get('cost_of_sales')
+                insert_data['gp_value'] = trading.get('gp_value')
+                insert_data['gp_percent'] = trading.get('gp_percent')
+                
+                # Extract from turnover summary (override turnover)
+                turnover = data.get('turnover_summary', {})
+                insert_data['turnover'] = turnover.get('turnover')
+                insert_data['sales_cash'] = turnover.get('sales_cash')
+                insert_data['sales_account'] = turnover.get('sales_account')
+                insert_data['sales_cod'] = turnover.get('sales_cod')
+                
+                # Extract from transaction summary
+                transaction = data.get('transaction_summary', {})
+                insert_data['transactions_total'] = transaction.get('transactions_total')
+                insert_data['avg_basket_value'] = transaction.get('avg_basket_value')
+                
+                # Extract from gross profit
+                gross_profit = data.get('gross_profit', {})
+                if gross_profit and transaction.get('transactions_total'):
+                    total_qty = gross_profit.get('total_sales_qty', 0)
+                    transactions = transaction.get('transactions_total', 1)
+                    insert_data['avg_basket_size'] = total_qty / transactions if transactions > 0 else 0
+                
+                # Extract from dispensary summary
+                dispensary = data.get('dispensary_summary', {})
+                insert_data['script_total'] = dispensary.get('script_total')
+                insert_data['disp_turnover'] = dispensary.get('disp_turnover')
+                insert_data['avg_script_value'] = dispensary.get('avg_script_value')
+                
+                return insert_data
+            else:
+                return data
+                
+        except Exception as e:
+            logger.error(f"Error preparing data for insertion: {e}")
+            return data
     
     def load_combined_data(self) -> Dict:
         """Load combined data from the pipeline JSON files"""
