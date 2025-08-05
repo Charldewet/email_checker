@@ -222,7 +222,7 @@ class PharmacyEmailMonitor:
             # Trading Summary
             try:
                 # Find and process trading summary files
-                trading_files = list(Path('../temp_classified_pdfs').rglob('trading_summary_*.pdf'))
+                trading_files = list(Path('temp_classified_pdfs').rglob('trading_summary_*.pdf'))
                 if trading_files:
                     for file_path in trading_files:
                         data = extract_trading_summary_data(str(file_path))
@@ -236,7 +236,7 @@ class PharmacyEmailMonitor:
             # Turnover Summary
             try:
                 # Find and process turnover summary files
-                turnover_files = list(Path('../temp_classified_pdfs').rglob('turnover_summary_*.pdf'))
+                turnover_files = list(Path('temp_classified_pdfs').rglob('turnover_summary_*.pdf'))
                 if turnover_files:
                     for file_path in turnover_files:
                         data = extract_turnover_summary_data(str(file_path))
@@ -250,7 +250,7 @@ class PharmacyEmailMonitor:
             # Transaction Summary
             try:
                 # Find and process transaction summary files
-                transaction_files = list(Path('../temp_classified_pdfs').rglob('transaction_summary_*.pdf'))
+                transaction_files = list(Path('temp_classified_pdfs').rglob('transaction_summary_*.pdf'))
                 if transaction_files:
                     for file_path in transaction_files:
                         data = extract_transaction_summary_data(str(file_path))
@@ -264,7 +264,7 @@ class PharmacyEmailMonitor:
             # Gross Profit Report
             try:
                 # Find and process gross profit files
-                gross_profit_files = list(Path('../temp_classified_pdfs').rglob('gross_profit_report_*.pdf'))
+                gross_profit_files = list(Path('temp_classified_pdfs').rglob('gross_profit_report_*.pdf'))
                 if gross_profit_files:
                     for file_path in gross_profit_files:
                         data = extract_gross_profit_data(str(file_path))
@@ -278,7 +278,7 @@ class PharmacyEmailMonitor:
             # Dispensary Summary
             try:
                 # Find and process dispensary summary files
-                dispensary_files = list(Path('../temp_classified_pdfs').rglob('dispensary_summary_*.pdf'))
+                dispensary_files = list(Path('temp_classified_pdfs').rglob('dispensary_summary_*.pdf'))
                 if dispensary_files:
                     for file_path in dispensary_files:
                         data = extract_dispensary_summary_data(str(file_path))
@@ -383,7 +383,7 @@ class PharmacyEmailMonitor:
             
             # Clean up temp directories
             temp_dirs = [
-                Path('../temp_classified_pdfs'),
+                Path('temp_classified_pdfs'),
                 Path('temp_email_pdfs')
             ]
             
@@ -436,6 +436,10 @@ class PharmacyEmailMonitor:
             
             logger.info(f"Found {len(unread_emails)} new emails with PDFs")
             
+            # Collect all PDF files first
+            all_pdf_files = []
+            processed_emails = []
+            
             for email_data in unread_emails:
                 email_id = email_data['id']
                 
@@ -455,23 +459,33 @@ class PharmacyEmailMonitor:
                         self.mark_email_as_processed(mail, email_id)
                         continue
                     
-                    # Process PDFs through pipeline
-                    success = self.process_pdfs_through_pipeline(pdf_files)
+                    # Add to collection
+                    all_pdf_files.extend(pdf_files)
+                    processed_emails.append(email_id)
                     
-                    if success:
-                        # Clean up files
-                        self.cleanup_processed_files(pdf_files)
-                        
-                        # Mark email as processed
-                        self.mark_email_as_processed(mail, email_id)
-                        
-                        logger.info(f"✅ Successfully processed email {email_id}")
-                    else:
-                        logger.error(f"❌ Failed to process email {email_id}")
+                    logger.info(f"✅ Extracted {len(pdf_files)} PDF files from email {email_id}")
                 
                 except Exception as e:
                     logger.error(f"❌ Error processing email {email_id}: {e}")
                     continue
+            
+            # Process all PDFs through pipeline at once
+            if all_pdf_files:
+                logger.info(f"Processing {len(all_pdf_files)} total PDF files through pipeline")
+                success = self.process_pdfs_through_pipeline(all_pdf_files)
+                
+                if success:
+                    # Clean up all files at once
+                    self.cleanup_processed_files(all_pdf_files)
+                    
+                    # Mark all emails as processed
+                    for email_id in processed_emails:
+                        self.mark_email_as_processed(mail, email_id)
+                        logger.info(f"✅ Successfully processed email {email_id}")
+                else:
+                    logger.error(f"❌ Failed to process PDF pipeline")
+            else:
+                logger.info("No PDF files to process")
             
             return True
             
