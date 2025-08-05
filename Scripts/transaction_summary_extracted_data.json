@@ -1,0 +1,31 @@
+[
+  {
+    "file": "transaction_summary_20250805-12h41m07s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "transactions_total": 321,
+    "transaction_breakdown": {
+      "CASH SALE": 292,
+      "INVOICE": 25,
+      "RECEIPT": 4
+    },
+    "avg_basket_value": 212.53146417445484,
+    "turnover": 68222.6
+  },
+  {
+    "file": "transaction_summary_20250805-12h39m56s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "transactions_total": 387,
+    "transaction_breakdown": {
+      "CASH SALE": 314,
+      "C.O.D SALE": 14,
+      "INVOICE": 40,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 2,
+      "RECEIPT": 15
+    },
+    "avg_basket_value": 232.51514211886305,
+    "turnover": 89983.36
+  }
+]

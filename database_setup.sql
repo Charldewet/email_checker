@@ -1,0 +1,243 @@
+-- PostgreSQL Database Setup for Pharmacy Reporting System
+-- This script creates the complete database structure for storing pharmacy reports
+
+-- Step 1: Create the Database (run this separately if needed)
+-- CREATE DATABASE pharmacy_reports;
+
+-- Step 2: Connect to the database
+-- \c pharmacy_reports
+
+-- Step 3: Create Tables
+
+-- Table: pharmacies
+CREATE TABLE IF NOT EXISTS pharmacies (
+    id SERIAL PRIMARY KEY,
+    pharmacy_code TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table: daily_summary
+CREATE TABLE IF NOT EXISTS daily_summary (
+    id SERIAL PRIMARY KEY,
+    pharmacy_id INTEGER REFERENCES pharmacies(id) ON DELETE CASCADE,
+    report_date DATE NOT NULL,
+    upload_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Financial metrics
+    turnover NUMERIC,
+    gp_percent NUMERIC,
+    gp_value NUMERIC,
+    cost_of_sales NUMERIC,
+    purchases NUMERIC,
+    
+    -- Transaction metrics
+    avg_basket_value NUMERIC,
+    avg_basket_size NUMERIC,
+    transactions_total INTEGER,
+    script_total INTEGER,
+    avg_script_value NUMERIC,
+    
+    -- Dispensing metrics
+    disp_turnover NUMERIC,
+    
+    -- Stock metrics
+    stock_opening NUMERIC,
+    stock_closing NUMERIC,
+    adjustments NUMERIC,
+    
+    -- Payment methods
+    sales_cash NUMERIC,
+    sales_cod NUMERIC,
+    sales_account NUMERIC,
+
+    UNIQUE (pharmacy_id, report_date)
+);
+
+-- Table: department_codes
+CREATE TABLE IF NOT EXISTS department_codes (
+    id SERIAL PRIMARY KEY,
+    department_code TEXT UNIQUE NOT NULL,
+    department_name TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table: sales_details
+CREATE TABLE IF NOT EXISTS sales_details (
+    id SERIAL PRIMARY KEY,
+    pharmacy_id INTEGER REFERENCES pharmacies(id) ON DELETE CASCADE,
+    report_date DATE NOT NULL,
+
+    -- Product information
+    department_code TEXT REFERENCES department_codes(department_code) ON DELETE SET NULL,
+    stock_code TEXT,
+    description TEXT,
+    
+    -- Stock and sales data
+    soh INTEGER, -- Stock on Hand
+    sales_qty INTEGER,
+    sales_value NUMERIC,
+    sales_cost NUMERIC,
+    gross_profit NUMERIC,
+    gross_profit_percent NUMERIC,
+
+    -- Foreign key constraint to ensure data integrity
+    FOREIGN KEY (pharmacy_id, report_date) REFERENCES daily_summary(pharmacy_id, report_date) ON DELETE CASCADE
+);
+
+-- Step 4: Create Indexes for Performance
+CREATE INDEX IF NOT EXISTS idx_sales_details_pharmacy_date ON sales_details(pharmacy_id, report_date);
+CREATE INDEX IF NOT EXISTS idx_department_code_lookup ON department_codes(department_code);
+CREATE INDEX IF NOT EXISTS idx_daily_summary_pharmacy_date ON daily_summary(pharmacy_id, report_date);
+CREATE INDEX IF NOT EXISTS idx_daily_summary_date ON daily_summary(report_date);
+CREATE INDEX IF NOT EXISTS idx_sales_details_stock_code ON sales_details(stock_code);
+CREATE INDEX IF NOT EXISTS idx_sales_details_department ON sales_details(department_code);
+
+-- Step 5: Insert Sample Data
+
+-- Sample pharmacy
+INSERT INTO pharmacies (pharmacy_code, name) 
+VALUES ('REITZ', 'Reitz Pharmacy')
+ON CONFLICT (pharmacy_code) DO NOTHING;
+
+-- Note: Department codes will be imported from Departments.csv
+-- Run import_departments.py to populate this table with your actual department codes
+
+-- Step 6: Create Views for Common Queries
+
+-- View: Daily Summary with Pharmacy Details
+CREATE OR REPLACE VIEW daily_summary_view AS
+SELECT 
+    ds.id,
+    p.pharmacy_code,
+    p.name as pharmacy_name,
+    ds.report_date,
+    ds.upload_time,
+    ds.turnover,
+    ds.gp_percent,
+    ds.gp_value,
+    ds.cost_of_sales,
+    ds.purchases,
+    ds.avg_basket_value,
+    ds.avg_basket_size,
+    ds.transactions_total,
+    ds.script_total,
+    ds.avg_script_value,
+    ds.disp_turnover,
+    ds.stock_opening,
+    ds.stock_closing,
+    ds.adjustments,
+    ds.sales_cash,
+    ds.sales_cod,
+    ds.sales_account
+FROM daily_summary ds
+JOIN pharmacies p ON ds.pharmacy_id = p.id;
+
+-- View: Sales Details with Department and Pharmacy Info
+CREATE OR REPLACE VIEW sales_details_view AS
+SELECT 
+    sd.id,
+    p.pharmacy_code,
+    p.name as pharmacy_name,
+    sd.report_date,
+    dc.department_code,
+    dc.department_name,
+    sd.stock_code,
+    sd.description,
+    sd.soh,
+    sd.sales_qty,
+    sd.sales_value,
+    sd.sales_cost,
+    sd.gross_profit,
+    sd.gross_profit_percent
+FROM sales_details sd
+JOIN pharmacies p ON sd.pharmacy_id = p.id
+LEFT JOIN department_codes dc ON sd.department_code = dc.department_code;
+
+-- Step 7: Create Functions for Data Analysis
+
+-- Function: Get pharmacy performance summary
+CREATE OR REPLACE FUNCTION get_pharmacy_performance(
+    p_pharmacy_code TEXT,
+    p_start_date DATE,
+    p_end_date DATE
+)
+RETURNS TABLE (
+    report_date DATE,
+    turnover NUMERIC,
+    gp_value NUMERIC,
+    gp_percent NUMERIC,
+    transactions_total INTEGER,
+    avg_basket_value NUMERIC
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        ds.report_date,
+        ds.turnover,
+        ds.gp_value,
+        ds.gp_percent,
+        ds.transactions_total,
+        ds.avg_basket_value
+    FROM daily_summary ds
+    JOIN pharmacies p ON ds.pharmacy_id = p.id
+    WHERE p.pharmacy_code = p_pharmacy_code
+    AND ds.report_date BETWEEN p_start_date AND p_end_date
+    ORDER BY ds.report_date;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function: Get top selling products
+CREATE OR REPLACE FUNCTION get_top_selling_products(
+    p_pharmacy_code TEXT,
+    p_start_date DATE,
+    p_end_date DATE,
+    p_limit INTEGER DEFAULT 10
+)
+RETURNS TABLE (
+    stock_code TEXT,
+    description TEXT,
+    department_name TEXT,
+    total_sales_qty INTEGER,
+    total_sales_value NUMERIC,
+    avg_gp_percent NUMERIC
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        sd.stock_code,
+        sd.description,
+        dc.department_name,
+        SUM(sd.sales_qty) as total_sales_qty,
+        SUM(sd.sales_value) as total_sales_value,
+        AVG(sd.gross_profit_percent) as avg_gp_percent
+    FROM sales_details sd
+    JOIN pharmacies p ON sd.pharmacy_id = p.id
+    LEFT JOIN department_codes dc ON sd.department_code = dc.department_code
+    WHERE p.pharmacy_code = p_pharmacy_code
+    AND sd.report_date BETWEEN p_start_date AND p_end_date
+    GROUP BY sd.stock_code, sd.description, dc.department_name
+    ORDER BY total_sales_value DESC
+    LIMIT p_limit;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 8: Grant Permissions (adjust as needed)
+-- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO your_user;
+-- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO your_user;
+
+-- Step 9: Create Comments for Documentation
+COMMENT ON TABLE pharmacies IS 'Stores information about pharmacies in the system';
+COMMENT ON TABLE daily_summary IS 'Daily summary reports for each pharmacy';
+COMMENT ON TABLE department_codes IS 'Lookup table for department codes and names';
+COMMENT ON TABLE sales_details IS 'Detailed sales data at stock item level';
+
+COMMENT ON COLUMN daily_summary.turnover IS 'Total daily turnover';
+COMMENT ON COLUMN daily_summary.gp_percent IS 'Gross profit percentage';
+COMMENT ON COLUMN daily_summary.gp_value IS 'Gross profit value';
+COMMENT ON COLUMN sales_details.soh IS 'Stock on Hand';
+COMMENT ON COLUMN sales_details.sales_qty IS 'Quantity sold';
+COMMENT ON COLUMN sales_details.sales_value IS 'Sales value excluding VAT';
+
+-- Success message
+SELECT 'Pharmacy reporting database setup completed successfully!' as status; 

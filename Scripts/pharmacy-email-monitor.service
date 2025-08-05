@@ -1,0 +1,27 @@
+[Unit]
+Description=Pharmacy Email Monitor Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=charldewet
+WorkingDirectory=/Users/charldewet/Python/pharmacyDatabase/Scripts
+Environment=REITZ_GMAIL_USERNAME=dmr.tlc.reitz@gmail.com
+Environment=REITZ_GMAIL_APP_PASSWORD=dkcj ixgf vhkf jupx
+Environment=DATABASE_URL=your_render_database_url_here
+ExecStart=/usr/bin/python3 /Users/charldewet/Python/pharmacyDatabase/Scripts/email_monitor.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/Users/charldewet/Python/pharmacyDatabase/Scripts
+
+[Install]
+WantedBy=multi-user.target 

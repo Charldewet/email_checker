@@ -1,20 +1,13 @@
-databases:
-  - name: pharmacy-reports
-    databaseName: pharmacy_reports
-    user: pharmacy_user
-
 services:
   - type: web
     name: pharmacy-email-monitor
     env: python
-    plan: free
+    plan: starter
     buildCommand: pip install -r Scripts/requirements.txt
     startCommand: python Scripts/app.py
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: pharmacy-reports
-          property: connectionString
+        value: postgresql://pharmacy_user:PzL1HpYNaYOrmcfImjeZm8LitHTd4d7F@dpg-d28vb1muk2gs73frrns0-a.oregon-postgres.render.com/pharmacy_reports
       - key: REITZ_GMAIL_USERNAME
         value: dmr.tlc.reitz@gmail.com
       - key: REITZ_GMAIL_APP_PASSWORD

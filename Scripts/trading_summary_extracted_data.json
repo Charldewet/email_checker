@@ -1,0 +1,28 @@
+[
+  {
+    "file": "trading_summary_20250805-11h39m56s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "stock_opening": 1622999.99,
+    "stock_closing": 1649511.94,
+    "purchases": 22572.01,
+    "adjustments": 56030.81,
+    "cost_of_sales": 52090.87,
+    "gp_value": 16115.28,
+    "gp_percent": 23.63,
+    "turnover": 68206.16
+  },
+  {
+    "file": "trading_summary_20250805-09h51m22s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "stock_opening": 1561481.29,
+    "stock_closing": 1586140.69,
+    "purchases": 90583.26,
+    "adjustments": 57.84,
+    "cost_of_sales": 65866.0,
+    "gp_value": 24064.62,
+    "gp_percent": 26.76,
+    "turnover": 89930.63
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "file": "dispensary_summary_20250805-11h40m53s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "script_total": 104,
+    "disp_turnover_including_vat": 46078.0,
+    "disp_turnover_excluding_vat": 40067.82608695653,
+    "avg_script_value": 385.26755852842814
+  },
+  {
+    "file": "dispensary_summary_20250805-10h07m09s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "script_total": 155,
+    "disp_turnover_including_vat": 60381.1,
+    "disp_turnover_excluding_vat": 52505.30434782609,
+    "avg_script_value": 338.7438990182328
+  }
+]

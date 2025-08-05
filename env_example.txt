@@ -1,0 +1,23 @@
+# PostgreSQL Database Connection Configuration
+# Copy this file to .env and update with your actual database credentials
+
+# Database Host (usually localhost for local installations)
+DB_HOST=localhost
+
+# Database Port (default PostgreSQL port is 5432)
+DB_PORT=5432
+
+# Database Name (created in the setup process)
+DB_NAME=pharmacy_reports
+
+# Database Username
+DB_USER=postgres
+
+# Database Password
+DB_PASSWORD=your_password_here
+
+# Optional: Connection timeout (seconds)
+DB_TIMEOUT=30
+
+# Optional: SSL mode (disable, require, verify-ca, verify-full)
+DB_SSLMODE=disable 

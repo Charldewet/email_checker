@@ -1,0 +1,40 @@
+{
+  "TLC WINTERTON_2025-08-04": {
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "source_files": [
+      "Trading: trading_summary_20250805-11h39m56s-Complete.pdf",
+      "Turnover: turnover_summary_20250805-11h38m27s-Complete.pdf"
+    ],
+    "stock_opening": 1622999.99,
+    "stock_closing": 1649511.94,
+    "purchases": 22572.01,
+    "adjustments": 56030.81,
+    "cost_of_sales": 52090.87,
+    "gp_value": 16115.28,
+    "gp_percent": 23.63,
+    "turnover": 68222.6,
+    "sales_cash": 44100.0,
+    "sales_account": 14521.9,
+    "sales_cod": null
+  },
+  "REITZ_2025-08-04": {
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "source_files": [
+      "Trading: trading_summary_20250805-09h51m22s-Complete.pdf",
+      "Turnover: turnover_summary_20250805-09h57m18s-Complete.pdf"
+    ],
+    "stock_opening": 1561481.29,
+    "stock_closing": 1586140.69,
+    "purchases": 90583.26,
+    "adjustments": 57.84,
+    "cost_of_sales": 65866.0,
+    "gp_value": 24064.62,
+    "gp_percent": 26.76,
+    "turnover": 89983.36,
+    "sales_cash": 55111.63,
+    "sales_account": 8966.2,
+    "sales_cod": 2779.09
+  }
+}

@@ -1,42 +1,39 @@
-# Pharmacy Database System Requirements
-# For Render PostgreSQL Deployment & Email Monitoring Web Service
+# Pharmacy Database System Requirements - Optimized for Render
+# Using specific versions that build faster on Render
 
 # Database
 psycopg2-binary==2.9.7
 
-# Web Framework (for API endpoints)
+# Web Framework
 flask==2.3.3
 flask-cors==4.0.0
 
 # Environment Variables
 python-dotenv==1.0.0
 
-# PDF Processing
-PyMuPDF==1.23.8
+# PDF Processing - using a more stable version
+PyMuPDF==1.23.26
 
-# Data Processing
+# Data Processing - essential only
 pandas==2.1.1
-numpy==1.24.3
 
 # Date/Time Handling
 python-dateutil==2.8.2
 
-# JSON Processing
-jsonschema==4.19.1
-
-# HTTP Requests (for API calls)
+# HTTP Requests
 requests==2.31.0
 
-# Email Processing
-# Note: imaplib and email are built-in Python modules
-
-# Logging
-colorlog==6.7.0
-
-# Scheduling (for automated email checks)
+# Scheduling
 schedule==1.2.0
 
-# Development Tools (optional)
-# pytest==7.4.2
-# black==23.7.0
-# flake8==6.0.0 
+# Built-in modules (no installation needed):
+# - imaplib (email processing)
+# - email (email processing) 
+# - json (data processing)
+# - pathlib (file handling)
+# - os (system operations)
+# - datetime (date/time)
+# - logging (logging)
+# - threading (background tasks)
+# - re (regex)
+# - csv (CSV processing) 
