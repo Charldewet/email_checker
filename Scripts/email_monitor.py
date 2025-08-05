@@ -221,41 +221,71 @@ class PharmacyEmailMonitor:
             
             # Trading Summary
             try:
-                from test_trading_extraction import test_trading_extraction
-                test_trading_extraction()
-                logger.info("✅ Trading summary extraction completed")
+                # Find and process trading summary files
+                trading_files = list(Path('../temp_classified_pdfs').rglob('trading_summary_*.pdf'))
+                if trading_files:
+                    for file_path in trading_files:
+                        data = extract_trading_summary_data(str(file_path))
+                        if data:
+                            logger.info(f"✅ Trading summary extracted from {file_path.name}")
+                else:
+                    logger.info("No trading summary files found")
             except Exception as e:
                 logger.error(f"❌ Trading summary extraction failed: {e}")
             
             # Turnover Summary
             try:
-                from test_turnover_extraction import test_turnover_extraction
-                test_turnover_extraction()
-                logger.info("✅ Turnover summary extraction completed")
+                # Find and process turnover summary files
+                turnover_files = list(Path('../temp_classified_pdfs').rglob('turnover_summary_*.pdf'))
+                if turnover_files:
+                    for file_path in turnover_files:
+                        data = extract_turnover_summary_data(str(file_path))
+                        if data:
+                            logger.info(f"✅ Turnover summary extracted from {file_path.name}")
+                else:
+                    logger.info("No turnover summary files found")
             except Exception as e:
                 logger.error(f"❌ Turnover summary extraction failed: {e}")
             
             # Transaction Summary
             try:
-                from test_transaction_extraction import test_transaction_extraction
-                test_transaction_extraction()
-                logger.info("✅ Transaction summary extraction completed")
+                # Find and process transaction summary files
+                transaction_files = list(Path('../temp_classified_pdfs').rglob('transaction_summary_*.pdf'))
+                if transaction_files:
+                    for file_path in transaction_files:
+                        data = extract_transaction_summary_data(str(file_path))
+                        if data:
+                            logger.info(f"✅ Transaction summary extracted from {file_path.name}")
+                else:
+                    logger.info("No transaction summary files found")
             except Exception as e:
                 logger.error(f"❌ Transaction summary extraction failed: {e}")
             
             # Gross Profit Report
             try:
-                from test_gross_profit_extraction import test_gross_profit_extraction
-                test_gross_profit_extraction()
-                logger.info("✅ Gross profit extraction completed")
+                # Find and process gross profit files
+                gross_profit_files = list(Path('../temp_classified_pdfs').rglob('gross_profit_report_*.pdf'))
+                if gross_profit_files:
+                    for file_path in gross_profit_files:
+                        data = extract_gross_profit_data(str(file_path))
+                        if data:
+                            logger.info(f"✅ Gross profit extracted from {file_path.name}")
+                else:
+                    logger.info("No gross profit files found")
             except Exception as e:
                 logger.error(f"❌ Gross profit extraction failed: {e}")
             
             # Dispensary Summary
             try:
-                from test_dispensary_extraction import test_dispensary_extraction
-                test_dispensary_extraction()
-                logger.info("✅ Dispensary summary extraction completed")
+                # Find and process dispensary summary files
+                dispensary_files = list(Path('../temp_classified_pdfs').rglob('dispensary_summary_*.pdf'))
+                if dispensary_files:
+                    for file_path in dispensary_files:
+                        data = extract_dispensary_summary_data(str(file_path))
+                        if data:
+                            logger.info(f"✅ Dispensary summary extracted from {file_path.name}")
+                else:
+                    logger.info("No dispensary summary files found")
             except Exception as e:
                 logger.error(f"❌ Dispensary summary extraction failed: {e}")
             
