@@ -342,6 +342,9 @@ class PharmacyEmailMonitor:
                 
                 filename = part.get_filename()
                 if filename and filename.lower().endswith('.pdf'):
+                    # Ensure temp directory exists
+                    self.temp_dir.mkdir(exist_ok=True)
+                    
                     # Create unique filename
                     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
                     safe_filename = f"{timestamp}_{email_id}_{filename}"
