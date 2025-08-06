@@ -187,17 +187,26 @@ class PharmacyEmailMonitor:
                     email_body = msg_data[0][1]
                     email_message = email.message_from_bytes(email_body)
                     
-                    # Parse email date
-                    email_timestamp = datetime.now()
-                    date_str = email_message.get('Date', '')
-                    if date_str:
-                        try:
-                            # Handle different date formats
-                            date_str_clean = date_str.split(' (')[0]  # Remove timezone names
-                            date_str_clean = date_str_clean.split(' +')[0]  # Remove timezone offset
-                            email_timestamp = datetime.strptime(date_str_clean, '%a, %d %b %Y %H:%M:%S')
-                        except Exception as e:
-                            logger.warning(f"Could not parse email date '{date_str}': {e}")
+                    # Determine a reliable timestamp for this email
+                    try:
+                        # Prefer the server-side INTERNALDATE (timezone-safe and monotonic)
+                        status_int, int_data = mail.fetch(email_id, '(INTERNALDATE)')
+                        if status_int == 'OK' and int_data:
+                            raw = int_data[0][0] if isinstance(int_data[0], tuple) else int_data[0]
+                            internal_ts = imaplib.Internaldate2tuple(raw)
+                            email_timestamp = datetime.fromtimestamp(time.mktime(internal_ts))
+                        else:
+                            raise ValueError("INTERNALDATE not available")
+                    except Exception as e:
+                        # Fallback to parsing the Date: header or use current time
+                        email_timestamp = datetime.now()
+                        date_hdr = email_message.get('Date', '')
+                        if date_hdr:
+                            try:
+                                date_str_clean = date_hdr.split(' (')[0].split(' +')[0]
+                                email_timestamp = datetime.strptime(date_str_clean, '%a, %d %b %Y %H:%M:%S')
+                            except Exception:
+                                logger.warning(f"Could not parse email Date header '{date_hdr}'")
                     
                     # Check if email has PDF attachments
                     has_pdf = False
@@ -751,14 +760,7 @@ class PharmacyEmailMonitor:
                     logger.info("No PDF files found to process")
             
             # Always mark all examined emails as processed to prevent re-examination
-            if examined_emails:
-                for email_id in examined_emails:
-                    if email_id not in self.processed_emails:
-                        self.processed_emails.add(email_id)
-                        logger.info(f"Marked examined email {email_id} as processed")
-                self.save_processed_emails()
-            else:
-                logger.info("No new reports to process")
+            # (Removed in favour of only marking successfully processed emails)
             
             return True
             
