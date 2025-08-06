@@ -57,6 +57,7 @@ class PharmacyEmailMonitor:
         
         # Email processing settings
         self.processed_emails_file = 'processed_emails.json'
+        self.report_timestamps_file = 'report_timestamps.json'
         self.temp_dir = Path('temp_email_pdfs')
         self.temp_dir.mkdir(exist_ok=True)
         
@@ -64,8 +65,9 @@ class PharmacyEmailMonitor:
         self.db = None
         self.connect_database()
         
-        # Load processed email IDs
+        # Load processed email IDs and report timestamps
         self.processed_emails = self.load_processed_emails()
+        self.report_timestamps = self.load_report_timestamps()
         
         logger.info(f"Email monitor initialized for {self.gmail_user}")
     
@@ -101,6 +103,48 @@ class PharmacyEmailMonitor:
         except Exception as e:
             logger.error(f"Failed to save processed emails: {e}")
     
+    def load_report_timestamps(self) -> Dict:
+        """Load timestamp tracking for report dates"""
+        try:
+            if Path(self.report_timestamps_file).exists():
+                with open(self.report_timestamps_file, 'r') as f:
+                    return json.load(f)
+            return {}
+        except Exception as e:
+            logger.error(f"Error loading report timestamps: {e}")
+            return {}
+    
+    def save_report_timestamps(self):
+        """Save timestamp tracking for report dates"""
+        try:
+            with open(self.report_timestamps_file, 'w') as f:
+                json.dump(self.report_timestamps, f, indent=2)
+        except Exception as e:
+            logger.error(f"Error saving report timestamps: {e}")
+    
+    def should_process_report(self, report_date: str, email_timestamp: datetime) -> bool:
+        """Check if we should process this report based on timestamp"""
+        if report_date not in self.report_timestamps:
+            return True  # New report date, always process
+        
+        last_timestamp_str = self.report_timestamps[report_date].get('last_email_timestamp')
+        if not last_timestamp_str:
+            return True
+        
+        try:
+            last_timestamp = datetime.fromisoformat(last_timestamp_str)
+            return email_timestamp > last_timestamp
+        except:
+            return True  # If we can't parse, play it safe and process
+    
+    def update_report_timestamp(self, report_date: str, email_timestamp: datetime):
+        """Update the timestamp for a report date"""
+        if report_date not in self.report_timestamps:
+            self.report_timestamps[report_date] = {}
+        
+        self.report_timestamps[report_date]['last_email_timestamp'] = email_timestamp.isoformat()
+        self.report_timestamps[report_date]['last_processed'] = datetime.now().isoformat()
+    
     def connect_imap(self):
         """Connect to Gmail IMAP server"""
         try:
@@ -111,22 +155,27 @@ class PharmacyEmailMonitor:
             logger.error(f"Failed to connect to Gmail IMAP: {e}")
             return None
     
-    def get_unread_emails(self, mail) -> List[Dict]:
-        """Get all unread emails with PDF attachments"""
-        unread_emails = []
+    def get_recent_emails(self, mail, days: int = 2) -> List[Dict]:
+        """Get emails from the last N days with PDF attachments"""
+        recent_emails = []
         
         try:
             # Select inbox
             mail.select('INBOX')
             
-            # Search for unread emails
-            status, messages = mail.search(None, 'UNSEEN')
+            # Calculate date range (last N days)
+            cutoff_date = datetime.now() - timedelta(days=days)
+            date_str = cutoff_date.strftime('%d-%b-%Y')
+            
+            # Search for emails since cutoff date
+            status, messages = mail.search(None, f'SINCE {date_str}')
             
             if status != 'OK':
                 logger.error("Failed to search emails")
-                return unread_emails
+                return recent_emails
             
             email_ids = messages[0].split()
+            logger.info(f"Checking {len(email_ids)} emails from last {days} days")
             
             for email_id in email_ids:
                 try:
@@ -138,6 +187,18 @@ class PharmacyEmailMonitor:
                     
                     email_body = msg_data[0][1]
                     email_message = email.message_from_bytes(email_body)
+                    
+                    # Parse email date
+                    email_timestamp = datetime.now()
+                    date_str = email_message.get('Date', '')
+                    if date_str:
+                        try:
+                            # Handle different date formats
+                            date_str_clean = date_str.split(' (')[0]  # Remove timezone names
+                            date_str_clean = date_str_clean.split(' +')[0]  # Remove timezone offset
+                            email_timestamp = datetime.strptime(date_str_clean, '%a, %d %b %Y %H:%M:%S')
+                        except Exception as e:
+                            logger.warning(f"Could not parse email date '{date_str}': {e}")
                     
                     # Check if email has PDF attachments
                     has_pdf = False
@@ -153,24 +214,69 @@ class PharmacyEmailMonitor:
                             break
                     
                     if has_pdf:
-                        unread_emails.append({
+                        recent_emails.append({
                             'id': email_id.decode(),
                             'subject': email_message.get('Subject', 'No Subject'),
                             'from': email_message.get('From', 'Unknown'),
                             'date': email_message.get('Date', 'Unknown'),
+                            'timestamp': email_timestamp,
                             'message': email_message
                         })
-                        logger.info(f"Found unread email with PDF: {email_message.get('Subject', 'No Subject')}")
                 
                 except Exception as e:
                     logger.error(f"Error processing email {email_id}: {e}")
                     continue
             
-            return unread_emails
+            logger.info(f"Found {len(recent_emails)} emails with PDFs from last {days} days")
+            return recent_emails
             
         except Exception as e:
-            logger.error(f"Error getting unread emails: {e}")
-            return unread_emails
+            logger.error(f"Error getting recent emails: {e}")
+            return recent_emails
+    
+    def extract_report_date_from_pdf(self, pdf_path: Path) -> Optional[str]:
+        """Extract report date from PDF content"""
+        try:
+            import fitz  # PyMuPDF
+            doc = fitz.open(pdf_path)
+            text = ""
+            for page in doc:
+                text += page.get_text()
+            doc.close()
+            
+            # Date patterns to match
+            import re
+            date_patterns = [
+                r'DATE FROM\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+DATE TO\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
+                r'(\d{1,2})/(\d{1,2})/(\d{4})\s*-\s*(\d{1,2})/(\d{1,2})/(\d{4})',
+                r'Report Date\s*:\s*(\d{4})-(\d{1,2})-(\d{1,2})',
+                r'Date\s*:\s*(\d{1,2})/(\d{1,2})/(\d{4})'
+            ]
+            
+            for pattern in date_patterns:
+                match = re.search(pattern, text)
+                if match:
+                    if 'DATE TO' in pattern:
+                        # Use the "TO" date (end date)
+                        year, month, day = match.group(4), match.group(5), match.group(6)
+                    elif '-' in pattern and len(match.groups()) == 6:
+                        # Date range, use end date
+                        day, month, year = match.group(4), match.group(5), match.group(6)
+                    elif len(match.groups()) == 3:
+                        if match.group(1).isdigit() and len(match.group(1)) == 4:
+                            # YYYY-MM-DD format
+                            year, month, day = match.group(1), match.group(2), match.group(3)
+                        else:
+                            # DD/MM/YYYY format
+                            day, month, year = match.group(1), match.group(2), match.group(3)
+                    
+                    # Format as YYYY-MM-DD
+                    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+            
+            return None
+        except Exception as e:
+            logger.error(f"Error extracting date from {pdf_path}: {e}")
+            return None
     
     def extract_pdf_attachments(self, email_message, email_id: str) -> List[Path]:
         """Extract PDF attachments from email"""
@@ -467,7 +573,7 @@ class PharmacyEmailMonitor:
             logger.error(f"Failed to mark email as processed: {e}")
     
     def process_single_email_cycle(self):
-        """Process one cycle of email checking"""
+        """Process one cycle of email checking with date-based logic"""
         logger.info("🔄 Starting email processing cycle")
         
         mail = self.connect_imap()
@@ -475,26 +581,19 @@ class PharmacyEmailMonitor:
             return False
         
         try:
-            # Get unread emails with PDFs
-            unread_emails = self.get_unread_emails(mail)
+            # Get recent emails with PDFs (last 2 days)
+            recent_emails = self.get_recent_emails(mail, days=2)
             
-            if not unread_emails:
-                logger.info("No new emails with PDFs found")
+            if not recent_emails:
+                logger.info("No emails with PDFs found")
                 return True
             
-            logger.info(f"Found {len(unread_emails)} new emails with PDFs")
+            # Group emails by report date and find latest for each date
+            reports_by_date = {}
             
-            # Collect all PDF files first
-            all_pdf_files = []
-            processed_emails = []
-            
-            for email_data in unread_emails:
+            for email_data in recent_emails:
                 email_id = email_data['id']
-                
-                # Skip if already processed
-                if email_id in self.processed_emails:
-                    logger.info(f"Email {email_id} already processed, skipping")
-                    continue
+                email_timestamp = email_data['timestamp']
                 
                 logger.info(f"Processing email: {email_data['subject']}")
                 
@@ -504,12 +603,37 @@ class PharmacyEmailMonitor:
                     
                     if not pdf_files:
                         logger.warning(f"No PDF files found in email {email_id}")
-                        self.mark_email_as_processed(mail, email_id)
                         continue
                     
-                    # Add to collection
-                    all_pdf_files.extend(pdf_files)
-                    processed_emails.append(email_id)
+                    # Extract report dates from PDFs
+                    for pdf_file in pdf_files:
+                        report_date = self.extract_report_date_from_pdf(pdf_file)
+                        if report_date:
+                            logger.info(f"Found report for date: {report_date}")
+                            
+                            # Check if we should process this report
+                            if self.should_process_report(report_date, email_timestamp):
+                                if report_date not in reports_by_date:
+                                    reports_by_date[report_date] = {
+                                        'pdf_files': [],
+                                        'email_timestamp': email_timestamp,
+                                        'email_id': email_id
+                                    }
+                                elif email_timestamp > reports_by_date[report_date]['email_timestamp']:
+                                    # This email is newer, replace the data
+                                    reports_by_date[report_date] = {
+                                        'pdf_files': [],
+                                        'email_timestamp': email_timestamp,
+                                        'email_id': email_id
+                                    }
+                                
+                                # Add PDF if this is the latest email for this date
+                                if reports_by_date[report_date]['email_timestamp'] == email_timestamp:
+                                    reports_by_date[report_date]['pdf_files'].append(pdf_file)
+                            else:
+                                logger.info(f"Skipping report for {report_date} - we have newer data")
+                        else:
+                            logger.warning(f"Could not extract date from {pdf_file}")
                     
                     logger.info(f"✅ Extracted {len(pdf_files)} PDF files from email {email_id}")
                 
@@ -517,23 +641,33 @@ class PharmacyEmailMonitor:
                     logger.error(f"❌ Error processing email {email_id}: {e}")
                     continue
             
-            # Process all PDFs through pipeline at once
-            if all_pdf_files:
-                logger.info(f"Processing {len(all_pdf_files)} total PDF files through pipeline")
-                success = self.process_pdfs_through_pipeline(all_pdf_files)
+            # Process reports by date
+            if reports_by_date:
+                logger.info(f"Processing reports for {len(reports_by_date)} dates")
                 
-                if success:
-                    # Clean up all files at once
-                    self.cleanup_processed_files(all_pdf_files)
+                for report_date, report_data in reports_by_date.items():
+                    pdf_files = report_data['pdf_files']
+                    email_timestamp = report_data['email_timestamp']
                     
-                    # Mark all emails as processed
-                    for email_id in processed_emails:
-                        self.mark_email_as_processed(mail, email_id)
-                        logger.info(f"✅ Successfully processed email {email_id}")
-                else:
-                    logger.error(f"❌ Failed to process PDF pipeline")
+                    if pdf_files:
+                        logger.info(f"Processing {len(pdf_files)} PDFs for date: {report_date}")
+                        
+                        # Process this date's reports
+                        success = self.process_pdfs_through_pipeline(pdf_files)
+                        
+                        if success:
+                            # Update timestamp tracking
+                            self.update_report_timestamp(report_date, email_timestamp)
+                            self.save_report_timestamps()
+                            
+                            # Clean up files
+                            self.cleanup_processed_files(pdf_files)
+                            
+                            logger.info(f"✅ Successfully processed reports for {report_date}")
+                        else:
+                            logger.error(f"❌ Failed to process reports for {report_date}")
             else:
-                logger.info("No PDF files to process")
+                logger.info("No new reports to process")
             
             return True
             
