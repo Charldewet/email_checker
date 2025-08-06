@@ -647,6 +647,11 @@ class PharmacyEmailMonitor:
                 email_id = email_data['id']
                 email_timestamp = email_data['timestamp']
                 
+                # Skip if this email was already processed
+                if email_id in self.processed_emails:
+                    logger.info(f"Skipping already processed email {email_id}")
+                    continue
+                
                 logger.info(f"Processing email: {email_data['subject']}")
                 
                 try:
@@ -721,6 +726,14 @@ class PharmacyEmailMonitor:
                             self.update_report_timestamp(report_date, email_timestamp)
                         
                         self.save_report_timestamps()
+                        
+                        # Mark all processed emails as processed
+                        for report_date, report_data in reports_by_date.items():
+                            email_id = report_data['email_id']
+                            self.processed_emails.add(email_id)
+                            logger.info(f"Marked email {email_id} as processed")
+                        
+                        self.save_processed_emails()
                         
                         # Clean up all files at once
                         self.cleanup_processed_files(all_pdf_files)
