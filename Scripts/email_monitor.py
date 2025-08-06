@@ -386,6 +386,9 @@ class PharmacyEmailMonitor:
             from classify_and_organize_pdfs import classify_and_organize_pdfs
             classify_and_organize_pdfs("temp_email_pdfs")
             
+            # Remove duplicates keeping latest time per date/pharmacy/report
+            self.keep_latest_versions("temp_classified_pdfs")
+            
             # Step 2: Run complete data pipeline
             logger.info("Step 2: Running complete data pipeline")
             try:
@@ -783,6 +786,45 @@ class PharmacyEmailMonitor:
         # Cleanup
         if self.db:
             self.db.close()
+
+    def keep_latest_versions(self, base_dir: str):
+        """Within the classified PDF tree keep only the latest time-stamped file per (date, pharmacy, report_type)"""
+        from pathlib import Path
+        base = Path(base_dir)
+        if not base.exists():
+            return
+        import re
+        latest_map = {}
+        # Traverse date/pharmacy folders
+        for pdf in base.rglob("*.pdf"):
+            name = pdf.name
+            # Expected pattern: <report_type>_<HHMM>_originalname.pdf
+            m = re.match(r"([a-z_]+)_(\d{4})_.*", name)
+            if not m:
+                continue
+            report_type, hhmm = m.group(1), m.group(2)
+            # parent directories give date and pharmacy
+            try:
+                pharmacy = pdf.parent.name  # pharmacy folder
+                date_str = pdf.parent.parent.name  # date folder
+            except Exception:
+                continue
+            key = (date_str, pharmacy, report_type)
+            if key not in latest_map or hhmm > latest_map[key]["time"]:
+                latest_map[key] = {"time": hhmm, "path": pdf}
+        # Delete older files
+        for pdf in base.rglob("*.pdf"):
+            name = pdf.name
+            m = re.match(r"([a-z_]+)_(\d{4})_.*", name)
+            if not m:
+                continue
+            report_type, hhmm = m.group(1), m.group(2)
+            pharmacy = pdf.parent.name
+            date_str = pdf.parent.parent.name
+            key = (date_str, pharmacy, report_type)
+            if key in latest_map and latest_map[key]["path"] != pdf:
+                pdf.unlink(missing_ok=True)
+                logger.info(f"Removed older version: {pdf}")
 
 def main():
     """Main function to run the email monitor"""

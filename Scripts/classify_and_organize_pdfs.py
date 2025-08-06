@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 import fitz  # PyMuPDF
 import re
-from datetime import datetime
+from datetime import datetime, time
 
 # Define keywords for each report type (copied from Differntiator.py)
 REPORT_KEYWORDS = {
@@ -126,6 +126,21 @@ def extract_date(text):
     # If no date found, try to extract from filename
     return None
 
+def extract_time(text):
+    """Extract the first time pattern HH:MM from the text"""
+    import re
+    match = re.search(r"\b(\d{1,2}:\d{2})\b", text)
+    if match:
+        try:
+            # normalise to HHMM 24-hour without colon (e.g. 16:06 -> 1606)
+            parts = match.group(1).split(':')
+            hh = parts[0].zfill(2)
+            mm = parts[1]
+            return f"{hh}{mm}"
+        except Exception:
+            pass
+    return "0000"  # fallback if no time found
+
 def classify_pdf(file_path):
     doc = fitz.open(file_path)
     text = ""
@@ -204,13 +219,17 @@ def classify_and_organize_pdfs(source_dir=None):
                     date_str = "UNKNOWN_DATE"
                     print(f"  No date found, using: {date_str}")
             
+            # Extract time for deduping
+            time_str = extract_time(text)
+            print(f"  Detected time: {time_str}")
+            
             # Create folder structure: temp_dir/date/pharmacy/
             date_folder = temp_dir / date_str
             pharmacy_folder = date_folder / pharmacy_name
             pharmacy_folder.mkdir(parents=True, exist_ok=True)
             
-            # Create new filename based on classification
-            new_filename = f"{report_type}_{pdf_file.name}"
+            # Create new filename based on classification and time
+            new_filename = f"{report_type}_{time_str}_{pdf_file.name}"
             new_filepath = pharmacy_folder / new_filename
             
             # Copy the file to the appropriate folder
