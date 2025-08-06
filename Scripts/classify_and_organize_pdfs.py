@@ -69,8 +69,8 @@ def extract_date(text):
     for pattern in date_range_patterns:
         matches = re.findall(pattern, text)
         if matches:
-            # Take the first match - use the end date (last 3 values)
-            match = matches[0]
+            # Take the last match - use the end date (last 3 values)
+            match = matches[-1]
             try:
                 if len(match) == 6:  # Full range pattern
                     # Use the end date (last 3 values)
@@ -96,8 +96,8 @@ def extract_date(text):
     for pattern in single_date_patterns:
         matches = re.findall(pattern, text)
         if matches:
-            # Take the first match
-            match = matches[0]
+            # Take the last match (most recent/relevant)
+            match = matches[-1]
             try:
                 if len(match[0]) == 4:  # YYYY format
                     year, month, day = match
