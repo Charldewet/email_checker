@@ -645,6 +645,7 @@ class PharmacyEmailMonitor:
             
             # Group emails by report date and find latest for each date
             reports_by_date = {}
+            examined_emails = []  # Track all emails examined in this cycle
             
             for email_data in recent_emails:
                 email_id = email_data['id']
@@ -655,6 +656,8 @@ class PharmacyEmailMonitor:
                     logger.info(f"Skipping already processed email {email_id}")
                     continue
                 
+                # Track that we examined this email (even if it doesn't contain useful data)
+                examined_emails.append(email_id)
                 logger.info(f"Processing email: {email_data['subject']}")
                 
                 try:
@@ -746,6 +749,14 @@ class PharmacyEmailMonitor:
                         logger.error(f"❌ Failed to process reports")
                 else:
                     logger.info("No PDF files found to process")
+            
+            # Always mark all examined emails as processed to prevent re-examination
+            if examined_emails:
+                for email_id in examined_emails:
+                    if email_id not in self.processed_emails:
+                        self.processed_emails.add(email_id)
+                        logger.info(f"Marked examined email {email_id} as processed")
+                self.save_processed_emails()
             else:
                 logger.info("No new reports to process")
             
