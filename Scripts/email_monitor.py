@@ -237,6 +237,10 @@ class PharmacyEmailMonitor:
     def extract_report_date_from_pdf(self, pdf_path: Path) -> Optional[str]:
         """Extract report date from PDF content"""
         try:
+            # First try to extract from filename (as fallback)
+            filename = pdf_path.name
+            filename_date = self.extract_date_from_filename(filename)
+            
             import fitz  # PyMuPDF
             doc = fitz.open(pdf_path)
             text = ""
@@ -244,38 +248,86 @@ class PharmacyEmailMonitor:
                 text += page.get_text()
             doc.close()
             
-            # Date patterns to match
+            # Date patterns to match (more comprehensive)
             import re
             date_patterns = [
+                # DATE FROM : 2025/08/05 DATE TO : 2025/08/05
                 r'DATE FROM\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+DATE TO\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
+                # 05/08/2025 - 05/08/2025
                 r'(\d{1,2})/(\d{1,2})/(\d{4})\s*-\s*(\d{1,2})/(\d{1,2})/(\d{4})',
+                # Report Date : 2025-08-05
                 r'Report Date\s*:\s*(\d{4})-(\d{1,2})-(\d{1,2})',
-                r'Date\s*:\s*(\d{1,2})/(\d{1,2})/(\d{4})'
+                # Date : 05/08/2025
+                r'Date\s*:\s*(\d{1,2})/(\d{1,2})/(\d{4})',
+                # Any 2025/08/05 pattern
+                r'(\d{4})/(\d{1,2})/(\d{1,2})',
+                # Any 05/08/2025 pattern
+                r'(\d{1,2})/(\d{1,2})/(\d{4})'
             ]
             
             for pattern in date_patterns:
-                match = re.search(pattern, text)
-                if match:
+                matches = re.findall(pattern, text)
+                if matches:
+                    # Use the last match found (likely the most recent/relevant)
+                    match = matches[-1]
+                    
                     if 'DATE TO' in pattern:
                         # Use the "TO" date (end date)
-                        year, month, day = match.group(4), match.group(5), match.group(6)
-                    elif '-' in pattern and len(match.groups()) == 6:
+                        year, month, day = match[3], match[4], match[5]
+                    elif len(match) == 6:
                         # Date range, use end date
-                        day, month, year = match.group(4), match.group(5), match.group(6)
-                    elif len(match.groups()) == 3:
-                        if match.group(1).isdigit() and len(match.group(1)) == 4:
-                            # YYYY-MM-DD format
-                            year, month, day = match.group(1), match.group(2), match.group(3)
+                        day, month, year = match[3], match[4], match[5]
+                    elif len(match) == 3:
+                        if len(match[0]) == 4:
+                            # YYYY/MM/DD format
+                            year, month, day = match[0], match[1], match[2]
                         else:
                             # DD/MM/YYYY format
-                            day, month, year = match.group(1), match.group(2), match.group(3)
+                            day, month, year = match[0], match[1], match[2]
                     
                     # Format as YYYY-MM-DD
-                    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                    extracted_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                    logger.info(f"Extracted date {extracted_date} from PDF content")
+                    return extracted_date
+            
+            # If no date found in PDF content, use filename date
+            if filename_date:
+                logger.info(f"Using filename date {filename_date} as fallback")
+                return filename_date
             
             return None
         except Exception as e:
             logger.error(f"Error extracting date from {pdf_path}: {e}")
+            # Try filename as last resort
+            filename = pdf_path.name
+            return self.extract_date_from_filename(filename)
+    
+    def extract_date_from_filename(self, filename: str) -> Optional[str]:
+        """Extract date from filename as fallback"""
+        try:
+            import re
+            # Look for date patterns in filename like 20250805-09h51m22s-Complete.pdf
+            patterns = [
+                r'(\d{4})(\d{2})(\d{2})-\d{2}h\d{2}m\d{2}s',  # 20250805-09h51m22s
+                r'(\d{4})-(\d{2})-(\d{2})',  # 2025-08-05
+                r'(\d{2})(\d{2})(\d{4})',    # 05082025
+            ]
+            
+            for pattern in patterns:
+                match = re.search(pattern, filename)
+                if match:
+                    if len(match.group(1)) == 4:
+                        # YYYYMMDD or YYYY-MM-DD
+                        year, month, day = match.group(1), match.group(2), match.group(3)
+                    else:
+                        # DDMMYYYY
+                        day, month, year = match.group(1), match.group(2), match.group(3)
+                    
+                    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+            
+            return None
+        except Exception as e:
+            logger.error(f"Error extracting date from filename {filename}: {e}")
             return None
     
     def extract_pdf_attachments(self, email_message, email_id: str) -> List[Path]:
@@ -641,7 +693,10 @@ class PharmacyEmailMonitor:
                     logger.error(f"❌ Error processing email {email_id}: {e}")
                     continue
             
-            # Process reports by date
+            # Collect all PDF files for batch processing
+            all_pdf_files = []
+            processed_dates = []
+            
             if reports_by_date:
                 logger.info(f"Processing reports for {len(reports_by_date)} dates")
                 
@@ -650,22 +705,31 @@ class PharmacyEmailMonitor:
                     email_timestamp = report_data['email_timestamp']
                     
                     if pdf_files:
-                        logger.info(f"Processing {len(pdf_files)} PDFs for date: {report_date}")
-                        
-                        # Process this date's reports
-                        success = self.process_pdfs_through_pipeline(pdf_files)
-                        
-                        if success:
-                            # Update timestamp tracking
+                        logger.info(f"Found {len(pdf_files)} PDFs for date: {report_date}")
+                        all_pdf_files.extend(pdf_files)
+                        processed_dates.append((report_date, email_timestamp))
+                
+                if all_pdf_files:
+                    logger.info(f"Processing {len(all_pdf_files)} total PDFs through pipeline")
+                    
+                    # Process all PDFs together
+                    success = self.process_pdfs_through_pipeline(all_pdf_files)
+                    
+                    if success:
+                        # Update timestamp tracking for all dates
+                        for report_date, email_timestamp in processed_dates:
                             self.update_report_timestamp(report_date, email_timestamp)
-                            self.save_report_timestamps()
-                            
-                            # Clean up files
-                            self.cleanup_processed_files(pdf_files)
-                            
-                            logger.info(f"✅ Successfully processed reports for {report_date}")
-                        else:
-                            logger.error(f"❌ Failed to process reports for {report_date}")
+                        
+                        self.save_report_timestamps()
+                        
+                        # Clean up all files at once
+                        self.cleanup_processed_files(all_pdf_files)
+                        
+                        logger.info(f"✅ Successfully processed all reports")
+                    else:
+                        logger.error(f"❌ Failed to process reports")
+                else:
+                    logger.info("No PDF files found to process")
             else:
                 logger.info("No new reports to process")
             
