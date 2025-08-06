@@ -226,6 +226,40 @@ def stop_monitoring():
             'message': f'Failed to stop monitoring: {e}'
         }), 500
 
+@app.route('/reset-processing', methods=['POST'])
+def reset_processing():
+    """Reset processing state to allow reprocessing of recent emails"""
+    try:
+        import os
+        from pathlib import Path
+        
+        # Remove processed emails file
+        processed_emails_file = 'processed_emails.json'
+        if os.path.exists(processed_emails_file):
+            os.remove(processed_emails_file)
+            
+        # Remove report timestamps file
+        report_timestamps_file = 'report_timestamps.json'
+        if os.path.exists(report_timestamps_file):
+            os.remove(report_timestamps_file)
+            
+        # Reset the email monitor's in-memory state
+        if monitor:
+            monitor.processed_emails = set()
+            monitor.report_timestamps = {}
+        
+        return jsonify({
+            "status": "success",
+            "message": "Processing state reset - emails will be reprocessed on next check"
+        })
+        
+    except Exception as e:
+        logger.error(f"Error resetting processing state: {e}")
+        return jsonify({
+            "status": "error",
+            "message": f"Failed to reset processing state: {str(e)}"
+        }), 500
+
 @app.route('/database/stats')
 def database_stats():
     """Get database statistics"""
@@ -371,6 +405,7 @@ if __name__ == '__main__':
         logger.info("   POST /check-now - Manual email check")
         logger.info("   POST /start - Start monitoring")
         logger.info("   POST /stop - Stop monitoring")
+        logger.info("   POST /reset-processing - Reset processing state") # Added new endpoint to logger
         logger.info("   GET  /database/stats - Database statistics")
         logger.info("   GET  /database/pharmacies - List pharmacies")
         logger.info("   GET  /database/dates - Available dates")
