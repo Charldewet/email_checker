@@ -240,88 +240,61 @@ INSERT INTO daily_summary (
     
     return insert_statements
 
-def run_complete_pipeline():
-    """Run the complete data pipeline"""
-    print("🚀 STARTING COMPLETE PHARMACY DATA PIPELINE")
-    print("=" * 60)
+def run_complete_pipeline(classified_pdfs_dir="temp_classified_pdfs"):
+    """
+    Main function to run the complete data pipeline
+    """
+    # Define the base directory for classified PDFs
+    base_dir = Path(classified_pdfs_dir)
+
+    print("\n" + "="*80)
+    print("🚀 STARTING COMPLETE DATA PIPELINE")
+    print("="*80)
     
-    # Step 1: Classify and organize PDFs
-    print("\n📁 Step 1: Classifying and organizing PDF reports...")
-    try:
-        from classify_and_organize_pdfs import classify_and_organize_pdfs
-        classify_and_organize_pdfs()
-        print("✅ PDF classification completed")
-    except Exception as e:
-        print(f"❌ PDF classification failed: {e}")
-        return False
+    # --- Step 1: Run all data extractions from the classified files ---
+    print("\n--- Step 1: Running all data extractions ---")
     
-    # Step 2: Extract trading summary data
-    print("\n📊 Step 2: Extracting trading summary data...")
-    try:
-        from test_trading_extraction import test_trading_extraction
-        test_trading_extraction()
-        print("✅ Trading summary extraction completed")
-    except Exception as e:
-        print(f"❌ Trading summary extraction failed: {e}")
-        return False
+    # Trading Summary
+    print("\nExtracting Trading Summary data...")
+    from extract_trading_summary import test_trading_extraction
+    test_trading_extraction(str(base_dir))
     
-    # Step 3: Extract turnover summary data
-    print("\n💰 Step 3: Extracting turnover summary data...")
-    try:
-        from extract_turnover_summary import test_turnover_extraction
-        test_turnover_extraction()
-        print("✅ Turnover summary extraction completed")
-    except Exception as e:
-        print(f"❌ Turnover summary extraction failed: {e}")
-        return False
+    # Turnover Summary
+    print("\nExtracting Turnover Summary data...")
+    from extract_turnover_summary import test_turnover_extraction
+    test_turnover_extraction(str(base_dir))
     
-    # Step 4: Extract transaction summary data
-    print("\n🛒 Step 4: Extracting transaction summary data...")
-    try:
-        from extract_transaction_summary import test_transaction_extraction
-        test_transaction_extraction()
-        print("✅ Transaction summary extraction completed")
-    except Exception as e:
-        print(f"❌ Transaction summary extraction failed: {e}")
-        return False
+    # Transaction Summary
+    print("\nExtracting Transaction Summary data...")
+    from extract_transaction_summary import test_transaction_extraction
+    test_transaction_extraction(str(base_dir))
     
-    # Step 5: Extract gross profit data
-    print("\n📈 Step 5: Extracting gross profit data...")
-    try:
-        from extract_gross_profit import test_gross_profit_extraction
-        test_gross_profit_extraction()
-        print("✅ Gross profit extraction completed")
-    except Exception as e:
-        print(f"❌ Gross profit extraction failed: {e}")
-        return False
+    # Gross Profit Report
+    print("\nExtracting Gross Profit data...")
+    from extract_gross_profit import test_gross_profit_extraction
+    test_gross_profit_extraction(str(base_dir))
     
-    # Step 6: Extract dispensary summary data
-    print("\n💊 Step 6: Extracting dispensary summary data...")
-    try:
-        from extract_dispensary_summary import test_dispensary_extraction
-        test_dispensary_extraction()
-        print("✅ Dispensary summary extraction completed")
-    except Exception as e:
-        print(f"❌ Dispensary summary extraction failed: {e}")
-        return False
+    # Dispensary Summary
+    print("\nExtracting Dispensary Summary data...")
+    from extract_dispensary_summary import test_dispensary_extraction
+    test_dispensary_extraction(str(base_dir))
     
-    # Step 7: Combine all data
-    print("\n🔄 Step 7: Combining all extracted data...")
-    try:
-        combined_data = combine_all_data()
-        print(f"✅ Data combination completed for {len(combined_data)} pharmacy/date combinations")
-    except Exception as e:
-        print(f"❌ Data combination failed: {e}")
-        return False
+    print("\n--- All extractions completed ---")
     
-    # Step 8: Display complete summary
+    # --- Step 2: Combine all data ---
+    print("\n--- Step 2: Combining all data ---")
+    combined_data = combine_all_data()
+    
+    # --- Step 3: Display summary ---
+    print("\n--- Step 3: Displaying complete summary ---")
     display_complete_summary(combined_data)
     
-    # Step 9: Create database insert statements
-    print("\n📝 Step 8: Creating database insert statements...")
+    # --- Step 4: Create database insert statements ---
+    print("\n--- Step 4: Creating database insert statements ---")
     insert_statements = create_database_insert_statements(combined_data)
     
-    # Save SQL statements to file
+    # --- Step 5: Save SQL statements to file ---
+    print("\n--- Step 5: Saving SQL statements to file ---")
     sql_file = "complete_database_inserts.sql"
     with open(sql_file, 'w') as f:
         f.write("-- Complete Database Insert Statements\n")
@@ -332,31 +305,14 @@ def run_complete_pipeline():
     
     print(f"✅ SQL statements saved to: {sql_file}")
     
-    # Step 10: Save combined data to JSON
-    print("\n💾 Step 9: Saving combined data...")
-    combined_file = "complete_pipeline_data.json"
+    # --- Step 6: Save combined data to file ---
+    print("\n--- Step 6: Saving combined data to JSON file ---")
+    with open('complete_pipeline_data.json', 'w') as f:
+        # Convert tuple keys to string keys for JSON compatibility
+        json.dump({f"{k[0]}_{k[1]}": v for k, v in combined_data.items()}, f, indent=2, default=str)
     
-    # Convert tuple keys to strings for JSON serialization
-    json_safe_data = {}
-    for key, data in combined_data.items():
-        pharmacy, date = key
-        json_key = f"{pharmacy}_{date}"
-        json_safe_data[json_key] = data
-    
-    with open(combined_file, 'w') as f:
-        json.dump(json_safe_data, f, indent=2, default=str)
-    print(f"✅ Combined data saved to: {combined_file}")
-    
+    print("✅ Combined data saved to complete_pipeline_data.json")
     print("\n🎉 COMPLETE DATA PIPELINE FINISHED SUCCESSFULLY!")
-    print("=" * 60)
-    
-    return True
 
 if __name__ == "__main__":
-    success = run_complete_pipeline()
-    if success:
-        print("\n✅ Pipeline completed successfully!")
-        sys.exit(0)
-    else:
-        print("\n❌ Pipeline failed!")
-        sys.exit(1)
+    run_complete_pipeline()

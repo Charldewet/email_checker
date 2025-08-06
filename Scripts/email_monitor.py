@@ -55,18 +55,12 @@ class PharmacyEmailMonitor:
         self.smtp_port = 587
         
         # Email processing settings
-        self.processed_emails_file = 'processed_emails.json'
-        self.report_timestamps_file = 'report_timestamps.json'
         self.temp_dir = Path('temp_email_pdfs')
         self.temp_dir.mkdir(exist_ok=True)
         
         # Database connection
         self.db = None
         self.connect_database()
-        
-        # Load processed email IDs and report timestamps
-        self.processed_emails = self.load_processed_emails()
-        self.report_timestamps = self.load_report_timestamps()
         
         logger.info(f"Email monitor initialized for {self.gmail_user}")
     
@@ -78,71 +72,6 @@ class PharmacyEmailMonitor:
         except Exception as e:
             logger.error(f"❌ Failed to connect to database: {e}")
             self.db = None
-    
-    def load_processed_emails(self) -> set:
-        """Load list of already processed email IDs"""
-        try:
-            if os.path.exists(self.processed_emails_file):
-                with open(self.processed_emails_file, 'r') as f:
-                    data = json.load(f)
-                    return set(data.get('processed_emails', []))
-        except Exception as e:
-            logger.error(f"Failed to load processed emails: {e}")
-        return set()
-    
-    def save_processed_emails(self):
-        """Save list of processed email IDs"""
-        try:
-            data = {
-                'processed_emails': list(self.processed_emails),
-                'last_updated': datetime.now().isoformat()
-            }
-            with open(self.processed_emails_file, 'w') as f:
-                json.dump(data, f, indent=2)
-        except Exception as e:
-            logger.error(f"Failed to save processed emails: {e}")
-    
-    def load_report_timestamps(self) -> Dict:
-        """Load timestamp tracking for report dates"""
-        try:
-            if Path(self.report_timestamps_file).exists():
-                with open(self.report_timestamps_file, 'r') as f:
-                    return json.load(f)
-            return {}
-        except Exception as e:
-            logger.error(f"Error loading report timestamps: {e}")
-            return {}
-    
-    def save_report_timestamps(self):
-        """Save timestamp tracking for report dates"""
-        try:
-            with open(self.report_timestamps_file, 'w') as f:
-                json.dump(self.report_timestamps, f, indent=2)
-        except Exception as e:
-            logger.error(f"Error saving report timestamps: {e}")
-    
-    def should_process_report(self, report_date: str, email_timestamp: datetime) -> bool:
-        """Check if we should process this report based on timestamp"""
-        if report_date not in self.report_timestamps:
-            return True  # New report date, always process
-        
-        last_timestamp_str = self.report_timestamps[report_date].get('last_email_timestamp')
-        if not last_timestamp_str:
-            return True
-        
-        try:
-            last_timestamp = datetime.fromisoformat(last_timestamp_str)
-            return email_timestamp > last_timestamp
-        except:
-            return True  # If we can't parse, play it safe and process
-    
-    def update_report_timestamp(self, report_date: str, email_timestamp: datetime):
-        """Update the timestamp for a report date"""
-        if report_date not in self.report_timestamps:
-            self.report_timestamps[report_date] = {}
-        
-        self.report_timestamps[report_date]['last_email_timestamp'] = email_timestamp.isoformat()
-        self.report_timestamps[report_date]['last_processed'] = datetime.now().isoformat()
     
     def connect_imap(self):
         """Connect to Gmail IMAP server"""
@@ -174,7 +103,6 @@ class PharmacyEmailMonitor:
                 return recent_emails
             
             email_ids = messages[0].split()
-            logger.info(f"Checking {len(email_ids)} emails from last {days} days")
             
             for email_id in email_ids:
                 try:
@@ -232,10 +160,8 @@ class PharmacyEmailMonitor:
                         })
                 
                 except Exception as e:
-                    logger.error(f"Error processing email {email_id}: {e}")
                     continue
             
-            logger.info(f"Found {len(recent_emails)} emails with PDFs from last {days} days")
             return recent_emails
             
         except Exception as e:
@@ -372,82 +298,39 @@ class PharmacyEmailMonitor:
             logger.error(f"Error extracting PDF attachments: {e}")
             return pdf_files
     
-    def process_pdfs_through_pipeline(self, pdf_files: List[Path]) -> bool:
+    def process_pdfs_through_pipeline(self) -> bool:
         """Process PDFs through the complete data pipeline"""
         try:
-            if not pdf_files:
-                logger.warning("No PDF files to process")
-                return False
-            
-            logger.info(f"Processing {len(pdf_files)} PDF files through pipeline")
-            
-            # Step 1: Classify and organize PDFs
-            logger.info("Step 1: Classifying and organizing PDFs")
+            # Step 1: Classify and organize PDFs from the temp extraction folder
             from classify_and_organize_pdfs import classify_and_organize_pdfs
             classify_and_organize_pdfs("temp_email_pdfs")
             
-            # Remove duplicates keeping latest time per date/pharmacy/report
+            # Step 2: Remove duplicates keeping latest time per date/pharmacy/report
             self.keep_latest_versions("temp_classified_pdfs")
-            
-            # Step 2: Run complete data pipeline
-            logger.info("Step 2: Running complete data pipeline")
+
+            # Step 3: Log which reports will be imported
+            kept_files_path = Path("temp_classified_pdfs")
+            if kept_files_path.exists() and any(kept_files_path.iterdir()):
+                kept_files_log = [str(p.relative_to(kept_files_path)) for p in sorted(kept_files_path.rglob("*.pdf"))]
+                if kept_files_log:
+                    log_str = "Reports kept for importing into database:\n" + "\n".join(f"- {f}" for f in kept_files_log)
+                    logger.info(log_str)
+                else:
+                    logger.info("No reports left to import after deduplication.")
+                    return True
+            else:
+                logger.info("No reports found to process after classification.")
+                return True
+
+            # Step 4: Run complete data pipeline on the deduplicated, classified files
             try:
                 from complete_data_pipeline import run_complete_pipeline
                 run_complete_pipeline()
-                logger.info("✅ Complete data pipeline finished successfully")
+                logger.info("✅ Data imported successfully.")
             except Exception as e:
                 logger.error(f"❌ Complete data pipeline failed: {e}")
-                # Fallback: try individual extractions
-                logger.info("Trying individual extractions as fallback...")
-                
-                # Trading Summary
-                try:
-                    from extract_trading_summary import test_trading_extraction
-                    test_trading_extraction()
-                    logger.info("✅ Trading summary extraction completed")
-                except Exception as e:
-                    logger.error(f"❌ Trading summary extraction failed: {e}")
-                
-                # Turnover Summary
-                try:
-                    from extract_turnover_summary import test_turnover_extraction
-                    test_turnover_extraction()
-                    logger.info("✅ Turnover summary extraction completed")
-                except Exception as e:
-                    logger.error(f"❌ Turnover summary extraction failed: {e}")
-                
-                # Transaction Summary
-                try:
-                    from extract_transaction_summary import test_transaction_extraction
-                    test_transaction_extraction()
-                    logger.info("✅ Transaction summary extraction completed")
-                except Exception as e:
-                    logger.error(f"❌ Transaction summary extraction failed: {e}")
-                
-                # Gross Profit Report
-                try:
-                    from extract_gross_profit import test_gross_profit_extraction
-                    test_gross_profit_extraction()
-                    logger.info("✅ Gross profit extraction completed")
-                except Exception as e:
-                    logger.error(f"❌ Gross profit extraction failed: {e}")
-                
-                # Dispensary Summary
-                try:
-                    from extract_dispensary_summary import test_dispensary_extraction
-                    test_dispensary_extraction()
-                    logger.info("✅ Dispensary summary extraction completed")
-                except Exception as e:
-                    logger.error(f"❌ Dispensary summary extraction failed: {e}")
+                return False
             
-            # Step 3: Combine data and insert into database
-            if self.db:
-                logger.info("Step 3: Combining data and inserting into database")
-                self.insert_combined_data_into_database()
-            else:
-                logger.warning("Database not connected, skipping database insertion")
-            
-            logger.info("✅ PDF processing pipeline completed successfully")
             return True
             
         except Exception as e:
@@ -624,169 +507,6 @@ class PharmacyEmailMonitor:
         except Exception as e:
             logger.error(f"❌ Cleanup failed: {e}")
     
-    def mark_email_as_processed(self, mail, email_id: str):
-        """Mark email as processed and move to processed folder"""
-        try:
-            # Add to processed emails list
-            self.processed_emails.add(email_id)
-            self.save_processed_emails()
-            
-            # Move email to processed folder (optional)
-            # mail.store(email_id, '+X-GM-LABELS', '\\Processed')
-            
-            logger.info(f"Marked email {email_id} as processed")
-            
-        except Exception as e:
-            logger.error(f"Failed to mark email as processed: {e}")
-    
-    def process_single_email_cycle(self):
-        """Process one cycle of email checking with date-based logic"""
-        logger.info("🔄 Starting email processing cycle")
-        
-        mail = self.connect_imap()
-        if not mail:
-            return False
-        
-        try:
-            # Get recent emails with PDFs (last 2 days)
-            recent_emails = self.get_recent_emails(mail, days=2)
-            
-            if not recent_emails:
-                logger.info("No emails with PDFs found")
-                return True
-            
-            # Group emails by report date and find latest for each date
-            reports_by_date = {}
-            examined_emails = []  # Track all emails examined in this cycle
-            
-            for email_data in recent_emails:
-                email_id = email_data['id']
-                email_timestamp = email_data['timestamp']
-                
-                # Skip if this email was already processed
-                if email_id in self.processed_emails:
-                    logger.info(f"Skipping already processed email {email_id}")
-                    continue
-                
-                # Track that we examined this email (even if it doesn't contain useful data)
-                examined_emails.append(email_id)
-                logger.info(f"Processing email: {email_data['subject']}")
-                
-                try:
-                    # Extract PDF attachments
-                    pdf_files = self.extract_pdf_attachments(email_data['message'], email_id)
-                    
-                    if not pdf_files:
-                        logger.warning(f"No PDF files found in email {email_id}")
-                        continue
-                    
-                    # Extract report dates from PDFs
-                    for pdf_file in pdf_files:
-                        report_date = self.extract_report_date_from_pdf(pdf_file)
-                        if report_date:
-                            logger.info(f"Found report for date: {report_date}")
-                            
-                            # Always process every report; rely on DB ON CONFLICT to dedupe
-                            if report_date not in reports_by_date:
-                                reports_by_date[report_date] = {
-                                    'pdf_files': [],
-                                    'email_timestamp': email_timestamp,
-                                    'email_id': email_id
-                                }
-                            # Update timestamp if this email is newer (for logging/reference only)
-                            if email_timestamp > reports_by_date[report_date]['email_timestamp']:
-                                reports_by_date[report_date]['email_timestamp'] = email_timestamp
-                                reports_by_date[report_date]['email_id'] = email_id
-                            
-                            # Add PDF to the list for this date
-                            reports_by_date[report_date]['pdf_files'].append(pdf_file)
-                        else:
-                            logger.warning(f"Could not extract date from {pdf_file}")
-                    
-                    logger.info(f"✅ Extracted {len(pdf_files)} PDF files from email {email_id}")
-                
-                except Exception as e:
-                    logger.error(f"❌ Error processing email {email_id}: {e}")
-                    continue
-            
-            # Collect all PDF files for batch processing
-            all_pdf_files = []
-            processed_dates = []
-            
-            if reports_by_date:
-                logger.info(f"Processing reports for {len(reports_by_date)} dates")
-                
-                for report_date, report_data in reports_by_date.items():
-                    pdf_files = report_data['pdf_files']
-                    email_timestamp = report_data['email_timestamp']
-                    
-                    if pdf_files:
-                        logger.info(f"Found {len(pdf_files)} PDFs for date: {report_date}")
-                        all_pdf_files.extend(pdf_files)
-                        processed_dates.append((report_date, email_timestamp))
-                
-                if all_pdf_files:
-                    logger.info(f"Processing {len(all_pdf_files)} total PDFs through pipeline")
-                    
-                    # Process all PDFs together
-                    success = self.process_pdfs_through_pipeline(all_pdf_files)
-                    
-                    if success:
-                        # Update timestamp tracking for all dates
-                        for report_date, email_timestamp in processed_dates:
-                            self.update_report_timestamp(report_date, email_timestamp)
-                        
-                        self.save_report_timestamps()
-                        
-                        # Mark all processed emails as processed
-                        for report_date, report_data in reports_by_date.items():
-                            email_id = report_data['email_id']
-                            self.processed_emails.add(email_id)
-                            logger.info(f"Marked email {email_id} as processed")
-                        
-                        self.save_processed_emails()
-                        
-                        # Clean up all files at once
-                        self.cleanup_processed_files(all_pdf_files)
-                        
-                        logger.info(f"✅ Successfully processed all reports")
-                    else:
-                        logger.error(f"❌ Failed to process reports")
-                else:
-                    logger.info("No PDF files found to process")
-            
-            # Always mark all examined emails as processed to prevent re-examination
-            # (Removed in favour of only marking successfully processed emails)
-            
-            return True
-            
-        finally:
-            mail.logout()
-    
-    def run_continuous_monitoring(self, interval_minutes: int = 10):
-        """Run continuous email monitoring"""
-        logger.info(f"🚀 Starting continuous email monitoring (checking every {interval_minutes} minutes)")
-        
-        while True:
-            try:
-                self.process_single_email_cycle()
-                
-                # Wait for next cycle
-                logger.info(f"⏰ Waiting {interval_minutes} minutes until next check...")
-                time.sleep(interval_minutes * 60)
-                
-            except KeyboardInterrupt:
-                logger.info("🛑 Email monitoring stopped by user")
-                break
-            except Exception as e:
-                logger.error(f"❌ Email monitoring error: {e}")
-                logger.info("⏰ Waiting 5 minutes before retrying...")
-                time.sleep(5 * 60)
-        
-        # Cleanup
-        if self.db:
-            self.db.close()
-
     def keep_latest_versions(self, base_dir: str):
         """Within the classified PDF tree keep only the latest time-stamped file per (date, pharmacy, report_type)"""
         from pathlib import Path
@@ -824,7 +544,69 @@ class PharmacyEmailMonitor:
             key = (date_str, pharmacy, report_type)
             if key in latest_map and latest_map[key]["path"] != pdf:
                 pdf.unlink(missing_ok=True)
-                logger.info(f"Removed older version: {pdf}")
+                # logger.info(f"Removed older version: {pdf}")
+
+    def process_single_email_cycle(self):
+        """Process one cycle of email checking with date-based logic"""
+        logger.info("📧 Starting email check...")
+        
+        mail = self.connect_imap()
+        if not mail:
+            return False
+        
+        try:
+            # Get recent emails with PDFs (last 2 days)
+            recent_emails = self.get_recent_emails(mail, days=2)
+            logger.info(f"Found {len(recent_emails)} emails for the two days.")
+
+            if not recent_emails:
+                return True
+            
+            # Extract all PDFs from all emails into the temp directory
+            all_extracted_pdfs = []
+            for email_data in recent_emails:
+                pdfs = self.extract_pdf_attachments(email_data['message'], email_data['id'])
+                all_extracted_pdfs.extend(pdfs)
+
+            if not all_extracted_pdfs:
+                logger.info("No PDF attachments found in recent emails.")
+                return True
+
+            # Process all extracted PDFs through the pipeline
+            success = self.process_pdfs_through_pipeline()
+            
+            if success:
+                # Clean up all files at once
+                self.cleanup_processed_files(all_extracted_pdfs)
+            
+            return success
+            
+        finally:
+            mail.logout()
+    
+    def run_continuous_monitoring(self, interval_minutes: int = 10):
+        """Run continuous email monitoring"""
+        logger.info(f"🚀 Starting continuous email monitoring (checking every {interval_minutes} minutes)")
+        
+        while True:
+            try:
+                self.process_single_email_cycle()
+                
+                # Wait for next cycle
+                logger.info(f"⏰ Waiting {interval_minutes} minutes until next check...")
+                time.sleep(interval_minutes * 60)
+                
+            except KeyboardInterrupt:
+                logger.info("🛑 Email monitoring stopped by user")
+                break
+            except Exception as e:
+                logger.error(f"❌ Email monitoring error: {e}")
+                logger.info("⏰ Waiting 5 minutes before retrying...")
+                time.sleep(5 * 60)
+        
+        # Cleanup
+        if self.db:
+            self.db.close()
 
 def main():
     """Main function to run the email monitor"""
