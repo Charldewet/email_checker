@@ -132,63 +132,17 @@ def extract_pharmacy_and_date(pdf_path: str) -> tuple[str, str]:
     
     return pharmacy_name, date_str
 
-def process_trading_summary_file(pdf_path: str, db: PharmacyDatabase) -> bool:
-    """
-    Process a single trading summary PDF file and insert data into database
-    """
-    try:
-        print(f"Processing: {pdf_path}")
-        
-        # Extract pharmacy and date
-        pharmacy_name, date_str = extract_pharmacy_and_date(pdf_path)
-        print(f"  Pharmacy: {pharmacy_name}")
-        print(f"  Date: {date_str}")
-        
-        if not date_str:
-            print("  Error: Could not extract date")
-            return False
-        
-        # Extract trading data
-        trading_data = extract_trading_summary_data(pdf_path)
-        print(f"  Extracted data: {trading_data}")
-        
-        # Convert date string to date object
-        report_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        
-        # Insert or update pharmacy
-        pharmacy_id = db.insert_pharmacy(pharmacy_name, pharmacy_name)
-        if not pharmacy_id:
-            print(f"  Error: Could not insert/get pharmacy {pharmacy_name}")
-            return False
-        
-        # Insert daily summary data (this will update existing record if it exists)
-        success = db.insert_daily_summary(pharmacy_name, report_date, trading_data)
-        
-        if success:
-            print(f"  ✅ Successfully inserted trading summary data")
-            return True
-        else:
-            print(f"  ❌ Failed to insert trading summary data")
-            return False
-            
-    except Exception as e:
-        print(f"  Error processing {pdf_path}: {str(e)}")
-        return False
-
 def process_all_trading_summaries(base_dir: str = "../temp_classified_pdfs"):
     """
     Process all trading summary files in the classified PDFs directory
     """
+    import json
     base_path = Path(base_dir)
     
     if not base_path.exists():
         print(f"Directory not found: {base_path}")
         return
     
-    # Initialize database connection
-    db = PharmacyDatabase()
-    
-    # Find all trading summary files
     trading_files = list(base_path.rglob("trading_summary_*.pdf"))
     
     if not trading_files:
@@ -197,19 +151,24 @@ def process_all_trading_summaries(base_dir: str = "../temp_classified_pdfs"):
     
     print(f"Found {len(trading_files)} trading summary files")
     
-    successful = 0
-    failed = 0
+    all_data = []
     
     for pdf_file in trading_files:
-        if process_trading_summary_file(str(pdf_file), db):
-            successful += 1
-        else:
-            failed += 1
-    
-    print(f"\n=== SUMMARY ===")
-    print(f"Successfully processed: {successful}")
-    print(f"Failed: {failed}")
-    print(f"Total: {len(trading_files)}")
+        pharmacy_name, date_str = extract_pharmacy_and_date(str(pdf_file))
+        trading_data = extract_trading_summary_data(str(pdf_file))
+        
+        complete_data = {
+            'file': pdf_file.name,
+            'pharmacy': pharmacy_name,
+            'date': date_str,
+            **trading_data
+        }
+        all_data.append(complete_data)
+        
+    output_file = Path("trading_summary_extracted_data.json")
+    with open(output_file, 'w') as f:
+        json.dump(all_data, f, indent=2, default=str)
+
 
 if __name__ == "__main__":
     process_all_trading_summaries() 

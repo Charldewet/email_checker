@@ -182,84 +182,42 @@ def format_currency(amount: float) -> str:
     else:
         return f"R{amount:,.2f}"
 
-def test_transaction_extraction(base_dir: str = "../temp_classified_pdfs"):
+def process_all_transaction_summaries(base_dir: str = "../temp_classified_pdfs"):
     """
-    Test transaction summary extraction
+    Process all transaction summary files in the classified PDFs directory
     """
+    import json
     base_path = Path(base_dir)
     
     if not base_path.exists():
         print(f"Directory not found: {base_path}")
         return
-    
-    # Find all transaction summary files
+        
     transaction_files = list(base_path.rglob("transaction_summary_*.pdf"))
     
     if not transaction_files:
         print("No transaction summary files found")
         return
-    
-    print(f"=== TRANSACTION SUMMARY DATA EXTRACTION TEST ===")
-    print(f"Found {len(transaction_files)} transaction summary files\n")
-    
+
+    print(f"Found {len(transaction_files)} transaction summary files")
+
     all_data = []
     
     for pdf_file in transaction_files:
-        print(f"📄 Processing: {pdf_file.name}")
-        
-        # Extract pharmacy and date
         pharmacy_name, date_str = extract_pharmacy_and_date(str(pdf_file))
-        
-        # Extract transaction data
         transaction_data = extract_transaction_summary_data(str(pdf_file))
         
-        # Get turnover from turnover summary report
-        turnover = extract_turnover_from_turnover_summary(pharmacy_name, date_str, base_dir)
-        
-        # Calculate average basket value
-        if turnover and transaction_data['transactions_total'] > 0:
-            avg_basket_value = turnover / transaction_data['transactions_total']
-            transaction_data['avg_basket_value'] = avg_basket_value
-            transaction_data['turnover'] = turnover
-            print(f"  📊 Turnover: {format_currency(turnover)}")
-            print(f"  📊 Avg Basket Value: {format_currency(avg_basket_value)}")
-        else:
-            print(f"  ⚠️  Could not calculate avg basket value (turnover: {format_currency(turnover)}, transactions: {transaction_data['transactions_total']})")
-        
-        # Combine all data
         complete_data = {
             'file': pdf_file.name,
             'pharmacy': pharmacy_name,
             'date': date_str,
             **transaction_data
         }
-        
         all_data.append(complete_data)
         
-        # Display formatted results
-        print(f"   🏪 Pharmacy: {pharmacy_name}")
-        print(f"   📅 Date: {date_str}")
-        print(f"   📊 Transaction Summary:")
-        print(f"      • Total Transactions: {transaction_data.get('transactions_total', 0)}")
-        print(f"   📋 Transaction Breakdown:")
-        
-        breakdown = transaction_data.get('transaction_breakdown', {})
-        if breakdown:
-            for docket_type, count in breakdown.items():
-                print(f"      • {docket_type}: {count}")
-        else:
-            print(f"      • No transaction breakdown found")
-        
-        print(f"   " + "="*50)
-        print()
-    
-    # Save extracted data to JSON file for reference
     output_file = Path("transaction_summary_extracted_data.json")
     with open(output_file, 'w') as f:
         json.dump(all_data, f, indent=2, default=str)
-    
-    print(f"📊 Extracted data saved to: {output_file}")
-    print(f"✅ Successfully processed {len(transaction_files)} transaction summary files")
 
 if __name__ == "__main__":
-    test_transaction_extraction() 
+    process_all_transaction_summaries() 

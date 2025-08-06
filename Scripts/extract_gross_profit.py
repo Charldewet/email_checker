@@ -178,98 +178,42 @@ def format_currency(amount: float) -> str:
     else:
         return f"R{amount:,.2f}"
 
-def test_gross_profit_extraction(base_dir: str = "../temp_classified_pdfs"):
+def process_all_gross_profit_reports(base_dir: str = "../temp_classified_pdfs"):
     """
-    Test gross profit report extraction
+    Process all gross profit report files in the classified PDFs directory
     """
+    import json
     base_path = Path(base_dir)
-    
+
     if not base_path.exists():
         print(f"Directory not found: {base_path}")
         return
-    
-    # Find all gross profit report files
+
     gross_profit_files = list(base_path.rglob("gross_profit_report_*.pdf"))
-    
+
     if not gross_profit_files:
         print("No gross profit report files found")
         return
     
-    print(f"=== GROSS PROFIT REPORT DATA EXTRACTION TEST ===")
-    print(f"Found {len(gross_profit_files)} gross profit report files\n")
-    
+    print(f"Found {len(gross_profit_files)} gross profit report files")
+
     all_data = []
-    
+
     for pdf_file in gross_profit_files:
-        print(f"📄 Processing: {pdf_file.name}")
-        
-        # Extract pharmacy and date
         pharmacy_name, date_str = extract_pharmacy_and_date(str(pdf_file))
-        
-        # Extract gross profit data
         gross_profit_data = extract_gross_profit_data(str(pdf_file))
-        
-        # Combine all data
+
         complete_data = {
             'file': pdf_file.name,
             'pharmacy': pharmacy_name,
             'date': date_str,
             **gross_profit_data
         }
-        
         all_data.append(complete_data)
-        
-        # Display formatted results
-        print(f"   🏪 Pharmacy: {pharmacy_name}")
-        print(f"   📅 Date: {date_str}")
-        print(f"   📊 Summary Statistics:")
-        stats = gross_profit_data['summary_stats']
-        print(f"      • Total Records: {stats['total_records']}")
-        print(f"      • Total Sales Value: {format_currency(stats['total_sales_value'])}")
-        print(f"      • Total Sales Cost: {format_currency(stats['total_sales_cost'])}")
-        print(f"      • Total Gross Profit: {format_currency(stats['total_gross_profit'])}")
-        print(f"      • Overall GP %: {stats['overall_gp_percent']:.2f}%")
-        print(f"      • Total Sales Qty: {stats['total_sales_qty']:,.0f}")
-        print(f"      • Total Stock on Hand: {stats['total_soh']:,.0f}")
-        
-        # Show first few records as sample
-        records = gross_profit_data['sales_details']
-        if records:
-            print(f"   📋 Sample Records (first 3):")
-            for i, record in enumerate(records[:3]):
-                print(f"      {i+1}. {record['stock_code']} - {record['description'][:30]}... - Dept: {record['original_department_code']} → {record['department_code']} - Qty: {record['sales_qty']} - Value: {format_currency(record['sales_value'])}")
-        
-        # Show department mapping summary
-        dept_mapping = {}
-        for record in records:
-            orig_dept = record['original_department_code']
-            main_dept = record['department_code']
-            if orig_dept not in dept_mapping:
-                dept_mapping[orig_dept] = main_dept
-        
-        if len(dept_mapping) > 0:
-            print(f"   🏷️  Department Code Mapping:")
-            for orig_dept, main_dept in sorted(dept_mapping.items()):
-                print(f"      • {orig_dept} → {main_dept}")
-        
-        print(f"   " + "="*60)
-        print()
-    
-    # Save extracted data to JSON file for reference
+
     output_file = Path("gross_profit_extracted_data.json")
     with open(output_file, 'w') as f:
         json.dump(all_data, f, indent=2, default=str)
-    
-    # Save detailed CSV files for each report
-    for data in all_data:
-        if data['sales_details']:
-            df = pd.DataFrame(data['sales_details'])
-            csv_filename = f"gross_profit_{data['pharmacy']}_{data['date']}.csv"
-            df.to_csv(csv_filename, index=False)
-            print(f"📊 Detailed CSV saved: {csv_filename}")
-    
-    print(f"📊 Extracted data saved to: {output_file}")
-    print(f"✅ Successfully processed {len(gross_profit_files)} gross profit report files")
 
 if __name__ == "__main__":
-    test_gross_profit_extraction() 
+    process_all_gross_profit_reports() 

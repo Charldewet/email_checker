@@ -126,10 +126,11 @@ def format_currency(amount: float) -> str:
     else:
         return f"R{amount:,.2f}"
 
-def test_turnover_extraction(base_dir: str = "../temp_classified_pdfs"):
+def process_all_turnover_summaries(base_dir: str = "../temp_classified_pdfs"):
     """
-    Test turnover summary extraction without database
+    Process all turnover summary files in the classified PDFs directory
     """
+    import json
     base_path = Path(base_dir)
     
     if not base_path.exists():
@@ -143,48 +144,26 @@ def test_turnover_extraction(base_dir: str = "../temp_classified_pdfs"):
         print("No turnover summary files found")
         return
     
-    print(f"=== TURNOVER SUMMARY DATA EXTRACTION TEST ===")
-    print(f"Found {len(turnover_files)} turnover summary files\n")
+    print(f"Found {len(turnover_files)} turnover summary files")
     
     all_data = []
     
     for pdf_file in turnover_files:
-        print(f"📄 Processing: {pdf_file.name}")
-        
-        # Extract pharmacy and date
         pharmacy_name, date_str = extract_pharmacy_and_date(str(pdf_file))
-        
-        # Extract turnover data
         turnover_data = extract_turnover_summary_data(str(pdf_file))
         
-        # Combine all data
         complete_data = {
             'file': pdf_file.name,
             'pharmacy': pharmacy_name,
             'date': date_str,
             **turnover_data
         }
-        
         all_data.append(complete_data)
-        
-        # Display formatted results
-        print(f"   🏪 Pharmacy: {pharmacy_name}")
-        print(f"   📅 Date: {date_str}")
-        print(f"   💰 Turnover Summary (Nett Exclusive):")
-        print(f"      • Total Turnover:       {format_currency(turnover_data.get('turnover'))}")
-        print(f"      • Cash Sales:           {format_currency(turnover_data.get('sales_cash'))}")
-        print(f"      • Account Sales:        {format_currency(turnover_data.get('sales_account'))}")
-        print(f"      • COD Sales:            {format_currency(turnover_data.get('sales_cod'))}")
-        print(f"   " + "="*50)
-        print()
     
-    # Save extracted data to JSON file for reference
+    # Save extracted data to JSON file for the pipeline
     output_file = Path("turnover_summary_extracted_data.json")
     with open(output_file, 'w') as f:
         json.dump(all_data, f, indent=2, default=str)
-    
-    print(f"📊 Extracted data saved to: {output_file}")
-    print(f"✅ Successfully processed {len(turnover_files)} turnover summary files")
 
 if __name__ == "__main__":
-    test_turnover_extraction() 
+    process_all_turnover_summaries() 

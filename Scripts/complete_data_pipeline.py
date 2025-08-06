@@ -256,28 +256,28 @@ def run_complete_pipeline(classified_pdfs_dir="temp_classified_pdfs"):
     
     # Trading Summary
     print("\nExtracting Trading Summary data...")
-    from extract_trading_summary import test_trading_extraction
-    test_trading_extraction(str(base_dir))
+    from extract_trading_summary import process_all_trading_summaries
+    process_all_trading_summaries(str(base_dir))
     
     # Turnover Summary
     print("\nExtracting Turnover Summary data...")
-    from extract_turnover_summary import test_turnover_extraction
-    test_turnover_extraction(str(base_dir))
+    from extract_turnover_summary import process_all_turnover_summaries
+    process_all_turnover_summaries(str(base_dir))
     
     # Transaction Summary
     print("\nExtracting Transaction Summary data...")
-    from extract_transaction_summary import test_transaction_extraction
-    test_transaction_extraction(str(base_dir))
+    from extract_transaction_summary import process_all_transaction_summaries
+    process_all_transaction_summaries(str(base_dir))
     
     # Gross Profit Report
     print("\nExtracting Gross Profit data...")
-    from extract_gross_profit import test_gross_profit_extraction
-    test_gross_profit_extraction(str(base_dir))
+    from extract_gross_profit import process_all_gross_profit_reports
+    process_all_gross_profit_reports(str(base_dir))
     
     # Dispensary Summary
     print("\nExtracting Dispensary Summary data...")
-    from extract_dispensary_summary import test_dispensary_extraction
-    test_dispensary_extraction(str(base_dir))
+    from extract_dispensary_summary import process_all_dispensary_summaries
+    process_all_dispensary_summaries(str(base_dir))
     
     print("\n--- All extractions completed ---")
     

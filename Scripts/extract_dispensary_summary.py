@@ -141,100 +141,42 @@ def format_currency(amount: float) -> str:
     else:
         return f"R{amount:,.2f}"
 
-def test_dispensary_extraction(base_dir: str = "../temp_classified_pdfs"):
+def process_all_dispensary_summaries(base_dir: str = "../temp_classified_pdfs"):
     """
-    Test dispensary summary extraction
+    Process all dispensary summary files in the classified PDFs directory
     """
+    import json
     base_path = Path(base_dir)
-    
+
     if not base_path.exists():
         print(f"Directory not found: {base_path}")
         return
-    
-    # Find all dispensary summary report files
+
     dispensary_files = list(base_path.rglob("dispensary_summary_*.pdf"))
-    
+
     if not dispensary_files:
-        print("No dispensary summary report files found")
+        print("No dispensary summary files found")
         return
-    
-    print(f"=== DISPENSARY SUMMARY DATA EXTRACTION TEST ===")
-    print(f"Found {len(dispensary_files)} dispensary summary report files\n")
-    
+
+    print(f"Found {len(dispensary_files)} dispensary summary files")
+
     all_data = []
-    
+
     for pdf_file in dispensary_files:
-        print(f"📄 Processing: {pdf_file.name}")
-        
-        # Extract pharmacy and date
         pharmacy_name, date_str = extract_pharmacy_and_date(str(pdf_file))
-        
-        # Extract dispensary data
         dispensary_data = extract_dispensary_summary_data(str(pdf_file))
-        
-        # Combine all data
+
         complete_data = {
             'file': pdf_file.name,
             'pharmacy': pharmacy_name,
             'date': date_str,
             **dispensary_data
         }
-        
         all_data.append(complete_data)
-        
-        # Display formatted results
-        print(f"   🏪 Pharmacy: {pharmacy_name}")
-        print(f"   📅 Date: {date_str}")
-        print(f"   📊 Dispensary Statistics:")
-        print(f"      • Total Scripts: {dispensary_data['script_total']:,}" if dispensary_data['script_total'] else "      • Total Scripts: N/A")
-        print(f"      • Dispensary Turnover (Including VAT): {format_currency(dispensary_data['disp_turnover_including_vat'])}")
-        print(f"      • Dispensary Turnover (Excluding VAT): {format_currency(dispensary_data['disp_turnover_excluding_vat'])}")
-        print(f"      • Average Script Value: {format_currency(dispensary_data['avg_script_value'])}")
-        
-        # Show calculation details
-        if dispensary_data['disp_turnover_including_vat'] and dispensary_data['disp_turnover_excluding_vat']:
-            vat_amount = dispensary_data['disp_turnover_including_vat'] - dispensary_data['disp_turnover_excluding_vat']
-            print(f"   💡 Calculation Details:")
-            print(f"      • VAT Amount: {format_currency(vat_amount)}")
-            print(f"      • VAT Rate: 15%")
-            print(f"      • Calculation: {format_currency(dispensary_data['disp_turnover_including_vat'])} ÷ 1.15 = {format_currency(dispensary_data['disp_turnover_excluding_vat'])}")
-        
-        if dispensary_data['script_total'] and dispensary_data['avg_script_value']:
-            print(f"      • Avg Script Value: {format_currency(dispensary_data['disp_turnover_excluding_vat'])} ÷ {dispensary_data['script_total']} = {format_currency(dispensary_data['avg_script_value'])}")
-        
-        print(f"   " + "="*60)
-        print()
-    
-    # Save extracted data to JSON file for reference
+
     output_file = Path("dispensary_summary_extracted_data.json")
     with open(output_file, 'w') as f:
         json.dump(all_data, f, indent=2, default=str)
-    
-    print(f"📊 Extracted data saved to: {output_file}")
-    
-    # Display summary
-    print("=== SUMMARY ===")
-    for data in all_data:
-        print(f"🏪 {data['pharmacy']} ({data['date']}):")
-        print(f"   • Scripts: {data['script_total']:,}" if data['script_total'] else "   • Scripts: N/A")
-        print(f"   • Dispensary Turnover: {format_currency(data['disp_turnover_excluding_vat'])}")
-        print(f"   • Average Script Value: {format_currency(data['avg_script_value'])}")
-        print()
-    
-    # Create database-ready format
-    print("=== DATABASE INSERT FORMAT ===")
-    for data in all_data:
-        if data['script_total'] and data['disp_turnover_excluding_vat'] and data['avg_script_value']:
-            print(f"-- {data['pharmacy']} - {data['date']}")
-            print(f"UPDATE daily_summary SET")
-            print(f"    script_total = {data['script_total']},")
-            print(f"    disp_turnover = {data['disp_turnover_excluding_vat']},")
-            print(f"    avg_script_value = {data['avg_script_value']}")
-            print(f"WHERE pharmacy_id = (SELECT id FROM pharmacies WHERE pharmacy_code = '{data['pharmacy']}')")
-            print(f"  AND report_date = '{data['date']}';")
-            print()
-    
-    print(f"✅ Successfully processed {len(dispensary_files)} dispensary summary report files")
 
 if __name__ == "__main__":
-    test_dispensary_extraction() 
+    process_all_dispensary_summaries() 
