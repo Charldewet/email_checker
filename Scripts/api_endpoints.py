@@ -1008,10 +1008,10 @@ def register_status_endpoints(app: Flask, db: RenderPharmacyDatabase):
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }), 500
     
-    @app.route('/api/health', methods=['GET'])
-    def health_check():
-        """Health check endpoint"""
-        return jsonify({'status': 'healthy'})
+    @app.route('/api/health_check', methods=['GET'])
+    def api_health_check():
+        """API health check endpoint"""
+        return jsonify({'status': 'healthy', 'service': 'api'})
 
 def register_all_endpoints(app: Flask, db: RenderPharmacyDatabase):
     """Register all Phase 1 API endpoints"""
