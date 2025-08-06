@@ -19,6 +19,7 @@ import schedule
 # Import our pharmacy monitoring modules
 from email_monitor import PharmacyEmailMonitor
 from render_database_connection import RenderPharmacyDatabase
+from api_endpoints import register_all_endpoints
 
 # Configure logging
 logging.basicConfig(
@@ -30,6 +31,15 @@ logger = logging.getLogger(__name__)
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+# Initialize database connection for API endpoints
+try:
+    api_db = RenderPharmacyDatabase()
+    # Register all Phase 1 API endpoints
+    register_all_endpoints(app, api_db)
+    logger.info("✅ All Phase 1 API endpoints registered successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to register API endpoints: {e}")
 
 # Global variables
 monitor = None

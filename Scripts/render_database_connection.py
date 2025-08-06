@@ -49,6 +49,18 @@ class RenderPharmacyDatabase:
             print(f"❌ Query execution failed: {e}")
             raise
     
+    def get_pharmacy_id_by_code(self, pharmacy_code: str) -> Optional[int]:
+        """Get pharmacy_id from pharmacy_code"""
+        query = "SELECT id FROM pharmacies WHERE pharmacy_code = %s"
+        result = self.execute_query(query, (pharmacy_code,))
+        return result[0]['id'] if result else None
+    
+    def get_pharmacy_code_by_id(self, pharmacy_id: int) -> Optional[str]:
+        """Get pharmacy_code from pharmacy_id"""
+        query = "SELECT pharmacy_code FROM pharmacies WHERE id = %s"
+        result = self.execute_query(query, (pharmacy_id,))
+        return result[0]['pharmacy_code'] if result else None
+    
     def insert_daily_summary(self, **kwargs) -> bool:
         """Insert or update daily summary data"""
         query = """
