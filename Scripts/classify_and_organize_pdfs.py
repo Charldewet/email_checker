@@ -146,18 +146,21 @@ def classify_pdf(file_path):
     
     return best_match
 
-def classify_and_organize_pdfs():
+def classify_and_organize_pdfs(source_dir=None):
     """
-    Classify PDFs in the Test pdfs folder and save them with appropriate names in a temp folder
+    Classify PDFs in the specified directory and save them with appropriate names in a temp folder
     """
     # Define paths
-    test_pdfs_dir = Path("../Test pdfs")
+    if source_dir is None:
+        test_pdfs_dir = Path("../Test pdfs")
+    else:
+        test_pdfs_dir = Path(source_dir)
     temp_dir = Path("../temp_classified_pdfs")
     
     # Create temp directory if it doesn't exist
     temp_dir.mkdir(exist_ok=True)
     
-    # Get all PDF files in the test pdfs directory
+    # Get all PDF files in the source directory
     pdf_files = list(test_pdfs_dir.glob("*.pdf"))
     
     if not pdf_files:

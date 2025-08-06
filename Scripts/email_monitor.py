@@ -27,7 +27,6 @@ import threading
 from typing import List, Dict, Optional
 
 # Import our existing modules
-from classify_and_organize_pdfs import classify_and_organize_pdfs
 from extract_trading_summary import extract_trading_summary_data
 from extract_turnover_summary import extract_turnover_summary_data
 from extract_transaction_summary import extract_transaction_summary_data
@@ -372,7 +371,8 @@ class PharmacyEmailMonitor:
             
             # Step 1: Classify and organize PDFs
             logger.info("Step 1: Classifying and organizing PDFs")
-            classify_and_organize_pdfs()
+            from classify_and_organize_pdfs import classify_and_organize_pdfs
+            classify_and_organize_pdfs("temp_email_pdfs")
             
             # Step 2: Run complete data pipeline
             logger.info("Step 2: Running complete data pipeline")
