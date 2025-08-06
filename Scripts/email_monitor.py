@@ -683,27 +683,20 @@ class PharmacyEmailMonitor:
                         if report_date:
                             logger.info(f"Found report for date: {report_date}")
                             
-                            # Check if we should process this report
-                            if self.should_process_report(report_date, email_timestamp):
-                                if report_date not in reports_by_date:
-                                    reports_by_date[report_date] = {
-                                        'pdf_files': [],
-                                        'email_timestamp': email_timestamp,
-                                        'email_id': email_id
-                                    }
-                                elif email_timestamp > reports_by_date[report_date]['email_timestamp']:
-                                    # This email is newer, replace the data
-                                    reports_by_date[report_date] = {
-                                        'pdf_files': [],
-                                        'email_timestamp': email_timestamp,
-                                        'email_id': email_id
-                                    }
-                                
-                                # Add PDF if this is the latest email for this date
-                                if reports_by_date[report_date]['email_timestamp'] == email_timestamp:
-                                    reports_by_date[report_date]['pdf_files'].append(pdf_file)
-                            else:
-                                logger.info(f"Skipping report for {report_date} - we have newer data")
+                            # Always process every report; rely on DB ON CONFLICT to dedupe
+                            if report_date not in reports_by_date:
+                                reports_by_date[report_date] = {
+                                    'pdf_files': [],
+                                    'email_timestamp': email_timestamp,
+                                    'email_id': email_id
+                                }
+                            # Update timestamp if this email is newer (for logging/reference only)
+                            if email_timestamp > reports_by_date[report_date]['email_timestamp']:
+                                reports_by_date[report_date]['email_timestamp'] = email_timestamp
+                                reports_by_date[report_date]['email_id'] = email_id
+                            
+                            # Add PDF to the list for this date
+                            reports_by_date[report_date]['pdf_files'].append(pdf_file)
                         else:
                             logger.warning(f"Could not extract date from {pdf_file}")
                     
