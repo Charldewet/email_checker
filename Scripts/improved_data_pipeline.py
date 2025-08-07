@@ -254,6 +254,11 @@ class ImprovedDataPipeline:
             pharmacy, date = key
             calculated = data['calculated_metrics']
             
+            # Skip records with invalid dates
+            if not date or date is None:
+                logger.warning(f"⚠️ Skipping {pharmacy} - Invalid date (None)")
+                continue
+                
             logger.info(f"\n🏪 Processing {pharmacy} - {date}")
             
             # Get existing data from database
@@ -360,6 +365,11 @@ class ImprovedDataPipeline:
     def update_database_record(self, pharmacy: str, date: str, metrics: Dict[str, Any]):
         """Update database record with final metrics"""
         try:
+            # Validate date before attempting database operation
+            if not date or date is None:
+                logger.warning(f"⚠️ Skipping database update for {pharmacy} - Invalid date (None)")
+                return
+                
             query = """
             INSERT INTO daily_summary (
                 pharmacy_id, report_date, turnover, gp_percent, gp_value, cost_of_sales, purchases,
