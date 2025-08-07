@@ -1,0 +1,34 @@
+2025-08-07 15:54:35,367 - INFO - 
+================================================================================
+2025-08-07 15:54:35,367 - INFO - 🧪 TESTING IMPROVED PIPELINE
+2025-08-07 15:54:35,367 - INFO - ================================================================================
+2025-08-07 15:54:35,367 - INFO - 
+--- Test 1: Creating test data ---
+2025-08-07 15:54:35,367 - INFO - Creating test data...
+2025-08-07 15:54:35,368 - INFO - Test data created: test_pipeline_data.json
+2025-08-07 15:54:35,368 - INFO - 
+--- Test 2: Testing largest value strategy ---
+2025-08-07 15:54:35,368 - INFO - Testing largest value strategy...
+2025-08-07 15:54:35,368 - INFO - Running test cases:
+2025-08-07 15:54:35,368 - INFO -   Turnover: New value R30,000.00 > existing R1,000.00, keeping new
+2025-08-07 15:54:35,368 - INFO - Result for Turnover: R30,000.00
+2025-08-07 15:54:35,368 - INFO -   GP Value: Existing value R5,000.00 >= new R3,000.00, keeping existing
+2025-08-07 15:54:35,368 - INFO - Result for GP Value: R5,000.00
+2025-08-07 15:54:35,368 - INFO -   Transactions: No existing value, using new value: R150.00
+2025-08-07 15:54:35,368 - INFO - Result for Transactions: R150.00
+2025-08-07 15:54:35,368 - INFO -   Cash Sales: Existing value R8,000.00 >= new R8,000.00, keeping existing
+2025-08-07 15:54:35,368 - INFO - Result for Cash Sales: R8,000.00
+2025-08-07 15:54:35,368 - INFO - ✅ Largest value strategy test completed!
+2025-08-07 15:54:35,368 - INFO - 
+--- Test 3: Testing database connection ---
+2025-08-07 15:54:35,368 - INFO - Testing database connection...
+2025-08-07 15:54:35,460 - ERROR - ❌ Database connection failed: DATABASE_URL environment variable not set
+2025-08-07 15:54:35,460 - INFO - 
+================================================================================
+2025-08-07 15:54:35,460 - INFO - 📊 TEST SUMMARY
+2025-08-07 15:54:35,460 - INFO - ================================================================================
+2025-08-07 15:54:35,460 - INFO - ✅ Test data creation: PASSED
+2025-08-07 15:54:35,460 - INFO - ✅ Largest value strategy: PASSED
+2025-08-07 15:54:35,460 - WARNING - ⚠️ Database connection: FAILED (may need environment setup)
+2025-08-07 15:54:35,460 - INFO - 
+🎉 All tests completed!
