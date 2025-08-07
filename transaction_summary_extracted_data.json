@@ -1,6 +1,6 @@
 [
   {
-    "file": "transaction_summary_0000_20250807_163847_960_20250807-14h59m02s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_960_20250807-14h59m02s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-06",
     "transactions_total": 414,
@@ -15,7 +15,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_942_20250807-14h40m55s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_942_20250807-14h40m55s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-01",
     "transactions_total": 378,
@@ -30,7 +30,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_929_20250807-11h40m15s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_929_20250807-11h40m15s-Complete.pdf",
     "pharmacy": "TLC WINTERTON",
     "date": "2025-08-07",
     "transactions_total": 158,
@@ -42,21 +42,20 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_985_20250807-16h18m48s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_930_20250807-11h35m46s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-07",
-    "transactions_total": 237,
+    "transactions_total": 68,
     "transaction_breakdown": {
-      "CASH SALE": 211,
-      "C.O.D SALE": 3,
-      "INVOICE": 20,
-      "CASH REFUND": 1,
-      "RECEIPT": 2
+      "CASH SALE": 58,
+      "C.O.D SALE": 2,
+      "INVOICE": 7,
+      "RECEIPT": 1
     },
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_968_20250807-15h05m30s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_968_20250807-15h05m30s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-07-30",
     "transactions_total": 328,
@@ -71,7 +70,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_970_20250807-15h07m52s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_970_20250807-15h07m52s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-07-31",
     "transactions_total": 353,
@@ -85,7 +84,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_951_20250807-14h49m05s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_948_20250807-14h46m44s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-02",
     "transactions_total": 218,
@@ -98,7 +97,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_955_20250807-14h56m46s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_955_20250807-14h56m46s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-05",
     "transactions_total": 414,
@@ -113,7 +112,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_888_20250805-12h41m07s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_888_20250805-12h41m07s-Complete.pdf",
     "pharmacy": "TLC WINTERTON",
     "date": "2025-08-04",
     "transactions_total": 321,
@@ -125,7 +124,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_889_20250805-12h39m56s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_889_20250805-12h39m56s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-04",
     "transactions_total": 387,
@@ -140,7 +139,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250807_163847_979_20250807-16h15m37s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_165703_979_20250807-16h15m37s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-07-29",
     "transactions_total": 335,

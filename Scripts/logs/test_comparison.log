@@ -1,0 +1,48 @@
+2025-08-07 16:57:44,283 - INFO - 🚀 STARTING COMPARISON TESTS
+2025-08-07 16:57:44,283 - INFO - ==================================================
+2025-08-07 16:57:44,283 - INFO - 🧪 TESTING COMPARISON LOGIC
+2025-08-07 16:57:44,283 - INFO - ==================================================
+2025-08-07 16:57:46,706 - INFO - ✅ Connected to database
+2025-08-07 16:57:46,706 - INFO - Testing compare_and_keep_largest function:
+2025-08-07 16:57:46,706 - INFO -   Test Turnover: New value R2,000.00 > existing R1,000.00, keeping new
+2025-08-07 16:57:46,706 - INFO - Result 1: 2000
+2025-08-07 16:57:46,706 - INFO -   Test Turnover: Existing value R3,000.00 >= new R2,000.00, keeping existing
+2025-08-07 16:57:46,706 - INFO - Result 2: 3000
+2025-08-07 16:57:46,706 - INFO -   Test Turnover: No existing value, using new value: R1,500.00
+2025-08-07 16:57:46,706 - INFO - Result 3: 1500
+2025-08-07 16:57:46,706 - INFO - ✅ Comparison logic test completed
+2025-08-07 16:57:46,707 - INFO - 
+🧪 TESTING DATABASE COMPARISON
+2025-08-07 16:57:46,707 - INFO - ==================================================
+2025-08-07 16:57:48,260 - INFO - ✅ Connected to database
+2025-08-07 16:57:49,898 - INFO - 📅 Testing for date: 2025-08-07
+2025-08-07 16:57:50,490 - INFO - 📊 Existing data for REITZ today: {'id': 252, 'pharmacy_id': 1, 'report_date': datetime.date(2025, 8, 7), 'upload_time': datetime.datetime(2025, 8, 7, 9, 37, 32, 115364), 'turnover': Decimal('35789.62'), 'gp_percent': Decimal('23.96'), 'gp_value': Decimal('3409.85'), 'cost_of_sales': Decimal('10820.8'), 'purchases': Decimal('16616.41'), 'avg_basket_value': Decimal('526.32'), 'avg_basket_size': Decimal('6.81'), 'transactions_total': 237, 'script_total': 84, 'avg_script_value': Decimal('287.92215320910975'), 'disp_turnover': Decimal('24185.460869565217'), 'stock_opening': Decimal('1576838.63'), 'stock_closing': Decimal('1581516.98'), 'adjustments': Decimal('1117.26'), 'sales_cash': Decimal('20269.67'), 'sales_cod': Decimal('2125.37'), 'sales_account': Decimal('2527.95')}
+2025-08-07 16:57:50,491 - INFO - 💰 Existing turnover: R35,789.62
+2025-08-07 16:57:50,491 - INFO - 💰 New turnover: R33,564.49
+2025-08-07 16:57:50,491 - INFO -   Turnover: Existing value R35,789.62 >= new R33,564.49, keeping existing
+2025-08-07 16:57:50,492 - INFO - 🎯 Final turnover: R35,789.62
+2025-08-07 16:57:50,492 - INFO - ✅ Existing value should be kept
+2025-08-07 16:57:50,492 - INFO - 
+🧪 TESTING PIPELINE STEP
+2025-08-07 16:57:50,492 - INFO - ==================================================
+2025-08-07 16:57:52,261 - INFO - ✅ Connected to database
+2025-08-07 16:57:52,262 - INFO - 🔄 Testing compare_with_database_and_update with test data
+2025-08-07 16:57:52,262 - INFO - 🔄 Comparing with database and updating with largest values...
+2025-08-07 16:57:52,262 - INFO - 
+🏪 Processing REITZ - 2025-08-07
+2025-08-07 16:57:52,870 - INFO -   Turnover: Existing value R35,789.62 >= new R33,564.49, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Gross Profit Value: Existing value R3,409.85 >= new R3,409.85, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Cost of Sales: Existing value R10,820.80 >= new R0.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Purchases: Existing value R16,616.41 >= new R0.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Dispensary Turnover: Existing value R24,185.46 >= new R0.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Total Transactions: Existing value R237.00 >= new R68.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Total Scripts: Existing value R84.00 >= new R0.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Opening Stock: Existing value R1,576,838.63 >= new R0.00, keeping existing
+2025-08-07 16:57:52,871 - INFO -   Closing Stock: Existing value R1,581,516.98 >= new R0.00, keeping existing
+2025-08-07 16:57:52,872 - INFO -   Cash Sales: Existing value R20,269.67 >= new R0.00, keeping existing
+2025-08-07 16:57:52,872 - INFO -   Account Sales: Existing value R2,527.95 >= new R0.00, keeping existing
+2025-08-07 16:57:52,872 - INFO -   COD Sales: Existing value R2,125.37 >= new R0.00, keeping existing
+2025-08-07 16:57:53,503 - INFO - ✅ Updated database record for REITZ - 2025-08-07
+2025-08-07 16:57:53,503 - INFO - ✅ Pipeline step test completed
+2025-08-07 16:57:53,504 - INFO - 
+✅ ALL TESTS COMPLETED

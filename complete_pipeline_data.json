@@ -3,7 +3,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-06",
     "trading_summary": {
-      "file": "trading_summary_1457_20250807_163847_958_20250807-14h57m12s-Complete.pdf",
+      "file": "trading_summary_1457_20250807_165703_958_20250807-14h57m12s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-06",
       "stock_opening": 1563965.07,
@@ -16,7 +16,7 @@
       "turnover": 82800.5
     },
     "turnover_summary": {
-      "file": "turnover_summary_1606_20250807_163847_911_20250806-16h06m36s-Complete.pdf",
+      "file": "turnover_summary_1606_20250807_165703_911_20250806-16h06m36s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-06",
       "turnover": 80353.14,
@@ -25,7 +25,7 @@
       "sales_cod": 1515.75
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_960_20250807-14h59m02s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_960_20250807-14h59m02s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-06",
       "transactions_total": 414,
@@ -40,7 +40,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1524_20250807_163847_975_20250807-15h24m24s-Complete.pdf",
+      "file": "gross_profit_report_1524_20250807_165703_975_20250807-15h24m24s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-06",
       "sales_details": [
@@ -7037,7 +7037,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1554_20250807_163847_910_20250806-15h54m09s-Complete.pdf",
+      "file": "dispensary_summary_1554_20250807_165703_910_20250806-15h54m09s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-06",
       "script_total": 114,
@@ -7069,7 +7069,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-01",
     "trading_summary": {
-      "file": "trading_summary_1412_20250807_163847_937_20250807-14h12m16s-Complete.pdf",
+      "file": "trading_summary_1412_20250807_165703_937_20250807-14h12m16s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-01",
       "stock_opening": 1546766.46,
@@ -7082,7 +7082,7 @@
       "turnover": 80589.38
     },
     "turnover_summary": {
-      "file": "turnover_summary_1544_20250807_163847_903_20250806-15h44m13s-Complete.pdf",
+      "file": "turnover_summary_1544_20250807_165703_903_20250806-15h44m13s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-01",
       "turnover": 77107.46,
@@ -7091,7 +7091,7 @@
       "sales_cod": 1130.5
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_942_20250807-14h40m55s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_942_20250807-14h40m55s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-01",
       "transactions_total": 378,
@@ -7106,7 +7106,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1412_20250807_163847_938_20250807-14h12m52s-Complete.pdf",
+      "file": "gross_profit_report_1412_20250807_165703_938_20250807-14h12m52s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-01",
       "sales_details": [
@@ -13882,7 +13882,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1553_20250807_163847_909_20250806-15h53m44s-Complete.pdf",
+      "file": "dispensary_summary_1553_20250807_165703_909_20250806-15h53m44s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-01",
       "script_total": 150,
@@ -13914,7 +13914,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-07",
     "trading_summary": {
-      "file": "trading_summary_1616_20250807_163847_984_20250807-16h16m57s-Complete.pdf",
+      "file": "trading_summary_1616_20250807_165703_984_20250807-16h16m57s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-07",
       "stock_opening": 1575961.17,
@@ -13927,7 +13927,7 @@
       "turnover": 44585.27
     },
     "turnover_summary": {
-      "file": "turnover_summary_1618_20250807_163847_987_20250807-16h18m16s-Complete.pdf",
+      "file": "turnover_summary_1618_20250807_165703_987_20250807-16h18m16s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-07",
       "turnover": 45866.02,
@@ -13936,21 +13936,20 @@
       "sales_cod": 2125.37
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_985_20250807-16h18m48s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_930_20250807-11h35m46s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-07",
-      "transactions_total": 237,
+      "transactions_total": 68,
       "transaction_breakdown": {
-        "CASH SALE": 211,
-        "C.O.D SALE": 3,
-        "INVOICE": 20,
-        "CASH REFUND": 1,
-        "RECEIPT": 2
+        "CASH SALE": 58,
+        "C.O.D SALE": 2,
+        "INVOICE": 7,
+        "RECEIPT": 1
       },
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1617_20250807_163847_986_20250807-16h17m25s-Complete.pdf",
+      "file": "gross_profit_report_1617_20250807_165703_986_20250807-16h17m25s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-07",
       "sales_details": [
@@ -18503,7 +18502,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1617_20250807_163847_988_20250807-16h17m53s-Complete.pdf",
+      "file": "dispensary_summary_1617_20250807_165703_988_20250807-16h17m53s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-07",
       "script_total": 84,
@@ -18512,10 +18511,10 @@
       "avg_script_value": 287.92215320910975
     },
     "calculated_metrics": {
-      "avg_basket_size": 1.95,
+      "avg_basket_size": 6.81,
       "turnover": 45866.02,
-      "avg_basket_value": 193.53,
-      "transactions_total": 237,
+      "avg_basket_value": 674.5,
+      "transactions_total": 68,
       "script_total": 84,
       "disp_turnover": 24185.460869565217,
       "avg_script_value": 287.92215320910975,
@@ -18535,7 +18534,7 @@
     "pharmacy": "REITZ",
     "date": "2025-07-30",
     "trading_summary": {
-      "file": "trading_summary_1503_20250807_163847_965_20250807-15h03m35s-Complete.pdf",
+      "file": "trading_summary_1503_20250807_165703_965_20250807-15h03m35s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-30",
       "stock_opening": 1565706.93,
@@ -18548,7 +18547,7 @@
       "turnover": 79517.4
     },
     "turnover_summary": {
-      "file": "turnover_summary_1504_20250807_163847_966_20250807-15h04m57s-Complete.pdf",
+      "file": "turnover_summary_1504_20250807_165703_966_20250807-15h04m57s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-30",
       "turnover": 79800.91,
@@ -18557,7 +18556,7 @@
       "sales_cod": 1176.16
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_968_20250807-15h05m30s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_968_20250807-15h05m30s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-30",
       "transactions_total": 328,
@@ -18572,7 +18571,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1504_20250807_163847_967_20250807-15h04m04s-Complete.pdf",
+      "file": "gross_profit_report_1504_20250807_165703_967_20250807-15h04m04s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-30",
       "sales_details": [
@@ -24867,7 +24866,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1504_20250807_163847_964_20250807-15h04m33s-Complete.pdf",
+      "file": "dispensary_summary_1504_20250807_165703_964_20250807-15h04m33s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-30",
       "script_total": 116,
@@ -24899,7 +24898,7 @@
     "pharmacy": "REITZ",
     "date": "2025-07-31",
     "trading_summary": {
-      "file": "trading_summary_1505_20250807_163847_969_20250807-15h05m57s-Complete.pdf",
+      "file": "trading_summary_1505_20250807_165703_969_20250807-15h05m57s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-31",
       "stock_opening": 1556121.63,
@@ -24912,7 +24911,7 @@
       "turnover": 87443.51
     },
     "turnover_summary": {
-      "file": "turnover_summary_1507_20250807_163847_971_20250807-15h07m19s-Complete.pdf",
+      "file": "turnover_summary_1507_20250807_165703_971_20250807-15h07m19s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-31",
       "turnover": 87438.48,
@@ -24921,7 +24920,7 @@
       "sales_cod": 2135.35
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_970_20250807-15h07m52s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_970_20250807-15h07m52s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-31",
       "transactions_total": 353,
@@ -24935,7 +24934,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1511_20250807_163847_974_20250807-15h11m11s-Complete.pdf",
+      "file": "gross_profit_report_1511_20250807_165703_974_20250807-15h11m11s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-31",
       "sales_details": [
@@ -32543,7 +32542,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1506_20250807_163847_973_20250807-15h06m55s-Complete.pdf",
+      "file": "dispensary_summary_1506_20250807_165703_973_20250807-15h06m55s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-31",
       "script_total": 121,
@@ -32575,7 +32574,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-02",
     "trading_summary": {
-      "file": "trading_summary_1444_20250807_163847_945_20250807-14h44m54s-Complete.pdf",
+      "file": "trading_summary_1444_20250807_165703_945_20250807-14h44m54s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-02",
       "stock_opening": 1524800.91,
@@ -32588,7 +32587,7 @@
       "turnover": 39380.43
     },
     "turnover_summary": {
-      "file": "turnover_summary_1544_20250807_163847_905_20250806-15h44m04s-Complete.pdf",
+      "file": "turnover_summary_1544_20250807_165703_905_20250806-15h44m04s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-02",
       "turnover": 39377.47,
@@ -32597,7 +32596,7 @@
       "sales_cod": null
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_951_20250807-14h49m05s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_948_20250807-14h46m44s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-02",
       "transactions_total": 218,
@@ -32610,7 +32609,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1445_20250807_163847_943_20250807-14h45m22s-Complete.pdf",
+      "file": "gross_profit_report_1445_20250807_165703_943_20250807-14h45m22s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-02",
       "sales_details": [
@@ -37293,7 +37292,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1554_20250807_163847_908_20250806-15h54m00s-Complete.pdf",
+      "file": "dispensary_summary_1554_20250807_165703_908_20250806-15h54m00s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-02",
       "script_total": 62,
@@ -37325,7 +37324,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-05",
     "trading_summary": {
-      "file": "trading_summary_1812_20250807_163847_892_20250805-18h12m03s-Complete.pdf",
+      "file": "trading_summary_1812_20250807_165703_892_20250805-18h12m03s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-05",
       "stock_opening": 1589370.96,
@@ -37338,7 +37337,7 @@
       "turnover": 92923.63
     },
     "turnover_summary": {
-      "file": "turnover_summary_1814_20250807_163847_894_20250805-18h14m32s-Complete.pdf",
+      "file": "turnover_summary_1814_20250807_165703_894_20250805-18h14m32s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-05",
       "turnover": 95437.83,
@@ -37347,7 +37346,7 @@
       "sales_cod": 1839.75
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_955_20250807-14h56m46s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_955_20250807-14h56m46s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-05",
       "transactions_total": 414,
@@ -37362,7 +37361,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1809_20250807_163847_893_20250805-18h09m43s-Complete.pdf",
+      "file": "gross_profit_report_1809_20250807_165703_893_20250805-18h09m43s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-05",
       "sales_details": [
@@ -44398,7 +44397,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1553_20250807_163847_906_20250806-15h53m25s-Complete.pdf",
+      "file": "dispensary_summary_1553_20250807_165703_906_20250806-15h53m25s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-05",
       "script_total": 159,
@@ -44430,7 +44429,7 @@
     "pharmacy": "TLC WINTERTON",
     "date": "2025-08-04",
     "trading_summary": {
-      "file": "trading_summary_1139_20250807_163847_885_20250805-11h39m56s-Complete.pdf",
+      "file": "trading_summary_1139_20250807_165703_885_20250805-11h39m56s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-04",
       "stock_opening": 1622999.99,
@@ -44443,7 +44442,7 @@
       "turnover": 68206.16
     },
     "turnover_summary": {
-      "file": "turnover_summary_1138_20250807_163847_886_20250805-11h38m27s-Complete.pdf",
+      "file": "turnover_summary_1138_20250807_165703_886_20250805-11h38m27s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-04",
       "turnover": 68222.6,
@@ -44452,7 +44451,7 @@
       "sales_cod": null
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_888_20250805-12h41m07s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_888_20250805-12h41m07s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-04",
       "transactions_total": 321,
@@ -44464,7 +44463,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1140_20250807_163847_887_20250805-11h40m22s-Complete.pdf",
+      "file": "gross_profit_report_1140_20250807_165703_887_20250805-11h40m22s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-04",
       "sales_details": [
@@ -49836,7 +49835,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1140_20250807_163847_890_20250805-11h40m53s-Complete.pdf",
+      "file": "dispensary_summary_1140_20250807_165703_890_20250805-11h40m53s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-04",
       "script_total": 104,
@@ -49868,7 +49867,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-04",
     "trading_summary": {
-      "file": "trading_summary_1452_20250807_163847_962_20250807-14h52m37s-Complete.pdf",
+      "file": "trading_summary_1452_20250807_165703_962_20250807-14h52m37s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-04",
       "stock_opening": 1547705.7,
@@ -49881,7 +49880,7 @@
       "turnover": 89930.63
     },
     "turnover_summary": {
-      "file": "turnover_summary_1453_20250807_163847_949_20250807-14h53m57s-Complete.pdf",
+      "file": "turnover_summary_1453_20250807_165703_949_20250807-14h53m57s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-04",
       "turnover": 89983.36,
@@ -49890,7 +49889,7 @@
       "sales_cod": 2779.09
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_889_20250805-12h39m56s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_889_20250805-12h39m56s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-04",
       "transactions_total": 387,
@@ -49905,7 +49904,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_0951_20250807_163847_882_20250805-09h51m51s-Complete.pdf",
+      "file": "gross_profit_report_0951_20250807_165703_882_20250805-09h51m51s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-04",
       "sales_details": [
@@ -56564,7 +56563,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1007_20250807_163847_884_20250805-10h07m09s-Complete.pdf",
+      "file": "dispensary_summary_1007_20250807_165703_884_20250805-10h07m09s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-04",
       "script_total": 155,
@@ -56596,7 +56595,7 @@
     "pharmacy": "REITZ",
     "date": "2025-08-03",
     "trading_summary": {
-      "file": "trading_summary_1450_20250807_163847_961_20250807-14h50m21s-Complete.pdf",
+      "file": "trading_summary_1450_20250807_165703_961_20250807-14h50m21s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-08-03",
       "stock_opening": 1547590.01,
@@ -56636,7 +56635,7 @@
     "pharmacy": "REITZ",
     "date": "2025-07-29",
     "trading_summary": {
-      "file": "trading_summary_1613_20250807_163847_980_20250807-16h13m42s-Complete.pdf",
+      "file": "trading_summary_1613_20250807_165703_980_20250807-16h13m42s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-29",
       "stock_opening": 1533660.82,
@@ -56649,7 +56648,7 @@
       "turnover": 65728.96
     },
     "turnover_summary": {
-      "file": "turnover_summary_1615_20250807_163847_983_20250807-16h15m04s-Complete.pdf",
+      "file": "turnover_summary_1615_20250807_165703_983_20250807-16h15m04s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-29",
       "turnover": 65911.19,
@@ -56658,7 +56657,7 @@
       "sales_cod": 684.39
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_979_20250807-16h15m37s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_979_20250807-16h15m37s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-29",
       "transactions_total": 335,
@@ -56673,7 +56672,7 @@
       "avg_basket_value": null
     },
     "gross_profit_summary": {
-      "file": "gross_profit_report_1614_20250807_163847_982_20250807-16h14m11s-Complete.pdf",
+      "file": "gross_profit_report_1614_20250807_165703_982_20250807-16h14m11s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-29",
       "sales_details": [
@@ -63254,7 +63253,7 @@
       }
     },
     "dispensary_summary": {
-      "file": "dispensary_summary_1614_20250807_163847_981_20250807-16h14m40s-Complete.pdf",
+      "file": "dispensary_summary_1614_20250807_165703_981_20250807-16h14m40s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": "2025-07-29",
       "script_total": 132,
@@ -63287,7 +63286,7 @@
     "date": "2025-08-06",
     "trading_summary": {},
     "turnover_summary": {
-      "file": "turnover_summary_0529_20250807_163847_917_20250807-05h29m38s-Complete.pdf",
+      "file": "turnover_summary_0529_20250807_165703_917_20250807-05h29m38s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-06",
       "turnover": 78925.39,
@@ -63323,7 +63322,7 @@
     "date": "2025-08-01",
     "trading_summary": {},
     "turnover_summary": {
-      "file": "turnover_summary_0529_20250807_163847_915_20250807-05h29m48s-Complete.pdf",
+      "file": "turnover_summary_0529_20250807_165703_915_20250807-05h29m48s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-01",
       "turnover": 70191.87,
@@ -63359,7 +63358,7 @@
     "date": "2025-08-07",
     "trading_summary": {},
     "turnover_summary": {
-      "file": "turnover_summary_1222_20250807_163847_932_20250807-12h22m27s-Complete.pdf",
+      "file": "turnover_summary_1222_20250807_165703_932_20250807-12h22m27s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-07",
       "turnover": 29974.32,
@@ -63368,7 +63367,7 @@
       "sales_cod": null
     },
     "transaction_summary": {
-      "file": "transaction_summary_0000_20250807_163847_929_20250807-11h40m15s-Complete.pdf",
+      "file": "transaction_summary_0000_20250807_165703_929_20250807-11h40m15s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-07",
       "transactions_total": 158,
@@ -63406,7 +63405,7 @@
     "date": "2025-08-02",
     "trading_summary": {},
     "turnover_summary": {
-      "file": "turnover_summary_0529_20250807_163847_916_20250807-05h29m54s-Complete.pdf",
+      "file": "turnover_summary_0529_20250807_165703_916_20250807-05h29m54s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-02",
       "turnover": 28888.06,
@@ -63442,7 +63441,7 @@
     "date": "2025-08-05",
     "trading_summary": {},
     "turnover_summary": {
-      "file": "turnover_summary_0530_20250807_163847_914_20250807-05h30m06s-Complete.pdf",
+      "file": "turnover_summary_0530_20250807_165703_914_20250807-05h30m06s-Complete.pdf",
       "pharmacy": "TLC WINTERTON",
       "date": "2025-08-05",
       "turnover": 82906.29,
@@ -63481,7 +63480,7 @@
     "transaction_summary": {},
     "gross_profit_summary": {},
     "dispensary_summary": {
-      "file": "dispensary_summary_1451_20250807_163847_959_20250807-14h51m17s-Complete.pdf",
+      "file": "dispensary_summary_1451_20250807_165703_959_20250807-14h51m17s-Complete.pdf",
       "pharmacy": "REITZ",
       "date": null,
       "script_total": 0,

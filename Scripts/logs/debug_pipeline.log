@@ -1,0 +1,135 @@
+2025-08-07 16:57:06,337 - INFO - 🚀 STARTING PIPELINE DEBUG
+2025-08-07 16:57:06,337 - INFO - ==================================================
+2025-08-07 16:57:06,337 - INFO - 🔍 DEBUGGING DATA EXTRACTION
+2025-08-07 16:57:06,337 - INFO - ==================================================
+2025-08-07 16:57:06,337 - INFO - 
+📄 trading_summary_extracted_data.json: 12 records
+2025-08-07 16:57:06,337 - INFO -   Record 1: REITZ - 2025-08-06
+2025-08-07 16:57:06,337 - INFO -     Turnover: R82,800.50
+2025-08-07 16:57:06,337 - INFO -   Record 2: REITZ - 2025-08-01
+2025-08-07 16:57:06,337 - INFO -     Turnover: R80,589.38
+2025-08-07 16:57:06,337 - INFO -   Record 3: REITZ - 2025-08-07
+2025-08-07 16:57:06,337 - INFO -     Turnover: R14,230.65
+2025-08-07 16:57:06,338 - INFO - 
+📄 turnover_summary_extracted_data.json: 35 records
+2025-08-07 16:57:06,338 - INFO -   Record 1: TLC WINTERTON - 2025-08-06
+2025-08-07 16:57:06,338 - INFO -     Turnover: R78,925.39
+2025-08-07 16:57:06,338 - INFO -   Record 2: REITZ - 2025-08-06
+2025-08-07 16:57:06,338 - INFO -     Turnover: R78,258.18
+2025-08-07 16:57:06,338 - INFO -   Record 3: REITZ - 2025-08-06
+2025-08-07 16:57:06,338 - INFO -     Turnover: R88,226.66
+2025-08-07 16:57:06,338 - INFO - 
+📄 transaction_summary_extracted_data.json: 12 records
+2025-08-07 16:57:06,338 - INFO -   Record 1: REITZ - 2025-08-06
+2025-08-07 16:57:06,338 - INFO -     Transactions: 414
+2025-08-07 16:57:06,338 - INFO -   Record 2: REITZ - 2025-08-01
+2025-08-07 16:57:06,338 - INFO -     Transactions: 378
+2025-08-07 16:57:06,338 - INFO -   Record 3: TLC WINTERTON - 2025-08-07
+2025-08-07 16:57:06,338 - INFO -     Transactions: 158
+2025-08-07 16:57:06,349 - INFO - 
+📄 gross_profit_extracted_data.json: 11 records
+2025-08-07 16:57:06,349 - INFO -   Record 1: REITZ - 2025-08-06
+2025-08-07 16:57:06,349 - INFO -   Record 2: REITZ - 2025-08-01
+2025-08-07 16:57:06,349 - INFO -   Record 3: REITZ - 2025-08-07
+2025-08-07 16:57:06,350 - INFO - 
+📄 dispensary_summary_extracted_data.json: 14 records
+2025-08-07 16:57:06,350 - INFO -   Record 1: REITZ - 2025-08-06
+2025-08-07 16:57:06,350 - INFO -   Record 2: REITZ - 2025-08-06
+2025-08-07 16:57:06,350 - INFO -   Record 3: REITZ - 2025-08-01
+2025-08-07 16:57:06,350 - INFO - 
+🔍 DEBUGGING COMBINED DATA
+2025-08-07 16:57:06,350 - INFO - ==================================================
+2025-08-07 16:57:06,361 - INFO - 📊 Combined data: 16 pharmacy/date combinations
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-08-06
+2025-08-07 16:57:06,361 - INFO -   📈 Turnover: R71,189.88
+2025-08-07 16:57:06,361 - INFO -   📦 Trading: GP R22,639.74
+2025-08-07 16:57:06,361 - INFO -   🛒 Transactions: 414
+2025-08-07 16:57:06,361 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,361 - INFO -   💊 Dispensary: 128 scripts
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-08-01
+2025-08-07 16:57:06,361 - INFO -   📈 Turnover: R77,107.46
+2025-08-07 16:57:06,361 - INFO -   📦 Trading: GP R21,595.95
+2025-08-07 16:57:06,361 - INFO -   🛒 Transactions: 378
+2025-08-07 16:57:06,361 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,361 - INFO -   💊 Dispensary: 150 scripts
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-08-07
+2025-08-07 16:57:06,361 - INFO -   📈 Turnover: R33,564.49
+2025-08-07 16:57:06,361 - INFO -   📦 Trading: GP R3,409.85
+2025-08-07 16:57:06,361 - INFO -   🛒 Transactions: 68
+2025-08-07 16:57:06,361 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-07-30
+2025-08-07 16:57:06,361 - INFO -   📈 Turnover: R79,800.91
+2025-08-07 16:57:06,361 - INFO -   📦 Trading: GP R17,600.38
+2025-08-07 16:57:06,361 - INFO -   🛒 Transactions: 328
+2025-08-07 16:57:06,361 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,361 - INFO -   💊 Dispensary: 116 scripts
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-07-31
+2025-08-07 16:57:06,361 - INFO -   📈 Turnover: R87,438.48
+2025-08-07 16:57:06,361 - INFO -   📦 Trading: GP R21,380.39
+2025-08-07 16:57:06,361 - INFO -   🛒 Transactions: 353
+2025-08-07 16:57:06,361 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,361 - INFO -   💊 Dispensary: 121 scripts
+2025-08-07 16:57:06,361 - INFO - 
+🏪 REITZ - 2025-08-02
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R39,377.47
+2025-08-07 16:57:06,362 - INFO -   📦 Trading: GP R11,231.88
+2025-08-07 16:57:06,362 - INFO -   🛒 Transactions: 218
+2025-08-07 16:57:06,362 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,362 - INFO -   💊 Dispensary: 62 scripts
+2025-08-07 16:57:06,362 - INFO - 
+🏪 REITZ - 2025-08-05
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R95,437.83
+2025-08-07 16:57:06,362 - INFO -   📦 Trading: GP R22,128.99
+2025-08-07 16:57:06,362 - INFO -   🛒 Transactions: 414
+2025-08-07 16:57:06,362 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,362 - INFO -   💊 Dispensary: 159 scripts
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-04
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R68,222.60
+2025-08-07 16:57:06,362 - INFO -   📦 Trading: GP R16,115.28
+2025-08-07 16:57:06,362 - INFO -   🛒 Transactions: 321
+2025-08-07 16:57:06,362 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,362 - INFO -   💊 Dispensary: 104 scripts
+2025-08-07 16:57:06,362 - INFO - 
+🏪 REITZ - 2025-08-04
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R89,983.36
+2025-08-07 16:57:06,362 - INFO -   📦 Trading: GP R24,064.62
+2025-08-07 16:57:06,362 - INFO -   🛒 Transactions: 387
+2025-08-07 16:57:06,362 - INFO -   💰 Gross Profit: 0 products
+2025-08-07 16:57:06,362 - INFO -   💊 Dispensary: 155 scripts
+2025-08-07 16:57:06,362 - INFO - 
+🏪 REITZ - 2025-08-03
+2025-08-07 16:57:06,362 - INFO -   📦 Trading: GP R0.00
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-06
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R78,925.39
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-01
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R70,191.87
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-07
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R12,239.08
+2025-08-07 16:57:06,362 - INFO -   🛒 Transactions: 158
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-02
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R28,888.06
+2025-08-07 16:57:06,362 - INFO - 
+🏪 TLC WINTERTON - 2025-08-05
+2025-08-07 16:57:06,362 - INFO -   📈 Turnover: R82,906.29
+2025-08-07 16:57:06,362 - INFO - 
+🏪 REITZ - None
+2025-08-07 16:57:06,362 - INFO -   💊 Dispensary: 0 scripts
+2025-08-07 16:57:06,363 - INFO - 
+🔍 DEBUGGING DATABASE CONNECTION
+2025-08-07 16:57:06,363 - INFO - ==================================================
+2025-08-07 16:57:08,140 - INFO - ✅ Database connection successful
+2025-08-07 16:57:08,140 - INFO - 📅 Checking existing data for today: 2025-08-07
+2025-08-07 16:57:08,729 - INFO - 📊 Found 1 existing records for REITZ today
+2025-08-07 16:57:08,729 - ERROR - ❌ Database connection failed: 4
+2025-08-07 16:57:08,730 - INFO - 
+✅ DEBUG COMPLETED

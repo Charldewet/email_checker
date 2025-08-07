@@ -152,10 +152,10 @@ class ImprovedDataPipeline:
         gross_profit_data = load_json_data("gross_profit_extracted_data.json")
         dispensary_data = load_json_data("dispensary_summary_extracted_data.json")
         
-        # Combine and process data
+        # Combine and process data with aggregation
         combined_data = {}
         
-        # Process each data source
+        # Process each data source and aggregate by pharmacy/date
         for data_list, data_type in [
             (trading_data, "trading"),
             (turnover_data, "turnover"),
@@ -180,17 +180,35 @@ class ImprovedDataPipeline:
                         'calculated_metrics': {}
                     }
                 
-                # Store the data
+                # Aggregate data by keeping the highest values
                 if data_type == "trading":
-                    combined_data[key]['trading_summary'] = item
+                    existing = combined_data[key]['trading_summary']
+                    if not existing or item.get('turnover', 0) > existing.get('turnover', 0):
+                        combined_data[key]['trading_summary'] = item
                 elif data_type == "turnover":
-                    combined_data[key]['turnover_summary'] = item
+                    existing = combined_data[key]['turnover_summary']
+                    if not existing or item.get('turnover', 0) > existing.get('turnover', 0):
+                        combined_data[key]['turnover_summary'] = item
                 elif data_type == "transaction":
-                    combined_data[key]['transaction_summary'] = item
+                    existing = combined_data[key]['transaction_summary']
+                    if not existing or item.get('transactions_total', 0) > existing.get('transactions_total', 0):
+                        combined_data[key]['transaction_summary'] = item
                 elif data_type == "gross_profit":
-                    combined_data[key]['gross_profit_summary'] = item
+                    existing = combined_data[key]['gross_profit_summary']
+                    if not existing or item.get('total_gross_profit', 0) > existing.get('total_gross_profit', 0):
+                        combined_data[key]['gross_profit_summary'] = item
                 elif data_type == "dispensary":
-                    combined_data[key]['dispensary_summary'] = item
+                    existing = combined_data[key]['dispensary_summary']
+                    if not existing or item.get('script_total', 0) > existing.get('script_total', 0):
+                        combined_data[key]['dispensary_summary'] = item
+        
+        # Log the aggregation results
+        logger.info("📊 Aggregated data summary:")
+        for key, data in combined_data.items():
+            pharmacy, date = key
+            turnover = data.get('turnover_summary', {}).get('turnover', 0)
+            transactions = data.get('transaction_summary', {}).get('transactions_total', 0)
+            logger.info(f"  {pharmacy} - {date}: R{turnover:,.2f} turnover, {transactions} transactions")
         
         return combined_data
     
