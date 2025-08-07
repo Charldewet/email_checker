@@ -1,0 +1,63 @@
+{
+  "REITZ_2025-08-07": {
+    "pharmacy": "REITZ",
+    "date": "2025-08-07",
+    "trading_summary": {
+      "pharmacy": "REITZ",
+      "date": "2025-08-07",
+      "stock_opening": 50000.0,
+      "stock_closing": 45000.0,
+      "purchases": 15000.0,
+      "adjustments": 500.0,
+      "cost_of_sales": 20000.0,
+      "gp_value": 8000.0,
+      "gp_percent": 28.57
+    },
+    "turnover_summary": {
+      "pharmacy": "REITZ",
+      "date": "2025-08-07",
+      "turnover": 28000.0,
+      "sales_cash": 15000.0,
+      "sales_account": 10000.0,
+      "sales_cod": 3000.0
+    },
+    "transaction_summary": {
+      "pharmacy": "REITZ",
+      "date": "2025-08-07",
+      "transactions_total": 150
+    },
+    "gross_profit_summary": {
+      "pharmacy": "REITZ",
+      "date": "2025-08-07",
+      "summary_stats": {
+        "total_sales_qty": 300
+      }
+    },
+    "dispensary_summary": {
+      "pharmacy": "REITZ",
+      "date": "2025-08-07",
+      "script_total": 45,
+      "disp_turnover_excluding_vat": 12000.0,
+      "avg_script_value": 266.67
+    },
+    "calculated_metrics": {
+      "turnover": 28000.0,
+      "gp_value": 8000.0,
+      "gp_percent": 28.57,
+      "cost_of_sales": 20000.0,
+      "purchases": 15000.0,
+      "avg_basket_value": 186.67,
+      "avg_basket_size": 2.0,
+      "transactions_total": 150,
+      "script_total": 45,
+      "avg_script_value": 266.67,
+      "disp_turnover": 12000.0,
+      "stock_opening": 50000.0,
+      "stock_closing": 45000.0,
+      "adjustments": 500.0,
+      "sales_cash": 15000.0,
+      "sales_account": 10000.0,
+      "sales_cod": 3000.0
+    }
+  }
+}

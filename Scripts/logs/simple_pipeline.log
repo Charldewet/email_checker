@@ -1,0 +1,1383 @@
+2025-08-07 16:11:35,315 - INFO - 🔍 Checking environment...
+2025-08-07 16:11:35,315 - INFO - ✅ All environment variables are set.
+2025-08-07 16:11:35,315 - INFO - 📁 No temp directory found - classification needed
+2025-08-07 16:11:35,315 - INFO - 🔄 Running improved classification...
+2025-08-07 16:11:35,429 - INFO - Starting email processing for last 2 days...
+2025-08-07 16:12:37,247 - INFO - Found 85 emails with PDF attachments from last 2 days
+2025-08-07 16:12:37,250 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 09:51:22 SAST
+2025-08-07 16:12:37,252 - INFO - Extracted PDF: 20250805-09h51m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpn1pijdcb.pdf
+2025-08-07 16:12:37,252 - INFO - Processing PDF: tmpn1pijdcb.pdf
+2025-08-07 16:12:37,272 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,272 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,272 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,273 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/trading_summary_tmpn1pijdcb.pdf
+2025-08-07 16:12:37,273 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 09:51:51 SAST
+2025-08-07 16:12:37,274 - INFO - Extracted PDF: 20250805-09h51m51s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp0qzgfq4_.pdf
+2025-08-07 16:12:37,274 - INFO - Processing PDF: tmp0qzgfq4_.pdf
+2025-08-07 16:12:37,299 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,299 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,299 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,300 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/gross_profit_report_tmp0qzgfq4_.pdf
+2025-08-07 16:12:37,300 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 09:57:18 SAST
+2025-08-07 16:12:37,301 - INFO - Extracted PDF: 20250805-09h57m18s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp6_328g3o.pdf
+2025-08-07 16:12:37,301 - INFO - Processing PDF: tmp6_328g3o.pdf
+2025-08-07 16:12:37,311 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,311 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,311 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,312 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/turnover_summary_tmp6_328g3o.pdf
+2025-08-07 16:12:37,312 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 10:07:09 SAST
+2025-08-07 16:12:37,312 - INFO - Extracted PDF: 20250805-10h07m09s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp0bi5npct.pdf
+2025-08-07 16:12:37,312 - INFO - Processing PDF: tmp0bi5npct.pdf
+2025-08-07 16:12:37,323 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,323 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,323 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,323 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/dispensary_summary_tmp0bi5npct.pdf
+2025-08-07 16:12:37,324 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Tue 05 Aug 2025 11:39:56 SAST
+2025-08-07 16:12:37,324 - INFO - Extracted PDF: 20250805-11h39m56s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmplays0779.pdf
+2025-08-07 16:12:37,324 - INFO - Processing PDF: tmplays0779.pdf
+2025-08-07 16:12:37,330 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,330 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,330 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,330 - INFO -   Saved as: temp_classified_test/2025-08-04/TLC WINTERTON/trading_summary_tmplays0779.pdf
+2025-08-07 16:12:37,331 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Tue 05 Aug 2025 11:38:27 SAST
+2025-08-07 16:12:37,331 - INFO - Extracted PDF: 20250805-11h38m27s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpbd3r_qqw.pdf
+2025-08-07 16:12:37,331 - INFO - Processing PDF: tmpbd3r_qqw.pdf
+2025-08-07 16:12:37,339 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,339 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,339 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,340 - INFO -   Saved as: temp_classified_test/2025-08-04/TLC WINTERTON/turnover_summary_tmpbd3r_qqw.pdf
+2025-08-07 16:12:37,340 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Tue 05 Aug 2025 11:40:22 SAST
+2025-08-07 16:12:37,340 - INFO - Extracted PDF: 20250805-11h40m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpuji9bvc7.pdf
+2025-08-07 16:12:37,340 - INFO - Processing PDF: tmpuji9bvc7.pdf
+2025-08-07 16:12:37,364 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,364 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,364 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,365 - INFO -   Saved as: temp_classified_test/2025-08-04/TLC WINTERTON/gross_profit_report_tmpuji9bvc7.pdf
+2025-08-07 16:12:37,365 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Tue 05 Aug 2025 12:41:07 SAST
+2025-08-07 16:12:37,366 - INFO - Extracted PDF: 20250805-12h41m07s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp938nc56h.pdf
+2025-08-07 16:12:37,366 - INFO - Processing PDF: tmp938nc56h.pdf
+2025-08-07 16:12:37,370 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,370 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,371 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,371 - INFO -   Saved as: temp_classified_test/2025-08-04/TLC WINTERTON/transaction_summary_tmp938nc56h.pdf
+2025-08-07 16:12:37,372 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 12:39:56 SAST
+2025-08-07 16:12:37,372 - INFO - Extracted PDF: 20250805-12h39m56s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp3nbr5dml.pdf
+2025-08-07 16:12:37,372 - INFO - Processing PDF: tmp3nbr5dml.pdf
+2025-08-07 16:12:37,379 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,379 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,379 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,379 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/transaction_summary_tmp3nbr5dml.pdf
+2025-08-07 16:12:37,379 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Tue 05 Aug 2025 11:40:53 SAST
+2025-08-07 16:12:37,380 - INFO - Extracted PDF: 20250805-11h40m53s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpc0ngoi4r.pdf
+2025-08-07 16:12:37,380 - INFO - Processing PDF: tmpc0ngoi4r.pdf
+2025-08-07 16:12:37,391 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,391 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,391 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,391 - INFO -   Saved as: temp_classified_test/2025-08-04/TLC WINTERTON/dispensary_summary_tmpc0ngoi4r.pdf
+2025-08-07 16:12:37,391 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 18:12:03 SAST
+2025-08-07 16:12:37,392 - INFO - Extracted PDF: 20250805-18h12m03s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp_0b8lsp9.pdf
+2025-08-07 16:12:37,392 - INFO - Processing PDF: tmp_0b8lsp9.pdf
+2025-08-07 16:12:37,398 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,398 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,398 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,398 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/trading_summary_tmp_0b8lsp9.pdf
+2025-08-07 16:12:37,398 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 18:09:43 SAST
+2025-08-07 16:12:37,398 - INFO - Extracted PDF: 20250805-18h09m43s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp4nzyjafd.pdf
+2025-08-07 16:12:37,399 - INFO - Processing PDF: tmp4nzyjafd.pdf
+2025-08-07 16:12:37,422 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,422 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,422 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,422 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/gross_profit_report_tmp4nzyjafd.pdf
+2025-08-07 16:12:37,422 - INFO - Processing email: Reitz PHARMACY PDF file for Tue 05 Aug 2025 18:14:32 SAST
+2025-08-07 16:12:37,423 - INFO - Extracted PDF: 20250805-18h14m32s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpbwe1qb9e.pdf
+2025-08-07 16:12:37,423 - INFO - Processing PDF: tmpbwe1qb9e.pdf
+2025-08-07 16:12:37,432 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,432 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,432 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,432 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/turnover_summary_tmpbwe1qb9e.pdf
+2025-08-07 16:12:37,432 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 13:53:48 SAST
+2025-08-07 16:12:37,433 - INFO - Extracted PDF: 20250806-13h53m48s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpdrdfebnp.pdf
+2025-08-07 16:12:37,433 - INFO - Processing PDF: tmpdrdfebnp.pdf
+2025-08-07 16:12:37,441 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,441 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,441 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,442 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmpdrdfebnp.pdf
+2025-08-07 16:12:37,442 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 14:33:25 SAST
+2025-08-07 16:12:37,442 - INFO - Extracted PDF: 20250806-14h33m25s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpifxqv07f.pdf
+2025-08-07 16:12:37,442 - INFO - Processing PDF: tmpifxqv07f.pdf
+2025-08-07 16:12:37,453 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,453 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,453 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,453 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/dispensary_summary_tmpifxqv07f.pdf
+2025-08-07 16:12:37,453 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:05:51 SAST
+2025-08-07 16:12:37,454 - INFO - Extracted PDF: 20250806-15h05m51s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpvcs_je5r.pdf
+2025-08-07 16:12:37,454 - INFO - Processing PDF: tmpvcs_je5r.pdf
+2025-08-07 16:12:37,462 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,462 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,462 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,463 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmpvcs_je5r.pdf
+2025-08-07 16:12:37,463 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:04:52 SAST
+2025-08-07 16:12:37,463 - INFO - Extracted PDF: 20250806-15h04m52s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp2i25yi0f.pdf
+2025-08-07 16:12:37,463 - INFO - Processing PDF: tmp2i25yi0f.pdf
+2025-08-07 16:12:37,472 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,472 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,472 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,472 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmp2i25yi0f.pdf
+2025-08-07 16:12:37,472 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:15:46 SAST
+2025-08-07 16:12:37,472 - INFO - Extracted PDF: 20250806-15h15m46s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpyohf4q8s.pdf
+2025-08-07 16:12:37,472 - INFO - Processing PDF: tmpyohf4q8s.pdf
+2025-08-07 16:12:37,481 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,481 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,481 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,481 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmpyohf4q8s.pdf
+2025-08-07 16:12:37,481 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:28:22 SAST
+2025-08-07 16:12:37,482 - INFO - Extracted PDF: 20250806-15h28m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmptjdonl9q.pdf
+2025-08-07 16:12:37,482 - INFO - Processing PDF: tmptjdonl9q.pdf
+2025-08-07 16:12:37,490 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,490 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,490 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,491 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmptjdonl9q.pdf
+2025-08-07 16:12:37,491 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:40:59 SAST
+2025-08-07 16:12:37,491 - INFO - Extracted PDF: 20250806-15h40m59s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp2ic8kqfp.pdf
+2025-08-07 16:12:37,491 - INFO - Processing PDF: tmp2ic8kqfp.pdf
+2025-08-07 16:12:37,500 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,500 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,500 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,500 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmp2ic8kqfp.pdf
+2025-08-07 16:12:37,500 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:44:13 SAST
+2025-08-07 16:12:37,501 - INFO - Extracted PDF: 20250806-15h44m13s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpavmofbva.pdf
+2025-08-07 16:12:37,501 - INFO - Processing PDF: tmpavmofbva.pdf
+2025-08-07 16:12:37,510 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,510 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,510 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,511 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/turnover_summary_tmpavmofbva.pdf
+2025-08-07 16:12:37,511 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:43:22 SAST
+2025-08-07 16:12:37,511 - INFO - Extracted PDF: 20250806-15h43m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpkniah37q.pdf
+2025-08-07 16:12:37,511 - INFO - Processing PDF: tmpkniah37q.pdf
+2025-08-07 16:12:37,520 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,520 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,520 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,520 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmpkniah37q.pdf
+2025-08-07 16:12:37,520 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:44:04 SAST
+2025-08-07 16:12:37,520 - INFO - Extracted PDF: 20250806-15h44m04s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpocmwonzo.pdf
+2025-08-07 16:12:37,520 - INFO - Processing PDF: tmpocmwonzo.pdf
+2025-08-07 16:12:37,528 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,528 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,528 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,528 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/turnover_summary_tmpocmwonzo.pdf
+2025-08-07 16:12:37,528 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:53:25 SAST
+2025-08-07 16:12:37,529 - INFO - Extracted PDF: 20250806-15h53m25s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp21isumge.pdf
+2025-08-07 16:12:37,529 - INFO - Processing PDF: tmp21isumge.pdf
+2025-08-07 16:12:37,539 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,539 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,540 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,540 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/dispensary_summary_tmp21isumge.pdf
+2025-08-07 16:12:37,540 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:52:36 SAST
+2025-08-07 16:12:37,540 - INFO - Extracted PDF: 20250806-15h52m36s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp6sscb83b.pdf
+2025-08-07 16:12:37,540 - INFO - Processing PDF: tmp6sscb83b.pdf
+2025-08-07 16:12:37,549 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,549 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,549 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,549 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmp6sscb83b.pdf
+2025-08-07 16:12:37,549 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:54:00 SAST
+2025-08-07 16:12:37,549 - INFO - Extracted PDF: 20250806-15h54m00s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmplszfwmn1.pdf
+2025-08-07 16:12:37,549 - INFO - Processing PDF: tmplszfwmn1.pdf
+2025-08-07 16:12:37,560 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,560 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,560 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,561 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/dispensary_summary_tmplszfwmn1.pdf
+2025-08-07 16:12:37,561 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:53:44 SAST
+2025-08-07 16:12:37,561 - INFO - Extracted PDF: 20250806-15h53m44s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpn4zbifjz.pdf
+2025-08-07 16:12:37,561 - INFO - Processing PDF: tmpn4zbifjz.pdf
+2025-08-07 16:12:37,572 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,572 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,572 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,572 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/dispensary_summary_tmpn4zbifjz.pdf
+2025-08-07 16:12:37,572 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 15:54:09 SAST
+2025-08-07 16:12:37,573 - INFO - Extracted PDF: 20250806-15h54m09s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmptwowzt_x.pdf
+2025-08-07 16:12:37,573 - INFO - Processing PDF: tmptwowzt_x.pdf
+2025-08-07 16:12:37,583 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,583 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,583 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,583 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/dispensary_summary_tmptwowzt_x.pdf
+2025-08-07 16:12:37,584 - INFO - Processing email: Reitz PHARMACY PDF file for Wed 06 Aug 2025 16:06:36 SAST
+2025-08-07 16:12:37,584 - INFO - Extracted PDF: 20250806-16h06m36s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp1yz4hv0s.pdf
+2025-08-07 16:12:37,584 - INFO - Processing PDF: tmp1yz4hv0s.pdf
+2025-08-07 16:12:37,592 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,593 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,593 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,593 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmp1yz4hv0s.pdf
+2025-08-07 16:12:37,593 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 05:30:06 SAST
+2025-08-07 16:12:37,593 - INFO - Extracted PDF: 20250807-05h30m06s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpcl18t5vw.pdf
+2025-08-07 16:12:37,593 - INFO - Processing PDF: tmpcl18t5vw.pdf
+2025-08-07 16:12:37,602 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,602 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,602 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,602 - INFO -   Saved as: temp_classified_test/2025-08-05/TLC WINTERTON/turnover_summary_tmpcl18t5vw.pdf
+2025-08-07 16:12:37,602 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 05:29:48 SAST
+2025-08-07 16:12:37,603 - INFO - Extracted PDF: 20250807-05h29m48s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpgqeio_vd.pdf
+2025-08-07 16:12:37,603 - INFO - Processing PDF: tmpgqeio_vd.pdf
+2025-08-07 16:12:37,611 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,611 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,611 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,611 - INFO -   Saved as: temp_classified_test/2025-08-01/TLC WINTERTON/turnover_summary_tmpgqeio_vd.pdf
+2025-08-07 16:12:37,611 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 05:29:54 SAST
+2025-08-07 16:12:37,612 - INFO - Extracted PDF: 20250807-05h29m54s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp8l8u63ng.pdf
+2025-08-07 16:12:37,612 - INFO - Processing PDF: tmp8l8u63ng.pdf
+2025-08-07 16:12:37,621 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,621 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,621 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,621 - INFO -   Saved as: temp_classified_test/2025-08-02/TLC WINTERTON/turnover_summary_tmp8l8u63ng.pdf
+2025-08-07 16:12:37,621 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 05:29:38 SAST
+2025-08-07 16:12:37,622 - INFO - Extracted PDF: 20250807-05h29m38s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpvz03u8bc.pdf
+2025-08-07 16:12:37,622 - INFO - Processing PDF: tmpvz03u8bc.pdf
+2025-08-07 16:12:37,631 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,631 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,631 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,632 - INFO -   Saved as: temp_classified_test/2025-08-06/TLC WINTERTON/turnover_summary_tmpvz03u8bc.pdf
+2025-08-07 16:12:37,632 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 09:02:01 SAST
+2025-08-07 16:12:37,632 - INFO - Extracted PDF: 20250807-09h02m01s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpd_6zptgb.pdf
+2025-08-07 16:12:37,632 - INFO - Processing PDF: tmpd_6zptgb.pdf
+2025-08-07 16:12:37,640 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,640 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,640 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,640 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/turnover_summary_tmpd_6zptgb.pdf
+2025-08-07 16:12:37,640 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 09:05:43 SAST
+2025-08-07 16:12:37,640 - INFO - Extracted PDF: 20250807-09h05m43s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpk3c292iu.pdf
+2025-08-07 16:12:37,640 - INFO - Processing PDF: tmpk3c292iu.pdf
+2025-08-07 16:12:37,647 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,647 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,647 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,648 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/turnover_summary_tmpk3c292iu.pdf
+2025-08-07 16:12:37,648 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 09:35:49 SAST
+2025-08-07 16:12:37,648 - INFO - Extracted PDF: 20250807-09h35m49s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmppjwg568z.pdf
+2025-08-07 16:12:37,648 - INFO - Processing PDF: tmppjwg568z.pdf
+2025-08-07 16:12:37,655 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,655 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,655 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,656 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/turnover_summary_tmppjwg568z.pdf
+2025-08-07 16:12:37,656 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 11:06:05 SAST
+2025-08-07 16:12:37,656 - INFO - Extracted PDF: 20250807-11h06m05s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpukcdrcfo.pdf
+2025-08-07 16:12:37,656 - INFO - Processing PDF: tmpukcdrcfo.pdf
+2025-08-07 16:12:37,664 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,664 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,664 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,665 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/turnover_summary_tmpukcdrcfo.pdf
+2025-08-07 16:12:37,665 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 11:25:53 SAST
+2025-08-07 16:12:37,665 - INFO - Extracted PDF: 20250807-11h25m53s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp_je23h6n.pdf
+2025-08-07 16:12:37,665 - INFO - Processing PDF: tmp_je23h6n.pdf
+2025-08-07 16:12:37,673 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,673 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,673 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,673 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/turnover_summary_tmp_je23h6n.pdf
+2025-08-07 16:12:37,674 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 11:28:57 SAST
+2025-08-07 16:12:37,674 - INFO - Extracted PDF: 20250807-11h28m57s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpq6kwn1bt.pdf
+2025-08-07 16:12:37,674 - INFO - Processing PDF: tmpq6kwn1bt.pdf
+2025-08-07 16:12:37,681 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,681 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,682 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,682 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/turnover_summary_tmpq6kwn1bt.pdf
+2025-08-07 16:12:37,682 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 11:40:15 SAST
+2025-08-07 16:12:37,682 - INFO - Extracted PDF: 20250807-11h40m15s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp3s7trhpk.pdf
+2025-08-07 16:12:37,682 - INFO - Processing PDF: tmp3s7trhpk.pdf
+2025-08-07 16:12:37,686 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,686 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,686 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,687 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/transaction_summary_tmp3s7trhpk.pdf
+2025-08-07 16:12:37,687 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 11:35:46 SAST
+2025-08-07 16:12:37,687 - INFO - Extracted PDF: 20250807-11h35m46s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmprhpynrlh.pdf
+2025-08-07 16:12:37,687 - INFO - Processing PDF: tmprhpynrlh.pdf
+2025-08-07 16:12:37,692 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,692 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,692 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,693 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/transaction_summary_tmprhpynrlh.pdf
+2025-08-07 16:12:37,693 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 11:30:22 SAST
+2025-08-07 16:12:37,693 - INFO - Extracted PDF: 20250807-11h30m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpbudepmaa.pdf
+2025-08-07 16:12:37,693 - INFO - Processing PDF: tmpbudepmaa.pdf
+2025-08-07 16:12:37,699 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,699 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,699 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,699 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/trading_summary_tmpbudepmaa.pdf
+2025-08-07 16:12:37,699 - INFO - Processing email: TLC Winterton Pharmacy PDF file for Thu 07 Aug 2025 12:22:27 SAST
+2025-08-07 16:12:37,699 - INFO - Extracted PDF: 20250807-12h22m27s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp_a8dqv3i.pdf
+2025-08-07 16:12:37,700 - INFO - Processing PDF: tmp_a8dqv3i.pdf
+2025-08-07 16:12:37,707 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,707 - INFO -   Detected pharmacy: TLC WINTERTON
+2025-08-07 16:12:37,707 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,707 - INFO -   Saved as: temp_classified_test/2025-08-07/TLC WINTERTON/turnover_summary_tmp_a8dqv3i.pdf
+2025-08-07 16:12:37,707 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 12:19:08 SAST
+2025-08-07 16:12:37,708 - INFO - Extracted PDF: 20250807-12h19m08s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp144mm73l.pdf
+2025-08-07 16:12:37,708 - INFO - Processing PDF: tmp144mm73l.pdf
+2025-08-07 16:12:37,715 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,715 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,716 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,716 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/turnover_summary_tmp144mm73l.pdf
+2025-08-07 16:12:37,716 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:13:28 SAST
+2025-08-07 16:12:37,716 - INFO - Extracted PDF: 20250807-14h13m28s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpvs8socuu.pdf
+2025-08-07 16:12:37,716 - INFO - Processing PDF: tmpvs8socuu.pdf
+2025-08-07 16:12:37,727 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,727 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,727 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,728 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/dispensary_summary_tmpvs8socuu.pdf
+2025-08-07 16:12:37,728 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:12:16 SAST
+2025-08-07 16:12:37,728 - INFO - Extracted PDF: 20250807-14h12m16s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpnu2omkbo.pdf
+2025-08-07 16:12:37,728 - INFO - Processing PDF: tmpnu2omkbo.pdf
+2025-08-07 16:12:37,734 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,734 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,734 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,734 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/trading_summary_tmpnu2omkbo.pdf
+2025-08-07 16:12:37,734 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:12:52 SAST
+2025-08-07 16:12:37,734 - INFO - Extracted PDF: 20250807-14h12m52s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpz026ckyt.pdf
+2025-08-07 16:12:37,735 - INFO - Processing PDF: tmpz026ckyt.pdf
+2025-08-07 16:12:37,758 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,759 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,759 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,759 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/gross_profit_report_tmpz026ckyt.pdf
+2025-08-07 16:12:37,759 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:19:10 SAST
+2025-08-07 16:12:37,759 - INFO - Extracted PDF: 20250807-14h19m09s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp5j1yoeqw.pdf
+2025-08-07 16:12:37,760 - INFO - Processing PDF: tmp5j1yoeqw.pdf
+2025-08-07 16:12:37,767 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,767 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,767 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,768 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/turnover_summary_tmp5j1yoeqw.pdf
+2025-08-07 16:12:37,768 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:25:20 SAST
+2025-08-07 16:12:37,768 - INFO - Extracted PDF: 20250807-14h25m20s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpijin8y7e.pdf
+2025-08-07 16:12:37,768 - INFO - Processing PDF: tmpijin8y7e.pdf
+2025-08-07 16:12:37,791 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,791 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,792 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,792 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/gross_profit_report_tmpijin8y7e.pdf
+2025-08-07 16:12:37,792 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:45:49 SAST
+2025-08-07 16:12:37,792 - INFO - Extracted PDF: 20250807-14h45m49s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp6qs8qm7r.pdf
+2025-08-07 16:12:37,792 - INFO - Processing PDF: tmp6qs8qm7r.pdf
+2025-08-07 16:12:37,803 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,803 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,803 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,804 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/dispensary_summary_tmp6qs8qm7r.pdf
+2025-08-07 16:12:37,804 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:40:55 SAST
+2025-08-07 16:12:37,804 - INFO - Extracted PDF: 20250807-14h40m55s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpe5cu9imm.pdf
+2025-08-07 16:12:37,804 - INFO - Processing PDF: tmpe5cu9imm.pdf
+2025-08-07 16:12:37,811 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,811 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,812 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,812 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/transaction_summary_tmpe5cu9imm.pdf
+2025-08-07 16:12:37,812 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:45:22 SAST
+2025-08-07 16:12:37,812 - INFO - Extracted PDF: 20250807-14h45m22s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpfq09phi0.pdf
+2025-08-07 16:12:37,812 - INFO - Processing PDF: tmpfq09phi0.pdf
+2025-08-07 16:12:37,836 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:37,836 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,837 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,837 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/gross_profit_report_tmpfq09phi0.pdf
+2025-08-07 16:12:37,837 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:39:49 SAST
+2025-08-07 16:12:37,837 - INFO - Extracted PDF: 20250807-14h39m49s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpkzc2yrf1.pdf
+2025-08-07 16:12:37,837 - INFO - Processing PDF: tmpkzc2yrf1.pdf
+2025-08-07 16:12:37,846 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,846 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,846 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:37,846 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/turnover_summary_tmpkzc2yrf1.pdf
+2025-08-07 16:12:37,847 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:44:54 SAST
+2025-08-07 16:12:37,847 - INFO - Extracted PDF: 20250807-14h44m54s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp9_yvdplk.pdf
+2025-08-07 16:12:37,847 - INFO - Processing PDF: tmp9_yvdplk.pdf
+2025-08-07 16:12:37,853 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,853 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,853 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,853 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/trading_summary_tmp9_yvdplk.pdf
+2025-08-07 16:12:37,854 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:40:21 SAST
+2025-08-07 16:12:37,854 - INFO - Extracted PDF: 20250807-14h40m21s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpgp2iuaio.pdf
+2025-08-07 16:12:37,854 - INFO - Processing PDF: tmpgp2iuaio.pdf
+2025-08-07 16:12:37,864 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,864 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,864 - INFO -   Detected date: 2025-08-01
+2025-08-07 16:12:37,864 - INFO -   Saved as: temp_classified_test/2025-08-01/REITZ/turnover_summary_tmpgp2iuaio.pdf
+2025-08-07 16:12:37,865 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:46:13 SAST
+2025-08-07 16:12:37,865 - INFO - Extracted PDF: 20250807-14h46m13s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp1dev4ay7.pdf
+2025-08-07 16:12:37,865 - INFO - Processing PDF: tmp1dev4ay7.pdf
+2025-08-07 16:12:37,873 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,873 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,873 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,873 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/turnover_summary_tmp1dev4ay7.pdf
+2025-08-07 16:12:37,873 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:46:44 SAST
+2025-08-07 16:12:37,873 - INFO - Extracted PDF: 20250807-14h46m44s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpsycmm_6i.pdf
+2025-08-07 16:12:37,873 - INFO - Processing PDF: tmpsycmm_6i.pdf
+2025-08-07 16:12:37,878 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,878 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,878 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,879 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/transaction_summary_tmpsycmm_6i.pdf
+2025-08-07 16:12:37,879 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:53:57 SAST
+2025-08-07 16:12:37,879 - INFO - Extracted PDF: 20250807-14h53m57s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpc_br3wgp.pdf
+2025-08-07 16:12:37,879 - INFO - Processing PDF: tmpc_br3wgp.pdf
+2025-08-07 16:12:37,889 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,889 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,889 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,890 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/turnover_summary_tmpc_br3wgp.pdf
+2025-08-07 16:12:37,890 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:51:40 SAST
+2025-08-07 16:12:37,890 - INFO - Extracted PDF: 20250807-14h51m40s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp7x13ibt3.pdf
+2025-08-07 16:12:37,890 - INFO - Processing PDF: tmp7x13ibt3.pdf
+2025-08-07 16:12:37,893 - INFO -   Detected report type: unknown
+2025-08-07 16:12:37,893 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,893 - INFO -   Detected date: 2025-08-03
+2025-08-07 16:12:37,893 - INFO -   Saved as: temp_classified_test/2025-08-03/REITZ/unknown_tmp7x13ibt3.pdf
+2025-08-07 16:12:37,893 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:49:05 SAST
+2025-08-07 16:12:37,894 - INFO - Extracted PDF: 20250807-14h49m05s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpqd4idav0.pdf
+2025-08-07 16:12:37,894 - INFO - Processing PDF: tmpqd4idav0.pdf
+2025-08-07 16:12:37,899 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,899 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,899 - INFO -   Detected date: 2025-08-02
+2025-08-07 16:12:37,900 - INFO -   Saved as: temp_classified_test/2025-08-02/REITZ/transaction_summary_tmpqd4idav0.pdf
+2025-08-07 16:12:37,900 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:58:30 SAST
+2025-08-07 16:12:37,900 - INFO - Extracted PDF: 20250807-14h58m30s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp8y0byddt.pdf
+2025-08-07 16:12:37,900 - INFO - Processing PDF: tmp8y0byddt.pdf
+2025-08-07 16:12:37,908 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,908 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,908 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,909 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/turnover_summary_tmp8y0byddt.pdf
+2025-08-07 16:12:37,909 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:55:50 SAST
+2025-08-07 16:12:37,909 - INFO - Extracted PDF: 20250807-14h55m50s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp1l4eqt6_.pdf
+2025-08-07 16:12:37,909 - INFO - Processing PDF: tmp1l4eqt6_.pdf
+2025-08-07 16:12:37,919 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,920 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,920 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,920 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/dispensary_summary_tmp1l4eqt6_.pdf
+2025-08-07 16:12:37,920 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:56:14 SAST
+2025-08-07 16:12:37,921 - INFO - Extracted PDF: 20250807-14h56m14s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpfqgph7wc.pdf
+2025-08-07 16:12:37,921 - INFO - Processing PDF: tmpfqgph7wc.pdf
+2025-08-07 16:12:37,929 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:37,929 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,930 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,930 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/turnover_summary_tmpfqgph7wc.pdf
+2025-08-07 16:12:37,930 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:56:46 SAST
+2025-08-07 16:12:37,930 - INFO - Extracted PDF: 20250807-14h56m46s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpppmn0qyh.pdf
+2025-08-07 16:12:37,930 - INFO - Processing PDF: tmpppmn0qyh.pdf
+2025-08-07 16:12:37,937 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,937 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,937 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,937 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/transaction_summary_tmpppmn0qyh.pdf
+2025-08-07 16:12:37,937 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:54:29 SAST
+2025-08-07 16:12:37,938 - INFO - Extracted PDF: 20250807-14h54m29s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpusrsh59v.pdf
+2025-08-07 16:12:37,938 - INFO - Processing PDF: tmpusrsh59v.pdf
+2025-08-07 16:12:37,945 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,945 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,945 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,945 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/transaction_summary_tmpusrsh59v.pdf
+2025-08-07 16:12:37,945 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:54:55 SAST
+2025-08-07 16:12:37,946 - INFO - Extracted PDF: 20250807-14h54m55s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpavqm04st.pdf
+2025-08-07 16:12:37,946 - INFO - Processing PDF: tmpavqm04st.pdf
+2025-08-07 16:12:37,951 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,951 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,951 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:37,952 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/trading_summary_tmpavqm04st.pdf
+2025-08-07 16:12:37,952 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:57:12 SAST
+2025-08-07 16:12:37,952 - INFO - Extracted PDF: 20250807-14h57m12s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpo2y1jw9p.pdf
+2025-08-07 16:12:37,952 - INFO - Processing PDF: tmpo2y1jw9p.pdf
+2025-08-07 16:12:37,958 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,958 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,958 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,958 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/trading_summary_tmpo2y1jw9p.pdf
+2025-08-07 16:12:37,958 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:51:17 SAST
+2025-08-07 16:12:37,958 - INFO - Extracted PDF: 20250807-14h51m17s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpbr_dg3oz.pdf
+2025-08-07 16:12:37,958 - INFO - Processing PDF: tmpbr_dg3oz.pdf
+2025-08-07 16:12:37,969 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:37,969 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,969 - INFO -   Detected date: 2025-08-03
+2025-08-07 16:12:37,970 - INFO -   Saved as: temp_classified_test/2025-08-03/REITZ/dispensary_summary_tmpbr_dg3oz.pdf
+2025-08-07 16:12:37,970 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:59:02 SAST
+2025-08-07 16:12:37,970 - INFO - Extracted PDF: 20250807-14h59m02s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpz3c3b7eq.pdf
+2025-08-07 16:12:37,970 - INFO - Processing PDF: tmpz3c3b7eq.pdf
+2025-08-07 16:12:37,977 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:37,977 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,977 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:37,977 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/transaction_summary_tmpz3c3b7eq.pdf
+2025-08-07 16:12:37,977 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:50:21 SAST
+2025-08-07 16:12:37,978 - INFO - Extracted PDF: 20250807-14h50m21s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp7ke0f1se.pdf
+2025-08-07 16:12:37,978 - INFO - Processing PDF: tmp7ke0f1se.pdf
+2025-08-07 16:12:37,983 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,983 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,983 - INFO -   Detected date: 2025-08-03
+2025-08-07 16:12:37,983 - INFO -   Saved as: temp_classified_test/2025-08-03/REITZ/trading_summary_tmp7ke0f1se.pdf
+2025-08-07 16:12:37,983 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:52:38 SAST
+2025-08-07 16:12:37,984 - INFO - Extracted PDF: 20250807-14h52m37s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmplkxbx7vl.pdf
+2025-08-07 16:12:37,984 - INFO - Processing PDF: tmplkxbx7vl.pdf
+2025-08-07 16:12:37,989 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:37,989 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:37,989 - INFO -   Detected date: 2025-08-04
+2025-08-07 16:12:37,990 - INFO -   Saved as: temp_classified_test/2025-08-04/REITZ/trading_summary_tmplkxbx7vl.pdf
+2025-08-07 16:12:37,990 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 14:58:07 SAST
+2025-08-07 16:12:37,990 - INFO - Extracted PDF: 20250807-14h58m07s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp4iqsbna2.pdf
+2025-08-07 16:12:37,990 - INFO - Processing PDF: tmp4iqsbna2.pdf
+2025-08-07 16:12:38,000 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:38,000 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,001 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:38,001 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/dispensary_summary_tmp4iqsbna2.pdf
+2025-08-07 16:12:38,001 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:04:33 SAST
+2025-08-07 16:12:38,002 - INFO - Extracted PDF: 20250807-15h04m33s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp0lq2srg7.pdf
+2025-08-07 16:12:38,002 - INFO - Processing PDF: tmp0lq2srg7.pdf
+2025-08-07 16:12:38,012 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:38,012 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,013 - INFO -   Detected date: 2025-07-30
+2025-08-07 16:12:38,013 - INFO -   Saved as: temp_classified_test/2025-07-30/REITZ/dispensary_summary_tmp0lq2srg7.pdf
+2025-08-07 16:12:38,013 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:03:35 SAST
+2025-08-07 16:12:38,013 - INFO - Extracted PDF: 20250807-15h03m35s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmplaxy4fe7.pdf
+2025-08-07 16:12:38,013 - INFO - Processing PDF: tmplaxy4fe7.pdf
+2025-08-07 16:12:38,019 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:38,019 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,019 - INFO -   Detected date: 2025-07-30
+2025-08-07 16:12:38,019 - INFO -   Saved as: temp_classified_test/2025-07-30/REITZ/trading_summary_tmplaxy4fe7.pdf
+2025-08-07 16:12:38,020 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:04:57 SAST
+2025-08-07 16:12:38,020 - INFO - Extracted PDF: 20250807-15h04m57s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpz7w5f64r.pdf
+2025-08-07 16:12:38,020 - INFO - Processing PDF: tmpz7w5f64r.pdf
+2025-08-07 16:12:38,028 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:38,028 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,028 - INFO -   Detected date: 2025-07-30
+2025-08-07 16:12:38,029 - INFO -   Saved as: temp_classified_test/2025-07-30/REITZ/turnover_summary_tmpz7w5f64r.pdf
+2025-08-07 16:12:38,029 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:04:04 SAST
+2025-08-07 16:12:38,029 - INFO - Extracted PDF: 20250807-15h04m04s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpsgtky8z5.pdf
+2025-08-07 16:12:38,030 - INFO - Processing PDF: tmpsgtky8z5.pdf
+2025-08-07 16:12:38,053 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:38,053 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,053 - INFO -   Detected date: 2025-07-30
+2025-08-07 16:12:38,054 - INFO -   Saved as: temp_classified_test/2025-07-30/REITZ/gross_profit_report_tmpsgtky8z5.pdf
+2025-08-07 16:12:38,054 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:05:30 SAST
+2025-08-07 16:12:38,054 - INFO - Extracted PDF: 20250807-15h05m30s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpmqkav_86.pdf
+2025-08-07 16:12:38,054 - INFO - Processing PDF: tmpmqkav_86.pdf
+2025-08-07 16:12:38,061 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:38,061 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,061 - INFO -   Detected date: 2025-07-30
+2025-08-07 16:12:38,061 - INFO -   Saved as: temp_classified_test/2025-07-30/REITZ/transaction_summary_tmpmqkav_86.pdf
+2025-08-07 16:12:38,061 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:05:57 SAST
+2025-08-07 16:12:38,062 - INFO - Extracted PDF: 20250807-15h05m57s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmptudjbd5i.pdf
+2025-08-07 16:12:38,062 - INFO - Processing PDF: tmptudjbd5i.pdf
+2025-08-07 16:12:38,067 - INFO -   Detected report type: trading_summary
+2025-08-07 16:12:38,067 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,067 - INFO -   Detected date: 2025-07-31
+2025-08-07 16:12:38,068 - INFO -   Saved as: temp_classified_test/2025-07-31/REITZ/trading_summary_tmptudjbd5i.pdf
+2025-08-07 16:12:38,068 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:07:52 SAST
+2025-08-07 16:12:38,068 - INFO - Extracted PDF: 20250807-15h07m52s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpl5nyalkn.pdf
+2025-08-07 16:12:38,068 - INFO - Processing PDF: tmpl5nyalkn.pdf
+2025-08-07 16:12:38,073 - INFO -   Detected report type: transaction_summary
+2025-08-07 16:12:38,073 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,074 - INFO -   Detected date: 2025-07-31
+2025-08-07 16:12:38,074 - INFO -   Saved as: temp_classified_test/2025-07-31/REITZ/transaction_summary_tmpl5nyalkn.pdf
+2025-08-07 16:12:38,074 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:07:19 SAST
+2025-08-07 16:12:38,075 - INFO - Extracted PDF: 20250807-15h07m19s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpv50apsrd.pdf
+2025-08-07 16:12:38,075 - INFO - Processing PDF: tmpv50apsrd.pdf
+2025-08-07 16:12:38,083 - INFO -   Detected report type: turnover_summary
+2025-08-07 16:12:38,083 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,083 - INFO -   Detected date: 2025-07-31
+2025-08-07 16:12:38,083 - INFO -   Saved as: temp_classified_test/2025-07-31/REITZ/turnover_summary_tmpv50apsrd.pdf
+2025-08-07 16:12:38,083 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:01:28 SAST
+2025-08-07 16:12:38,084 - INFO - Extracted PDF: 20250807-15h01m28s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpuzsmlg9g.pdf
+2025-08-07 16:12:38,084 - INFO - Processing PDF: tmpuzsmlg9g.pdf
+2025-08-07 16:12:38,107 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:38,107 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,107 - INFO -   Detected date: 2025-08-07
+2025-08-07 16:12:38,108 - INFO -   Saved as: temp_classified_test/2025-08-07/REITZ/gross_profit_report_tmpuzsmlg9g.pdf
+2025-08-07 16:12:38,108 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:06:55 SAST
+2025-08-07 16:12:38,108 - INFO - Extracted PDF: 20250807-15h06m55s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpqmem_zg7.pdf
+2025-08-07 16:12:38,108 - INFO - Processing PDF: tmpqmem_zg7.pdf
+2025-08-07 16:12:38,119 - INFO -   Detected report type: dispensary_summary
+2025-08-07 16:12:38,119 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,119 - INFO -   Detected date: 2025-07-31
+2025-08-07 16:12:38,119 - INFO -   Saved as: temp_classified_test/2025-07-31/REITZ/dispensary_summary_tmpqmem_zg7.pdf
+2025-08-07 16:12:38,120 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:11:11 SAST
+2025-08-07 16:12:38,120 - INFO - Extracted PDF: 20250807-15h11m11s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp1m2c467k.pdf
+2025-08-07 16:12:38,120 - INFO - Processing PDF: tmp1m2c467k.pdf
+2025-08-07 16:12:38,145 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:38,145 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,146 - INFO -   Detected date: 2025-07-31
+2025-08-07 16:12:38,146 - INFO -   Saved as: temp_classified_test/2025-07-31/REITZ/gross_profit_report_tmp1m2c467k.pdf
+2025-08-07 16:12:38,146 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:24:24 SAST
+2025-08-07 16:12:38,146 - INFO - Extracted PDF: 20250807-15h24m24s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmpzanw6n9e.pdf
+2025-08-07 16:12:38,147 - INFO - Processing PDF: tmpzanw6n9e.pdf
+2025-08-07 16:12:38,172 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:38,172 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,172 - INFO -   Detected date: 2025-08-06
+2025-08-07 16:12:38,172 - INFO -   Saved as: temp_classified_test/2025-08-06/REITZ/gross_profit_report_tmpzanw6n9e.pdf
+2025-08-07 16:12:38,172 - INFO - Processing email: Reitz PHARMACY PDF file for Thu 07 Aug 2025 15:24:02 SAST
+2025-08-07 16:12:38,173 - INFO - Extracted PDF: 20250807-15h24m02s-Complete.pdf -> /var/folders/g3/sqy_n02s1v77g_h86_46ywpm0000gn/T/tmp4jr04vs2.pdf
+2025-08-07 16:12:38,173 - INFO - Processing PDF: tmp4jr04vs2.pdf
+2025-08-07 16:12:38,196 - INFO -   Detected report type: gross_profit_report
+2025-08-07 16:12:38,197 - INFO -   Detected pharmacy: REITZ
+2025-08-07 16:12:38,197 - INFO -   Detected date: 2025-08-05
+2025-08-07 16:12:38,197 - INFO -   Saved as: temp_classified_test/2025-08-05/REITZ/gross_profit_report_tmp4jr04vs2.pdf
+2025-08-07 16:12:38,197 - INFO - Email processing and classification complete!
+2025-08-07 16:12:38,898 - INFO - 
+================================================================================
+2025-08-07 16:12:38,898 - INFO - 📊 CLASSIFICATION SUMMARY
+2025-08-07 16:12:38,898 - INFO - ================================================================================
+2025-08-07 16:12:38,898 - INFO - 
+📅 Date: 2025-08-06
+2025-08-07 16:12:38,898 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,898 - INFO -     📄 turnover_summary_tmpvz03u8bc.pdf
+2025-08-07 16:12:38,899 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpkniah37q.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 trading_summary_tmpo2y1jw9p.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp8y0byddt.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmptjdonl9q.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 transaction_summary_tmpz3c3b7eq.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 dispensary_summary_tmptwowzt_x.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpyohf4q8s.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp1yz4hv0s.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 dispensary_summary_tmp4iqsbna2.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpdrdfebnp.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 gross_profit_report_tmpzanw6n9e.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp2ic8kqfp.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpvcs_je5r.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp6sscb83b.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp2i25yi0f.pdf
+2025-08-07 16:12:38,899 - INFO - 
+📅 Date: 2025-08-01
+2025-08-07 16:12:38,899 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpgqeio_vd.pdf
+2025-08-07 16:12:38,899 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,899 - INFO -     📄 dispensary_summary_tmpn4zbifjz.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpavmofbva.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpgp2iuaio.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 transaction_summary_tmpe5cu9imm.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 gross_profit_report_tmpz026ckyt.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 trading_summary_tmpnu2omkbo.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 dispensary_summary_tmpvs8socuu.pdf
+2025-08-07 16:12:38,899 - INFO - 
+📅 Date: 2025-08-07
+2025-08-07 16:12:38,899 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmp_a8dqv3i.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpk3c292iu.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpq6kwn1bt.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 transaction_summary_tmp3s7trhpk.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmpd_6zptgb.pdf
+2025-08-07 16:12:38,899 - INFO -     📄 turnover_summary_tmppjwg568z.pdf
+2025-08-07 16:12:38,900 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,900 - INFO -     📄 gross_profit_report_tmpijin8y7e.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmpukcdrcfo.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 trading_summary_tmpbudepmaa.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmp144mm73l.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmp_je23h6n.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmpkzc2yrf1.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 transaction_summary_tmprhpynrlh.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmp5j1yoeqw.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 gross_profit_report_tmpuzsmlg9g.pdf
+2025-08-07 16:12:38,900 - INFO - 
+📅 Date: 2025-07-30
+2025-08-07 16:12:38,900 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,900 - INFO -     📄 trading_summary_tmplaxy4fe7.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 transaction_summary_tmpmqkav_86.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 gross_profit_report_tmpsgtky8z5.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmpz7w5f64r.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 dispensary_summary_tmp0lq2srg7.pdf
+2025-08-07 16:12:38,900 - INFO - 
+📅 Date: 2025-07-31
+2025-08-07 16:12:38,900 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,900 - INFO -     📄 transaction_summary_tmpl5nyalkn.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 dispensary_summary_tmpqmem_zg7.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 trading_summary_tmptudjbd5i.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmpv50apsrd.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 gross_profit_report_tmp1m2c467k.pdf
+2025-08-07 16:12:38,900 - INFO - 
+📅 Date: 2025-08-02
+2025-08-07 16:12:38,900 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmp8l8u63ng.pdf
+2025-08-07 16:12:38,900 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,900 - INFO -     📄 gross_profit_report_tmpfq09phi0.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmp1dev4ay7.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 trading_summary_tmp9_yvdplk.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 dispensary_summary_tmp6qs8qm7r.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 transaction_summary_tmpsycmm_6i.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 dispensary_summary_tmplszfwmn1.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 transaction_summary_tmpqd4idav0.pdf
+2025-08-07 16:12:38,900 - INFO -     📄 turnover_summary_tmpocmwonzo.pdf
+2025-08-07 16:12:38,900 - INFO - 
+📅 Date: 2025-08-05
+2025-08-07 16:12:38,901 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmpcl18t5vw.pdf
+2025-08-07 16:12:38,901 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmpbwe1qb9e.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmp_0b8lsp9.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmpavqm04st.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmp21isumge.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 transaction_summary_tmpppmn0qyh.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 gross_profit_report_tmp4jr04vs2.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 gross_profit_report_tmp4nzyjafd.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmpifxqv07f.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmpfqgph7wc.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmp1l4eqt6_.pdf
+2025-08-07 16:12:38,901 - INFO - 
+📅 Date: 2025-08-04
+2025-08-07 16:12:38,901 - INFO -   🏪 Pharmacy: TLC WINTERTON
+2025-08-07 16:12:38,901 - INFO -     📄 transaction_summary_tmp938nc56h.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmplays0779.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 gross_profit_report_tmpuji9bvc7.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmpbd3r_qqw.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmpc0ngoi4r.pdf
+2025-08-07 16:12:38,901 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,901 - INFO -     📄 transaction_summary_tmp3nbr5dml.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmpn1pijdcb.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmpc_br3wgp.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 gross_profit_report_tmp0qzgfq4_.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmp0bi5npct.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 transaction_summary_tmpusrsh59v.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmplkxbx7vl.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 turnover_summary_tmp6_328g3o.pdf
+2025-08-07 16:12:38,901 - INFO - 
+📅 Date: 2025-08-03
+2025-08-07 16:12:38,901 - INFO -   🏪 Pharmacy: REITZ
+2025-08-07 16:12:38,901 - INFO -     📄 trading_summary_tmp7ke0f1se.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 dispensary_summary_tmpbr_dg3oz.pdf
+2025-08-07 16:12:38,901 - INFO -     📄 unknown_tmp7x13ibt3.pdf
+2025-08-07 16:12:38,901 - INFO - ✅ Classification completed successfully!
+2025-08-07 16:12:38,901 - INFO - 🔄 Running improved data pipeline...
+2025-08-07 16:12:41,206 - INFO - ✅ Connected to database
+2025-08-07 16:12:41,206 - INFO - 
+================================================================================
+2025-08-07 16:12:41,206 - INFO - 🚀 STARTING IMPROVED DATA PIPELINE
+2025-08-07 16:12:41,206 - INFO - ================================================================================
+2025-08-07 16:12:41,206 - INFO - 
+--- Step 1: Extracting and processing data ---
+2025-08-07 16:12:41,206 - INFO - 🔄 Starting data extraction and processing...
+2025-08-07 16:12:41,209 - INFO - Extracting Trading Summary data...
+2025-08-07 16:12:41,287 - INFO - Extracting Turnover Summary data...
+2025-08-07 16:12:41,579 - INFO - Extracting Transaction Summary data...
+2025-08-07 16:12:41,645 - INFO - Extracting Gross Profit data...
+2025-08-07 16:12:43,602 - INFO - Extracting Dispensary Summary data...
+2025-08-07 16:12:43,762 - INFO - 
+--- Step 2: Calculating derived metrics ---
+2025-08-07 16:12:43,762 - INFO - 🔄 Calculating derived metrics...
+2025-08-07 16:12:43,762 - INFO - 
+--- Step 3: Comparing with database and updating ---
+2025-08-07 16:12:43,762 - INFO - 🔄 Comparing with database and updating with largest values...
+2025-08-07 16:12:43,762 - INFO - 
+🏪 Processing REITZ - 2025-08-06
+2025-08-07 16:12:44,355 - INFO -   Turnover: Existing value R80,353.14 >= new R71,189.88, keeping existing
+2025-08-07 16:12:44,355 - INFO -   Gross Profit Value: No existing value, using new value: R22,639.74
+2025-08-07 16:12:44,355 - INFO -   Cost of Sales: No existing value, using new value: R60,160.76
+2025-08-07 16:12:44,355 - INFO -   Purchases: No existing value, using new value: R74,776.69
+2025-08-07 16:12:44,355 - INFO -   Dispensary Turnover: New value R37,905.40 > existing R33,265.26, keeping new
+2025-08-07 16:12:44,355 - INFO -   Total Transactions: No existing value, using new value: R414.00
+2025-08-07 16:12:44,355 - INFO -   Total Scripts: New value R128.00 > existing R114.00, keeping new
+2025-08-07 16:12:44,355 - INFO -   Opening Stock: No existing value, using new value: R1,563,965.07
+2025-08-07 16:12:44,355 - INFO -   Closing Stock: No existing value, using new value: R1,573,725.33
+2025-08-07 16:12:44,355 - INFO -   Cash Sales: Existing value R55,577.51 >= new R49,081.02, keeping existing
+2025-08-07 16:12:44,355 - INFO -   Account Sales: Existing value R9,404.06 >= new R9,404.06, keeping existing
+2025-08-07 16:12:44,355 - INFO -   COD Sales: Existing value R1,515.75 >= new R1,515.75, keeping existing
+2025-08-07 16:12:44,942 - INFO - ✅ Updated database record for REITZ - 2025-08-06
+2025-08-07 16:12:44,942 - INFO - 
+🏪 Processing REITZ - 2025-08-01
+2025-08-07 16:12:45,535 - INFO -   Turnover: New value R77,107.46 > existing R77,107.46, keeping new
+2025-08-07 16:12:45,536 - INFO -   Gross Profit Value: New value R21,595.95 > existing R21,595.95, keeping new
+2025-08-07 16:12:45,536 - INFO -   Cost of Sales: New value R58,993.43 > existing R58,993.43, keeping new
+2025-08-07 16:12:45,536 - INFO -   Purchases: New value R37,463.65 > existing R37,463.65, keeping new
+2025-08-07 16:12:45,536 - INFO -   Dispensary Turnover: Existing value R43,069.24 >= new R43,069.24, keeping existing
+2025-08-07 16:12:45,536 - INFO -   Total Transactions: Existing value R378.00 >= new R378.00, keeping existing
+2025-08-07 16:12:45,536 - INFO -   Total Scripts: Existing value R150.00 >= new R150.00, keeping existing
+2025-08-07 16:12:45,536 - INFO -   Opening Stock: Existing value R1,546,766.46 >= new R1,546,766.46, keeping existing
+2025-08-07 16:12:45,536 - INFO -   Closing Stock: Existing value R1,524,800.69 >= new R1,524,800.69, keeping existing
+2025-08-07 16:12:45,536 - INFO -   Cash Sales: New value R57,607.72 > existing R57,607.72, keeping new
+2025-08-07 16:12:45,536 - INFO -   Account Sales: Existing value R9,108.58 >= new R9,108.58, keeping existing
+2025-08-07 16:12:45,536 - INFO -   COD Sales: Existing value R1,130.50 >= new R1,130.50, keeping existing
+2025-08-07 16:12:46,175 - INFO - ✅ Updated database record for REITZ - 2025-08-01
+2025-08-07 16:12:46,176 - INFO - 
+🏪 Processing REITZ - 2025-08-07
+2025-08-07 16:12:46,762 - INFO -   Turnover: Existing value R35,789.62 >= new R33,564.49, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Gross Profit Value: Existing value R3,409.85 >= new R3,409.85, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Cost of Sales: Existing value R10,820.80 >= new R10,820.80, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Purchases: Existing value R16,616.41 >= new R16,616.41, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:46,762 - INFO -   Total Transactions: Existing value R68.00 >= new R68.00, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:12:46,762 - INFO -   Opening Stock: Existing value R1,576,838.63 >= new R1,576,838.63, keeping existing
+2025-08-07 16:12:46,762 - INFO -   Closing Stock: Existing value R1,581,516.98 >= new R1,581,516.98, keeping existing
+2025-08-07 16:12:46,763 - INFO -   Cash Sales: Existing value R20,269.67 >= new R19,733.71, keeping existing
+2025-08-07 16:12:46,763 - INFO -   Account Sales: Existing value R2,527.95 >= new R2,053.26, keeping existing
+2025-08-07 16:12:46,763 - INFO -   COD Sales: Existing value R2,125.37 >= new R2,008.05, keeping existing
+2025-08-07 16:12:47,347 - INFO - ✅ Updated database record for REITZ - 2025-08-07
+2025-08-07 16:12:47,347 - INFO - 
+🏪 Processing REITZ - 2025-07-30
+2025-08-07 16:12:48,063 - INFO -   Turnover: No existing value, using new value: R79,800.91
+2025-08-07 16:12:48,063 - INFO -   Gross Profit Value: No existing value, using new value: R17,600.38
+2025-08-07 16:12:48,063 - INFO -   Cost of Sales: No existing value, using new value: R61,917.01
+2025-08-07 16:12:48,063 - INFO -   Purchases: No existing value, using new value: R53,375.09
+2025-08-07 16:12:48,063 - INFO -   Dispensary Turnover: No existing value, using new value: R49,893.66
+2025-08-07 16:12:48,063 - INFO -   Total Transactions: No existing value, using new value: R328.00
+2025-08-07 16:12:48,063 - INFO -   Total Scripts: No existing value, using new value: R116.00
+2025-08-07 16:12:48,063 - INFO -   Opening Stock: No existing value, using new value: R1,565,706.93
+2025-08-07 16:12:48,063 - INFO -   Closing Stock: No existing value, using new value: R1,556,121.63
+2025-08-07 16:12:48,063 - INFO -   Cash Sales: No existing value, using new value: R48,008.77
+2025-08-07 16:12:48,063 - INFO -   Account Sales: No existing value, using new value: R4,218.27
+2025-08-07 16:12:48,063 - INFO -   COD Sales: No existing value, using new value: R1,176.16
+2025-08-07 16:12:48,649 - INFO - ✅ Updated database record for REITZ - 2025-07-30
+2025-08-07 16:12:48,650 - INFO - 
+🏪 Processing REITZ - 2025-07-31
+2025-08-07 16:12:49,304 - INFO -   Turnover: No existing value, using new value: R87,438.48
+2025-08-07 16:12:49,304 - INFO -   Gross Profit Value: No existing value, using new value: R21,380.39
+2025-08-07 16:12:49,304 - INFO -   Cost of Sales: No existing value, using new value: R66,063.12
+2025-08-07 16:12:49,304 - INFO -   Purchases: No existing value, using new value: R55,836.39
+2025-08-07 16:12:49,304 - INFO -   Dispensary Turnover: No existing value, using new value: R51,624.99
+2025-08-07 16:12:49,304 - INFO -   Total Transactions: No existing value, using new value: R353.00
+2025-08-07 16:12:49,304 - INFO -   Total Scripts: No existing value, using new value: R121.00
+2025-08-07 16:12:49,304 - INFO -   Opening Stock: No existing value, using new value: R1,556,121.63
+2025-08-07 16:12:49,304 - INFO -   Closing Stock: No existing value, using new value: R1,545,894.90
+2025-08-07 16:12:49,304 - INFO -   Cash Sales: No existing value, using new value: R41,664.85
+2025-08-07 16:12:49,305 - INFO -   Account Sales: No existing value, using new value: R21,044.65
+2025-08-07 16:12:49,305 - INFO -   COD Sales: No existing value, using new value: R2,135.35
+2025-08-07 16:12:49,890 - INFO - ✅ Updated database record for REITZ - 2025-07-31
+2025-08-07 16:12:49,890 - INFO - 
+🏪 Processing REITZ - 2025-08-02
+2025-08-07 16:12:50,523 - INFO -   Turnover: New value R39,377.47 > existing R39,377.47, keeping new
+2025-08-07 16:12:50,523 - INFO -   Gross Profit Value: Existing value R11,231.88 >= new R11,231.88, keeping existing
+2025-08-07 16:12:50,524 - INFO -   Cost of Sales: New value R28,148.54 > existing R28,148.54, keeping new
+2025-08-07 16:12:50,524 - INFO -   Purchases: New value R50,937.65 > existing R50,937.65, keeping new
+2025-08-07 16:12:50,524 - INFO -   Dispensary Turnover: New value R17,443.97 > existing R17,443.97, keeping new
+2025-08-07 16:12:50,524 - INFO -   Total Transactions: Existing value R218.00 >= new R218.00, keeping existing
+2025-08-07 16:12:50,524 - INFO -   Total Scripts: Existing value R62.00 >= new R62.00, keeping existing
+2025-08-07 16:12:50,524 - INFO -   Opening Stock: Existing value R1,524,800.91 >= new R1,524,800.91, keeping existing
+2025-08-07 16:12:50,524 - INFO -   Closing Stock: New value R1,547,590.01 > existing R1,547,590.01, keeping new
+2025-08-07 16:12:50,524 - INFO -   Cash Sales: New value R29,596.20 > existing R29,596.20, keeping new
+2025-08-07 16:12:50,524 - INFO -   Account Sales: New value R3,804.48 > existing R3,804.48, keeping new
+2025-08-07 16:12:50,524 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:51,163 - INFO - ✅ Updated database record for REITZ - 2025-08-02
+2025-08-07 16:12:51,163 - INFO - 
+🏪 Processing REITZ - 2025-08-05
+2025-08-07 16:12:51,779 - INFO -   Turnover: New value R95,437.83 > existing R95,437.83, keeping new
+2025-08-07 16:12:51,779 - INFO -   Gross Profit Value: New value R22,128.99 > existing R22,128.99, keeping new
+2025-08-07 16:12:51,779 - INFO -   Cost of Sales: New value R70,794.63 > existing R70,794.63, keeping new
+2025-08-07 16:12:51,779 - INFO -   Purchases: New value R50,187.08 > existing R50,187.08, keeping new
+2025-08-07 16:12:51,779 - INFO -   Dispensary Turnover: Existing value R55,884.76 >= new R55,884.76, keeping existing
+2025-08-07 16:12:51,779 - INFO -   Total Transactions: No existing value, using new value: R414.00
+2025-08-07 16:12:51,780 - INFO -   Total Scripts: Existing value R159.00 >= new R159.00, keeping existing
+2025-08-07 16:12:51,780 - INFO -   Opening Stock: Existing value R1,589,370.96 >= new R1,577,357.47, keeping existing
+2025-08-07 16:12:51,780 - INFO -   Closing Stock: Existing value R1,566,267.22 >= new R1,554,253.73, keeping existing
+2025-08-07 16:12:51,780 - INFO -   Cash Sales: New value R52,199.33 > existing R52,199.33, keeping new
+2025-08-07 16:12:51,780 - INFO -   Account Sales: New value R20,682.09 > existing R20,682.09, keeping new
+2025-08-07 16:12:51,780 - INFO -   COD Sales: Existing value R1,839.75 >= new R1,839.75, keeping existing
+2025-08-07 16:12:52,514 - INFO - ✅ Updated database record for REITZ - 2025-08-05
+2025-08-07 16:12:52,514 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-04
+2025-08-07 16:12:53,196 - INFO -   Turnover: New value R68,222.60 > existing R68,222.60, keeping new
+2025-08-07 16:12:53,197 - INFO -   Gross Profit Value: New value R16,115.28 > existing R16,115.28, keeping new
+2025-08-07 16:12:53,197 - INFO -   Cost of Sales: New value R52,090.87 > existing R52,090.87, keeping new
+2025-08-07 16:12:53,197 - INFO -   Purchases: Existing value R22,572.01 >= new R22,572.01, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Dispensary Turnover: Existing value R40,067.83 >= new R40,067.83, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Total Transactions: Existing value R321.00 >= new R321.00, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Total Scripts: Existing value R104.00 >= new R104.00, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Opening Stock: Existing value R1,622,999.99 >= new R1,622,999.99, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Closing Stock: Existing value R1,649,511.94 >= new R1,649,511.94, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Cash Sales: Existing value R44,100.00 >= new R44,100.00, keeping existing
+2025-08-07 16:12:53,197 - INFO -   Account Sales: Existing value R14,521.90 >= new R14,521.90, keeping existing
+2025-08-07 16:12:53,197 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:53,830 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-04
+2025-08-07 16:12:53,830 - INFO - 
+🏪 Processing REITZ - 2025-08-04
+2025-08-07 16:12:54,413 - INFO -   Turnover: New value R89,983.36 > existing R89,983.36, keeping new
+2025-08-07 16:12:54,414 - INFO -   Gross Profit Value: Existing value R24,064.62 >= new R24,064.62, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Cost of Sales: Existing value R65,866.00 >= new R65,866.00, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Purchases: Existing value R90,583.26 >= new R90,583.26, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Dispensary Turnover: Existing value R52,505.30 >= new R52,505.30, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Total Transactions: Existing value R387.00 >= new R387.00, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Total Scripts: Existing value R155.00 >= new R155.00, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Opening Stock: Existing value R1,561,481.29 >= new R1,547,705.70, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Closing Stock: Existing value R1,586,140.69 >= new R1,572,365.11, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Cash Sales: Existing value R55,111.63 >= new R55,111.63, keeping existing
+2025-08-07 16:12:54,414 - INFO -   Account Sales: New value R8,966.20 > existing R8,966.20, keeping new
+2025-08-07 16:12:54,414 - INFO -   COD Sales: New value R2,779.09 > existing R2,779.09, keeping new
+2025-08-07 16:12:55,143 - INFO - ✅ Updated database record for REITZ - 2025-08-04
+2025-08-07 16:12:55,143 - INFO - 
+🏪 Processing REITZ - 2025-08-03
+2025-08-07 16:12:55,746 - INFO -   Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:55,747 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:12:55,747 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:55,747 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   Opening Stock: No existing value, using new value: R1,547,590.01
+2025-08-07 16:12:55,748 - INFO -   Closing Stock: No existing value, using new value: R1,547,590.01
+2025-08-07 16:12:55,748 - INFO -   Cash Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   Account Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:55,748 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:56,465 - INFO - ✅ Updated database record for REITZ - 2025-08-03
+2025-08-07 16:12:56,466 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-06
+2025-08-07 16:12:57,048 - INFO -   Turnover: Existing value R78,925.39 >= new R78,925.39, keeping existing
+2025-08-07 16:12:57,048 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:12:57,048 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:57,048 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:12:57,048 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:57,048 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:12:57,048 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:12:57,049 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:57,049 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:57,049 - INFO -   Cash Sales: Existing value R39,664.06 >= new R39,664.06, keeping existing
+2025-08-07 16:12:57,049 - INFO -   Account Sales: Existing value R9,413.50 >= new R9,413.50, keeping existing
+2025-08-07 16:12:57,049 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:57,693 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-06
+2025-08-07 16:12:57,694 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-01
+2025-08-07 16:12:58,324 - INFO -   Turnover: Existing value R70,191.87 >= new R70,191.87, keeping existing
+2025-08-07 16:12:58,332 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:58,333 - INFO -   Cash Sales: Existing value R47,969.78 >= new R47,969.78, keeping existing
+2025-08-07 16:12:58,333 - INFO -   Account Sales: Existing value R10,381.65 >= new R10,381.65, keeping existing
+2025-08-07 16:12:58,333 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:58,920 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-01
+2025-08-07 16:12:58,921 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-07
+2025-08-07 16:12:59,556 - INFO -   Turnover: Existing value R29,974.32 >= new R12,239.08, keeping existing
+2025-08-07 16:12:59,557 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:12:59,557 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:12:59,557 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:12:59,557 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:12:59,557 - INFO -   Total Transactions: Existing value R158.00 >= new R158.00, keeping existing
+2025-08-07 16:12:59,557 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:12:59,557 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:59,558 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:12:59,558 - INFO -   Cash Sales: Existing value R16,988.32 >= new R5,122.73, keeping existing
+2025-08-07 16:12:59,558 - INFO -   Account Sales: Existing value R8,158.92 >= new R3,528.20, keeping existing
+2025-08-07 16:12:59,558 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:00,909 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-07
+2025-08-07 16:13:00,909 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-02
+2025-08-07 16:13:01,497 - INFO -   Turnover: New value R28,888.06 > existing R28,888.06, keeping new
+2025-08-07 16:13:01,497 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:13:01,498 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:01,499 - INFO -   Cash Sales: Existing value R18,408.82 >= new R18,408.82, keeping existing
+2025-08-07 16:13:01,500 - INFO -   Account Sales: New value R2,103.17 > existing R2,103.17, keeping new
+2025-08-07 16:13:01,500 - INFO -   COD Sales: New value R286.85 > existing R286.85, keeping new
+2025-08-07 16:13:02,088 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-02
+2025-08-07 16:13:02,088 - INFO - 
+🏪 Processing TLC WINTERTON - 2025-08-05
+2025-08-07 16:13:02,711 - INFO -   Turnover: Existing value R82,906.29 >= new R82,906.29, keeping existing
+2025-08-07 16:13:02,712 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:13:02,712 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:02,712 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:02,713 - INFO -   Cash Sales: New value R49,552.80 > existing R49,552.80, keeping new
+2025-08-07 16:13:02,713 - INFO -   Account Sales: New value R21,406.45 > existing R21,406.45, keeping new
+2025-08-07 16:13:02,713 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:03,296 - INFO - ✅ Updated database record for TLC WINTERTON - 2025-08-05
+2025-08-07 16:13:03,297 - INFO - 
+🏪 Processing REITZ - None
+2025-08-07 16:13:03,878 - INFO -   Turnover: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Gross Profit Value: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Cost of Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Purchases: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Dispensary Turnover: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Total Transactions: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Total Scripts: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Opening Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:03,878 - INFO -   Closing Stock: No existing value, using new value: R0.00
+2025-08-07 16:13:03,879 - INFO -   Cash Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:03,879 - INFO -   Account Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:03,879 - INFO -   COD Sales: No existing value, using new value: R0.00
+2025-08-07 16:13:04,509 - ERROR - ❌ Error updating database for REITZ - None: null value in column "report_date" of relation "daily_summary" violates not-null constraint
+DETAIL:  Failing row contains (1140, 1, null, 2025-08-07 14:13:03.748721, 0, 0, 0, 0, 0, 0.0, 0.0, 0, 0, null, null, 0, 0, 0, 0, 0, 0).
+
+2025-08-07 16:13:04,509 - INFO - 
+--- Step 4: Displaying final summary ---
+2025-08-07 16:13:04,510 - INFO - 
+================================================================================
+2025-08-07 16:13:04,510 - INFO - 📊 FINAL PROCESSED DATA SUMMARY
+2025-08-07 16:13:04,510 - INFO - ================================================================================
+2025-08-07 16:13:04,510 - INFO - 
+🏪 REITZ - 2025-08-06
+2025-08-07 16:13:04,510 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,510 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,511 - INFO -    • Turnover: R71,189.88
+2025-08-07 16:13:04,511 - INFO -    • Gross Profit: R22,639.74 (27.34%)
+2025-08-07 16:13:04,511 - INFO -    • Cost of Sales: R60,160.76
+2025-08-07 16:13:04,511 - INFO -    • Purchases: R74,776.69
+2025-08-07 16:13:04,511 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,511 - INFO -    • Total Transactions: 414
+2025-08-07 16:13:04,511 - INFO -    • Average Basket Value: R171.96
+2025-08-07 16:13:04,511 - INFO -    • Average Basket Size: 1.98 items
+2025-08-07 16:13:04,511 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,511 - INFO -    • Total Scripts: 128
+2025-08-07 16:13:04,511 - INFO -    • Dispensary Turnover: R37,905.40
+2025-08-07 16:13:04,511 - INFO -    • Average Script Value: R296.14
+2025-08-07 16:13:04,512 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,512 - INFO -    • Opening Stock: R1,563,965.07
+2025-08-07 16:13:04,512 - INFO -    • Closing Stock: R1,573,725.33
+2025-08-07 16:13:04,512 - INFO -    • Adjustments: R4,855.66
+2025-08-07 16:13:04,512 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,512 - INFO -    • Cash Sales: R49,081.02
+2025-08-07 16:13:04,513 - INFO -    • Account Sales: R9,404.06
+2025-08-07 16:13:04,513 - INFO -    • COD Sales: R1,515.75
+2025-08-07 16:13:04,513 - INFO - 
+🏪 REITZ - 2025-08-01
+2025-08-07 16:13:04,513 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,513 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,513 - INFO -    • Turnover: R77,107.46
+2025-08-07 16:13:04,513 - INFO -    • Gross Profit: R21,595.95 (26.80%)
+2025-08-07 16:13:04,513 - INFO -    • Cost of Sales: R58,993.43
+2025-08-07 16:13:04,513 - INFO -    • Purchases: R37,463.65
+2025-08-07 16:13:04,514 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,514 - INFO -    • Total Transactions: 378
+2025-08-07 16:13:04,514 - INFO -    • Average Basket Value: R203.99
+2025-08-07 16:13:04,514 - INFO -    • Average Basket Size: 2.06 items
+2025-08-07 16:13:04,514 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,514 - INFO -    • Total Scripts: 150
+2025-08-07 16:13:04,514 - INFO -    • Dispensary Turnover: R43,069.24
+2025-08-07 16:13:04,514 - INFO -    • Average Script Value: R287.13
+2025-08-07 16:13:04,514 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,514 - INFO -    • Opening Stock: R1,546,766.46
+2025-08-07 16:13:04,514 - INFO -    • Closing Stock: R1,524,800.69
+2025-08-07 16:13:04,514 - INFO -    • Adjustments: R436.00
+2025-08-07 16:13:04,514 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,514 - INFO -    • Cash Sales: R57,607.72
+2025-08-07 16:13:04,514 - INFO -    • Account Sales: R9,108.58
+2025-08-07 16:13:04,514 - INFO -    • COD Sales: R1,130.50
+2025-08-07 16:13:04,514 - INFO - 
+🏪 REITZ - 2025-08-07
+2025-08-07 16:13:04,514 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,514 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,514 - INFO -    • Turnover: R33,564.49
+2025-08-07 16:13:04,514 - INFO -    • Gross Profit: R3,409.85 (23.96%)
+2025-08-07 16:13:04,514 - INFO -    • Cost of Sales: R10,820.80
+2025-08-07 16:13:04,515 - INFO -    • Purchases: R16,616.41
+2025-08-07 16:13:04,515 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,515 - INFO -    • Total Transactions: 68
+2025-08-07 16:13:04,515 - INFO -    • Average Basket Value: R493.60
+2025-08-07 16:13:04,515 - INFO -    • Average Basket Size: 5.68 items
+2025-08-07 16:13:04,515 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,515 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,515 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,515 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,515 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,515 - INFO -    • Opening Stock: R1,576,838.63
+2025-08-07 16:13:04,515 - INFO -    • Closing Stock: R1,581,516.98
+2025-08-07 16:13:04,515 - INFO -    • Adjustments: R1,117.26
+2025-08-07 16:13:04,515 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,515 - INFO -    • Cash Sales: R19,733.71
+2025-08-07 16:13:04,515 - INFO -    • Account Sales: R2,053.26
+2025-08-07 16:13:04,515 - INFO -    • COD Sales: R2,008.05
+2025-08-07 16:13:04,515 - INFO - 
+🏪 REITZ - 2025-07-30
+2025-08-07 16:13:04,515 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,515 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,515 - INFO -    • Turnover: R79,800.91
+2025-08-07 16:13:04,515 - INFO -    • Gross Profit: R17,600.38 (22.13%)
+2025-08-07 16:13:04,515 - INFO -    • Cost of Sales: R61,917.01
+2025-08-07 16:13:04,515 - INFO -    • Purchases: R53,375.09
+2025-08-07 16:13:04,515 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,516 - INFO -    • Total Transactions: 328
+2025-08-07 16:13:04,516 - INFO -    • Average Basket Value: R243.30
+2025-08-07 16:13:04,516 - INFO -    • Average Basket Size: 2.07 items
+2025-08-07 16:13:04,516 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,516 - INFO -    • Total Scripts: 116
+2025-08-07 16:13:04,517 - INFO -    • Dispensary Turnover: R49,893.66
+2025-08-07 16:13:04,517 - INFO -    • Average Script Value: R430.12
+2025-08-07 16:13:04,517 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Opening Stock: R1,565,706.93
+2025-08-07 16:13:04,517 - INFO -    • Closing Stock: R1,556,121.63
+2025-08-07 16:13:04,517 - INFO -    • Adjustments: R1,043.37
+2025-08-07 16:13:04,517 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,517 - INFO -    • Cash Sales: R48,008.77
+2025-08-07 16:13:04,517 - INFO -    • Account Sales: R4,218.27
+2025-08-07 16:13:04,517 - INFO -    • COD Sales: R1,176.16
+2025-08-07 16:13:04,517 - INFO - 
+🏪 REITZ - 2025-07-31
+2025-08-07 16:13:04,517 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,517 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Turnover: R87,438.48
+2025-08-07 16:13:04,517 - INFO -    • Gross Profit: R21,380.39 (24.45%)
+2025-08-07 16:13:04,517 - INFO -    • Cost of Sales: R66,063.12
+2025-08-07 16:13:04,517 - INFO -    • Purchases: R55,836.39
+2025-08-07 16:13:04,517 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Total Transactions: 353
+2025-08-07 16:13:04,517 - INFO -    • Average Basket Value: R247.70
+2025-08-07 16:13:04,517 - INFO -    • Average Basket Size: 2.37 items
+2025-08-07 16:13:04,517 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Total Scripts: 121
+2025-08-07 16:13:04,517 - INFO -    • Dispensary Turnover: R51,624.99
+2025-08-07 16:13:04,517 - INFO -    • Average Script Value: R426.65
+2025-08-07 16:13:04,517 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Opening Stock: R1,556,121.63
+2025-08-07 16:13:04,517 - INFO -    • Closing Stock: R1,545,894.90
+2025-08-07 16:13:04,517 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,517 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,517 - INFO -    • Cash Sales: R41,664.85
+2025-08-07 16:13:04,517 - INFO -    • Account Sales: R21,044.65
+2025-08-07 16:13:04,517 - INFO -    • COD Sales: R2,135.35
+2025-08-07 16:13:04,517 - INFO - 
+🏪 REITZ - 2025-08-02
+2025-08-07 16:13:04,517 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,517 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Turnover: R39,377.47
+2025-08-07 16:13:04,517 - INFO -    • Gross Profit: R11,231.88 (28.52%)
+2025-08-07 16:13:04,517 - INFO -    • Cost of Sales: R28,148.54
+2025-08-07 16:13:04,517 - INFO -    • Purchases: R50,937.65
+2025-08-07 16:13:04,517 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Total Transactions: 218
+2025-08-07 16:13:04,517 - INFO -    • Average Basket Value: R180.63
+2025-08-07 16:13:04,517 - INFO -    • Average Basket Size: 2.14 items
+2025-08-07 16:13:04,517 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Total Scripts: 62
+2025-08-07 16:13:04,517 - INFO -    • Dispensary Turnover: R17,443.97
+2025-08-07 16:13:04,517 - INFO -    • Average Script Value: R281.35
+2025-08-07 16:13:04,517 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,517 - INFO -    • Opening Stock: R1,524,800.91
+2025-08-07 16:13:04,518 - INFO -    • Closing Stock: R1,547,590.01
+2025-08-07 16:13:04,518 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,518 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,518 - INFO -    • Cash Sales: R29,596.20
+2025-08-07 16:13:04,518 - INFO -    • Account Sales: R3,804.48
+2025-08-07 16:13:04,518 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,518 - INFO - 
+🏪 REITZ - 2025-08-05
+2025-08-07 16:13:04,518 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,518 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Turnover: R95,437.83
+2025-08-07 16:13:04,518 - INFO -    • Gross Profit: R22,128.99 (23.81%)
+2025-08-07 16:13:04,518 - INFO -    • Cost of Sales: R70,794.63
+2025-08-07 16:13:04,518 - INFO -    • Purchases: R50,187.08
+2025-08-07 16:13:04,518 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Total Transactions: 414
+2025-08-07 16:13:04,518 - INFO -    • Average Basket Value: R230.53
+2025-08-07 16:13:04,518 - INFO -    • Average Basket Size: 1.87 items
+2025-08-07 16:13:04,518 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Total Scripts: 159
+2025-08-07 16:13:04,518 - INFO -    • Dispensary Turnover: R55,884.76
+2025-08-07 16:13:04,518 - INFO -    • Average Script Value: R351.48
+2025-08-07 16:13:04,518 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Opening Stock: R1,577,357.47
+2025-08-07 16:13:04,518 - INFO -    • Closing Stock: R1,554,253.73
+2025-08-07 16:13:04,518 - INFO -    • Adjustments: R2,496.18
+2025-08-07 16:13:04,518 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,518 - INFO -    • Cash Sales: R52,199.33
+2025-08-07 16:13:04,518 - INFO -    • Account Sales: R20,682.09
+2025-08-07 16:13:04,518 - INFO -    • COD Sales: R1,839.75
+2025-08-07 16:13:04,518 - INFO - 
+🏪 TLC WINTERTON - 2025-08-04
+2025-08-07 16:13:04,518 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,518 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Turnover: R68,222.60
+2025-08-07 16:13:04,518 - INFO -    • Gross Profit: R16,115.28 (23.63%)
+2025-08-07 16:13:04,518 - INFO -    • Cost of Sales: R52,090.87
+2025-08-07 16:13:04,518 - INFO -    • Purchases: R22,572.01
+2025-08-07 16:13:04,518 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Total Transactions: 321
+2025-08-07 16:13:04,518 - INFO -    • Average Basket Value: R212.53
+2025-08-07 16:13:04,518 - INFO -    • Average Basket Size: 1.79 items
+2025-08-07 16:13:04,518 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,518 - INFO -    • Total Scripts: 104
+2025-08-07 16:13:04,519 - INFO -    • Dispensary Turnover: R40,067.83
+2025-08-07 16:13:04,519 - INFO -    • Average Script Value: R385.27
+2025-08-07 16:13:04,519 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Opening Stock: R1,622,999.99
+2025-08-07 16:13:04,519 - INFO -    • Closing Stock: R1,649,511.94
+2025-08-07 16:13:04,519 - INFO -    • Adjustments: R56,030.81
+2025-08-07 16:13:04,519 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,519 - INFO -    • Cash Sales: R44,100.00
+2025-08-07 16:13:04,519 - INFO -    • Account Sales: R14,521.90
+2025-08-07 16:13:04,519 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,519 - INFO - 
+🏪 REITZ - 2025-08-04
+2025-08-07 16:13:04,519 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,519 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Turnover: R89,983.36
+2025-08-07 16:13:04,519 - INFO -    • Gross Profit: R24,064.62 (26.76%)
+2025-08-07 16:13:04,519 - INFO -    • Cost of Sales: R65,866.00
+2025-08-07 16:13:04,519 - INFO -    • Purchases: R90,583.26
+2025-08-07 16:13:04,519 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Total Transactions: 387
+2025-08-07 16:13:04,519 - INFO -    • Average Basket Value: R232.52
+2025-08-07 16:13:04,519 - INFO -    • Average Basket Size: 1.9 items
+2025-08-07 16:13:04,519 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Total Scripts: 155
+2025-08-07 16:13:04,519 - INFO -    • Dispensary Turnover: R52,505.30
+2025-08-07 16:13:04,519 - INFO -    • Average Script Value: R338.74
+2025-08-07 16:13:04,519 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Opening Stock: R1,547,705.70
+2025-08-07 16:13:04,519 - INFO -    • Closing Stock: R1,572,365.11
+2025-08-07 16:13:04,519 - INFO -    • Adjustments: R57.84
+2025-08-07 16:13:04,519 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,519 - INFO -    • Cash Sales: R55,111.63
+2025-08-07 16:13:04,519 - INFO -    • Account Sales: R8,966.20
+2025-08-07 16:13:04,519 - INFO -    • COD Sales: R2,779.09
+2025-08-07 16:13:04,519 - INFO - 
+🏪 REITZ - 2025-08-03
+2025-08-07 16:13:04,519 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,519 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Turnover: R0.00
+2025-08-07 16:13:04,519 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,519 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,519 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,519 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,519 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,519 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,519 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,519 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,519 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,519 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,519 - INFO -    • Opening Stock: R1,547,590.01
+2025-08-07 16:13:04,520 - INFO -    • Closing Stock: R1,547,590.01
+2025-08-07 16:13:04,520 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,520 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,520 - INFO -    • Cash Sales: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Account Sales: R0.00
+2025-08-07 16:13:04,520 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,520 - INFO - 
+🏪 TLC WINTERTON - 2025-08-06
+2025-08-07 16:13:04,520 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,520 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Turnover: R78,925.39
+2025-08-07 16:13:04,520 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,520 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,520 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,520 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,520 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,520 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,520 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,520 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,520 - INFO -    • Cash Sales: R39,664.06
+2025-08-07 16:13:04,520 - INFO -    • Account Sales: R9,413.50
+2025-08-07 16:13:04,520 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,520 - INFO - 
+🏪 TLC WINTERTON - 2025-08-01
+2025-08-07 16:13:04,520 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,520 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Turnover: R70,191.87
+2025-08-07 16:13:04,520 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,520 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,520 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,520 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,520 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,520 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,520 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,520 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,520 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,520 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,520 - INFO -    • Cash Sales: R47,969.78
+2025-08-07 16:13:04,520 - INFO -    • Account Sales: R10,381.65
+2025-08-07 16:13:04,520 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,520 - INFO - 
+🏪 TLC WINTERTON - 2025-08-07
+2025-08-07 16:13:04,521 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,521 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Turnover: R12,239.08
+2025-08-07 16:13:04,521 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,521 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,521 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Total Transactions: 158
+2025-08-07 16:13:04,521 - INFO -    • Average Basket Value: R77.46
+2025-08-07 16:13:04,521 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,521 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,521 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,521 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,521 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,521 - INFO -    • Cash Sales: R5,122.73
+2025-08-07 16:13:04,521 - INFO -    • Account Sales: R3,528.20
+2025-08-07 16:13:04,521 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,521 - INFO - 
+🏪 TLC WINTERTON - 2025-08-02
+2025-08-07 16:13:04,521 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,521 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Turnover: R28,888.06
+2025-08-07 16:13:04,521 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,521 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,521 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,521 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,521 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,521 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,521 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,521 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,521 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,522 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,522 - INFO -    • Cash Sales: R18,408.82
+2025-08-07 16:13:04,522 - INFO -    • Account Sales: R2,103.17
+2025-08-07 16:13:04,522 - INFO -    • COD Sales: R286.85
+2025-08-07 16:13:04,522 - INFO - 
+🏪 TLC WINTERTON - 2025-08-05
+2025-08-07 16:13:04,522 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,522 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Turnover: R82,906.29
+2025-08-07 16:13:04,522 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,522 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,522 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,522 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,522 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,522 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,522 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,522 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,522 - INFO -    • Cash Sales: R49,552.80
+2025-08-07 16:13:04,522 - INFO -    • Account Sales: R21,406.45
+2025-08-07 16:13:04,522 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,522 - INFO - 
+🏪 REITZ - None
+2025-08-07 16:13:04,522 - INFO - ------------------------------------------------------------
+2025-08-07 16:13:04,522 - INFO - 💰 Financial Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Turnover: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Gross Profit: R0.00 (0.00%)
+2025-08-07 16:13:04,522 - INFO -    • Cost of Sales: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Purchases: R0.00
+2025-08-07 16:13:04,522 - INFO - 🛒 Transaction Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Total Transactions: 0
+2025-08-07 16:13:04,522 - INFO -    • Average Basket Value: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Average Basket Size: 0.0 items
+2025-08-07 16:13:04,522 - INFO - 💊 Script Metrics:
+2025-08-07 16:13:04,522 - INFO -    • Total Scripts: 0
+2025-08-07 16:13:04,522 - INFO -    • Dispensary Turnover: R0.00
+2025-08-07 16:13:04,522 - INFO -    • Average Script Value: R0.00
+2025-08-07 16:13:04,523 - INFO - 📦 Stock Metrics:
+2025-08-07 16:13:04,523 - INFO -    • Opening Stock: R0.00
+2025-08-07 16:13:04,523 - INFO -    • Closing Stock: R0.00
+2025-08-07 16:13:04,523 - INFO -    • Adjustments: R0.00
+2025-08-07 16:13:04,523 - INFO - 💳 Payment Methods:
+2025-08-07 16:13:04,523 - INFO -    • Cash Sales: R0.00
+2025-08-07 16:13:04,523 - INFO -    • Account Sales: R0.00
+2025-08-07 16:13:04,523 - INFO -    • COD Sales: R0.00
+2025-08-07 16:13:04,523 - INFO - 
+--- Step 5: Saving processed data ---
+2025-08-07 16:13:04,578 - INFO - ✅ Processed data saved to improved_pipeline_data.json
+2025-08-07 16:13:04,578 - INFO - 
+🎉 IMPROVED DATA PIPELINE COMPLETED SUCCESSFULLY!
+2025-08-07 16:13:04,579 - INFO - ✅ Data pipeline completed successfully!

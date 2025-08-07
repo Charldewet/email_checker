@@ -1,0 +1,169 @@
+[
+  {
+    "file": "transaction_summary_tmpz3c3b7eq.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-06",
+    "transactions_total": 414,
+    "transaction_breakdown": {
+      "CASH SALE": 375,
+      "C.O.D SALE": 5,
+      "INVOICE": 26,
+      "CASH REFUND": 1,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 6
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpe5cu9imm.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-01",
+    "transactions_total": 378,
+    "transaction_breakdown": {
+      "CASH SALE": 338,
+      "C.O.D SALE": 6,
+      "INVOICE": 22,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 9
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmp3s7trhpk.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-07",
+    "transactions_total": 158,
+    "transaction_breakdown": {
+      "CASH SALE": 147,
+      "INVOICE": 10,
+      "RECEIPT": 1
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmprhpynrlh.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-07",
+    "transactions_total": 68,
+    "transaction_breakdown": {
+      "CASH SALE": 58,
+      "C.O.D SALE": 2,
+      "INVOICE": 7,
+      "RECEIPT": 1
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpmqkav_86.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-07-30",
+    "transactions_total": 328,
+    "transaction_breakdown": {
+      "CASH SALE": 289,
+      "C.O.D SALE": 6,
+      "INVOICE": 20,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 10
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpl5nyalkn.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-07-31",
+    "transactions_total": 353,
+    "transaction_breakdown": {
+      "CASH SALE": 301,
+      "C.O.D SALE": 7,
+      "INVOICE": 29,
+      "CASH REFUND": 2,
+      "RECEIPT": 14
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpsycmm_6i.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-02",
+    "transactions_total": 218,
+    "transaction_breakdown": {
+      "CASH SALE": 200,
+      "INVOICE": 13,
+      "CASH REFUND": 1,
+      "RECEIPT": 4
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpqd4idav0.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-02",
+    "transactions_total": 218,
+    "transaction_breakdown": {
+      "CASH SALE": 200,
+      "INVOICE": 13,
+      "CASH REFUND": 1,
+      "RECEIPT": 4
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpppmn0qyh.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-05",
+    "transactions_total": 414,
+    "transaction_breakdown": {
+      "CASH SALE": 346,
+      "C.O.D SALE": 9,
+      "INVOICE": 46,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 10
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmp938nc56h.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "transactions_total": 321,
+    "transaction_breakdown": {
+      "CASH SALE": 292,
+      "INVOICE": 25,
+      "RECEIPT": 4
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmp3nbr5dml.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "transactions_total": 387,
+    "transaction_breakdown": {
+      "CASH SALE": 314,
+      "C.O.D SALE": 14,
+      "INVOICE": 40,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 2,
+      "RECEIPT": 15
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_tmpusrsh59v.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "transactions_total": 387,
+    "transaction_breakdown": {
+      "CASH SALE": 314,
+      "C.O.D SALE": 14,
+      "INVOICE": 40,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 2,
+      "RECEIPT": 15
+    },
+    "avg_basket_value": null
+  }
+]

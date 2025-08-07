@@ -20,6 +20,10 @@ from typing import Dict, List, Any, Optional
 import pandas as pd
 import logging
 
+# Create logs directory if it doesn't exist
+logs_dir = Path("logs")
+logs_dir.mkdir(exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,

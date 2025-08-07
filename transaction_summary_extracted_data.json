@@ -1,6 +1,119 @@
 [
   {
-    "file": "transaction_summary_0000_20250805-12h41m07s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_163307_960_20250807-14h59m02s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-06",
+    "transactions_total": 414,
+    "transaction_breakdown": {
+      "CASH SALE": 375,
+      "C.O.D SALE": 5,
+      "INVOICE": 26,
+      "CASH REFUND": 1,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 6
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_942_20250807-14h40m55s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-01",
+    "transactions_total": 378,
+    "transaction_breakdown": {
+      "CASH SALE": 338,
+      "C.O.D SALE": 6,
+      "INVOICE": 22,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 9
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_929_20250807-11h40m15s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-07",
+    "transactions_total": 158,
+    "transaction_breakdown": {
+      "CASH SALE": 147,
+      "INVOICE": 10,
+      "RECEIPT": 1
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_985_20250807-16h18m48s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-07",
+    "transactions_total": 237,
+    "transaction_breakdown": {
+      "CASH SALE": 211,
+      "C.O.D SALE": 3,
+      "INVOICE": 20,
+      "CASH REFUND": 1,
+      "RECEIPT": 2
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_968_20250807-15h05m30s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-07-30",
+    "transactions_total": 328,
+    "transaction_breakdown": {
+      "CASH SALE": 289,
+      "C.O.D SALE": 6,
+      "INVOICE": 20,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 10
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_970_20250807-15h07m52s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-07-31",
+    "transactions_total": 353,
+    "transaction_breakdown": {
+      "CASH SALE": 301,
+      "C.O.D SALE": 7,
+      "INVOICE": 29,
+      "CASH REFUND": 2,
+      "RECEIPT": 14
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_951_20250807-14h49m05s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-02",
+    "transactions_total": 218,
+    "transaction_breakdown": {
+      "CASH SALE": 200,
+      "INVOICE": 13,
+      "CASH REFUND": 1,
+      "RECEIPT": 4
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_955_20250807-14h56m46s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-05",
+    "transactions_total": 414,
+    "transaction_breakdown": {
+      "CASH SALE": 346,
+      "C.O.D SALE": 9,
+      "INVOICE": 46,
+      "CASH REFUND": 2,
+      "CREDIT NOTE": 1,
+      "RECEIPT": 10
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_888_20250805-12h41m07s-Complete.pdf",
     "pharmacy": "TLC WINTERTON",
     "date": "2025-08-04",
     "transactions_total": 321,
@@ -12,7 +125,7 @@
     "avg_basket_value": null
   },
   {
-    "file": "transaction_summary_0000_20250805-12h39m56s-Complete.pdf",
+    "file": "transaction_summary_0000_20250807_163307_956_20250807-14h54m29s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-04",
     "transactions_total": 387,
@@ -23,6 +136,21 @@
       "CASH REFUND": 2,
       "CREDIT NOTE": 2,
       "RECEIPT": 15
+    },
+    "avg_basket_value": null
+  },
+  {
+    "file": "transaction_summary_0000_20250807_163307_979_20250807-16h15m37s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-07-29",
+    "transactions_total": 335,
+    "transaction_breakdown": {
+      "CASH SALE": 297,
+      "C.O.D SALE": 4,
+      "INVOICE": 24,
+      "CASH REFUND": 1,
+      "CREDIT NOTE": 2,
+      "RECEIPT": 7
     },
     "avg_basket_value": null
   }
