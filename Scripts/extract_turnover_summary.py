@@ -139,6 +139,21 @@ def extract_pharmacy_and_date(pdf_path: str) -> tuple[str, str]:
             date_str = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
             break
     
+    if date_str is None:
+        # Fallback 1 ─ pick the <date> folder two levels up created by classifier
+        try:
+            possible_date = Path(pdf_path).parent.parent.name  # e.g. 2025-08-05
+            if re.match(r"\d{4}-\d{2}-\d{2}", possible_date):
+                date_str = possible_date
+        except Exception:
+            pass
+    if date_str is None:
+        # Fallback 2 ─ look for YYYYMMDD inside the filename
+        m = re.search(r"(20\d{6})", Path(pdf_path).name)
+        if m:
+            raw = m.group(1)            # 20250805
+            date_str = f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
+    
     return pharmacy_name, date_str
 
 def format_currency(amount: float) -> str:

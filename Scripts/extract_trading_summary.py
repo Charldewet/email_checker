@@ -129,6 +129,21 @@ def extract_pharmacy_and_date(pdf_path: str) -> tuple[str, str]:
                 year, month, day = match.group(1), match.group(2), match.group(3)
             date_str = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
             break
+
+    # Fallbacks if still None
+    if date_str is None:
+        try:
+            from pathlib import Path
+            possible_date = Path(pdf_path).parent.parent.name
+            if re.match(r"\d{4}-\d{2}-\d{2}", possible_date):
+                date_str = possible_date
+        except Exception:
+            pass
+    if date_str is None:
+        m = re.search(r"(20\d{6})", Path(pdf_path).name)
+        if m:
+            raw = m.group(1)
+            date_str = f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
     
     return pharmacy_name, date_str
 

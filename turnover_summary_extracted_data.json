@@ -1,5 +1,14 @@
 [
   {
+    "file": "turnover_summary_0529_20250807-05h29m38s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-06",
+    "turnover": 78925.39,
+    "sales_cash": 39664.06,
+    "sales_account": 9413.5,
+    "sales_cod": null
+  },
+  {
     "file": "turnover_summary_1606_20250806-16h06m36s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-06",
@@ -7,6 +16,15 @@
     "sales_cash": 55577.51,
     "sales_account": 9404.06,
     "sales_cod": 1515.75
+  },
+  {
+    "file": "turnover_summary_0529_20250807-05h29m48s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-01",
+    "turnover": 70191.87,
+    "sales_cash": 47969.78,
+    "sales_account": 10381.65,
+    "sales_cod": null
   },
   {
     "file": "turnover_summary_1544_20250806-15h44m13s-Complete.pdf",
@@ -18,12 +36,30 @@
     "sales_cod": 1130.5
   },
   {
+    "file": "turnover_summary_0529_20250807-05h29m54s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-02",
+    "turnover": 28888.06,
+    "sales_cash": 18408.82,
+    "sales_account": 2103.17,
+    "sales_cod": 286.85
+  },
+  {
     "file": "turnover_summary_1544_20250806-15h44m04s-Complete.pdf",
     "pharmacy": "REITZ",
     "date": "2025-08-02",
     "turnover": 39377.47,
     "sales_cash": 29596.2,
     "sales_account": 3804.48,
+    "sales_cod": null
+  },
+  {
+    "file": "turnover_summary_0530_20250807-05h30m06s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-05",
+    "turnover": 82906.29,
+    "sales_cash": 49552.8,
+    "sales_account": 21406.45,
     "sales_cod": null
   },
   {

@@ -12165,6 +12165,42 @@
       "sales_cod": 2779.09
     }
   },
+  "TLC WINTERTON_2025-08-06": {
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-06",
+    "trading_summary": {},
+    "turnover_summary": {
+      "file": "turnover_summary_0529_20250807-05h29m38s-Complete.pdf",
+      "pharmacy": "TLC WINTERTON",
+      "date": "2025-08-06",
+      "turnover": 78925.39,
+      "sales_cash": 39664.06,
+      "sales_account": 9413.5,
+      "sales_cod": null
+    },
+    "transaction_summary": {},
+    "gross_profit_summary": {},
+    "dispensary_summary": {},
+    "calculated_metrics": {
+      "avg_basket_size": 0.0,
+      "turnover": 78925.39,
+      "avg_basket_value": 0,
+      "transactions_total": 0,
+      "script_total": 0,
+      "disp_turnover": 0,
+      "avg_script_value": 0,
+      "stock_opening": 0,
+      "stock_closing": 0,
+      "purchases": 0,
+      "adjustments": 0,
+      "cost_of_sales": 0,
+      "gp_value": 0,
+      "gp_percent": 0,
+      "sales_cash": 39664.06,
+      "sales_account": 9413.5,
+      "sales_cod": null
+    }
+  },
   "REITZ_2025-08-06": {
     "pharmacy": "REITZ",
     "date": "2025-08-06",
@@ -12207,6 +12243,42 @@
       "sales_cash": 55577.51,
       "sales_account": 9404.06,
       "sales_cod": 1515.75
+    }
+  },
+  "TLC WINTERTON_2025-08-01": {
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-01",
+    "trading_summary": {},
+    "turnover_summary": {
+      "file": "turnover_summary_0529_20250807-05h29m48s-Complete.pdf",
+      "pharmacy": "TLC WINTERTON",
+      "date": "2025-08-01",
+      "turnover": 70191.87,
+      "sales_cash": 47969.78,
+      "sales_account": 10381.65,
+      "sales_cod": null
+    },
+    "transaction_summary": {},
+    "gross_profit_summary": {},
+    "dispensary_summary": {},
+    "calculated_metrics": {
+      "avg_basket_size": 0.0,
+      "turnover": 70191.87,
+      "avg_basket_value": 0,
+      "transactions_total": 0,
+      "script_total": 0,
+      "disp_turnover": 0,
+      "avg_script_value": 0,
+      "stock_opening": 0,
+      "stock_closing": 0,
+      "purchases": 0,
+      "adjustments": 0,
+      "cost_of_sales": 0,
+      "gp_value": 0,
+      "gp_percent": 0,
+      "sales_cash": 47969.78,
+      "sales_account": 10381.65,
+      "sales_cod": null
     }
   },
   "REITZ_2025-08-01": {
@@ -12253,6 +12325,42 @@
       "sales_cod": 1130.5
     }
   },
+  "TLC WINTERTON_2025-08-02": {
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-02",
+    "trading_summary": {},
+    "turnover_summary": {
+      "file": "turnover_summary_0529_20250807-05h29m54s-Complete.pdf",
+      "pharmacy": "TLC WINTERTON",
+      "date": "2025-08-02",
+      "turnover": 28888.06,
+      "sales_cash": 18408.82,
+      "sales_account": 2103.17,
+      "sales_cod": 286.85
+    },
+    "transaction_summary": {},
+    "gross_profit_summary": {},
+    "dispensary_summary": {},
+    "calculated_metrics": {
+      "avg_basket_size": 0.0,
+      "turnover": 28888.06,
+      "avg_basket_value": 0,
+      "transactions_total": 0,
+      "script_total": 0,
+      "disp_turnover": 0,
+      "avg_script_value": 0,
+      "stock_opening": 0,
+      "stock_closing": 0,
+      "purchases": 0,
+      "adjustments": 0,
+      "cost_of_sales": 0,
+      "gp_value": 0,
+      "gp_percent": 0,
+      "sales_cash": 18408.82,
+      "sales_account": 2103.17,
+      "sales_cod": 286.85
+    }
+  },
   "REITZ_2025-08-02": {
     "pharmacy": "REITZ",
     "date": "2025-08-02",
@@ -12294,6 +12402,42 @@
       "gp_percent": 0,
       "sales_cash": 29596.2,
       "sales_account": 3804.48,
+      "sales_cod": null
+    }
+  },
+  "TLC WINTERTON_2025-08-05": {
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-05",
+    "trading_summary": {},
+    "turnover_summary": {
+      "file": "turnover_summary_0530_20250807-05h30m06s-Complete.pdf",
+      "pharmacy": "TLC WINTERTON",
+      "date": "2025-08-05",
+      "turnover": 82906.29,
+      "sales_cash": 49552.8,
+      "sales_account": 21406.45,
+      "sales_cod": null
+    },
+    "transaction_summary": {},
+    "gross_profit_summary": {},
+    "dispensary_summary": {},
+    "calculated_metrics": {
+      "avg_basket_size": 0.0,
+      "turnover": 82906.29,
+      "avg_basket_value": 0,
+      "transactions_total": 0,
+      "script_total": 0,
+      "disp_turnover": 0,
+      "avg_script_value": 0,
+      "stock_opening": 0,
+      "stock_closing": 0,
+      "purchases": 0,
+      "adjustments": 0,
+      "cost_of_sales": 0,
+      "gp_value": 0,
+      "gp_percent": 0,
+      "sales_cash": 49552.8,
+      "sales_account": 21406.45,
       "sales_cod": null
     }
   },
