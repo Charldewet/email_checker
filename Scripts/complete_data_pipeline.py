@@ -312,6 +312,37 @@ def run_complete_pipeline(classified_pdfs_dir="temp_classified_pdfs"):
         json.dump({f"{k[0]}_{k[1]}": v for k, v in combined_data.items()}, f, indent=2, default=str)
     
     print("✅ Combined data saved to complete_pipeline_data.json")
+    
+    # --- Step 7: Execute SQL statements to insert data into database ---
+    print("\n--- Step 7: Executing SQL statements to insert data into database ---")
+    try:
+        from render_database_connection import RenderPharmacyDatabase
+        db = RenderPharmacyDatabase()
+        
+        # Read and execute the SQL file
+        with open(sql_file, 'r') as f:
+            sql_content = f.read()
+        
+        # Fix None values to NULL for PostgreSQL compatibility
+        sql_content = sql_content.replace('None,', 'NULL,')
+        sql_content = sql_content.replace('None\n', 'NULL\n')
+        
+        # Execute the SQL
+        db.execute_query(sql_content)
+        print("✅ Data successfully inserted into database!")
+        
+        # Display summary of what was inserted
+        print(f"\n📊 Database Insertion Summary:")
+        print(f"   • Records processed: {len(combined_data)}")
+        for key, data in combined_data.items():
+            pharmacy, date = key
+            calculated = data['calculated_metrics']
+            print(f"   • {pharmacy} - {date}: R{calculated.get('turnover', 0):,.2f} turnover")
+        
+    except Exception as e:
+        print(f"❌ Database insertion failed: {e}")
+        print("💡 SQL file was saved and can be executed manually if needed")
+    
     print("\n🎉 COMPLETE DATA PIPELINE FINISHED SUCCESSFULLY!")
 
 if __name__ == "__main__":

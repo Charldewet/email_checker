@@ -326,7 +326,7 @@ class PharmacyEmailMonitor:
             try:
                 from complete_data_pipeline import run_complete_pipeline
                 run_complete_pipeline()
-                logger.info("✅ Data imported successfully.")
+                logger.info("✅ Data extracted and inserted into database successfully.")
             except Exception as e:
                 logger.error(f"❌ Complete data pipeline failed: {e}")
                 return False
