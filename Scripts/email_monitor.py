@@ -557,6 +557,8 @@ class PharmacyEmailMonitor:
         try:
             # Get recent emails with PDFs (last 2 days)
             recent_emails = self.get_recent_emails(mail, days=2)
+            # expose count to outer app for logging
+            self.last_email_count = len(recent_emails)
             logger.info(f"Found {len(recent_emails)} emails for the two days.")
 
             if not recent_emails:

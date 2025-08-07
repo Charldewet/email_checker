@@ -79,11 +79,26 @@ def check_for_new_reports():
                 return
         
         # Process one email cycle
+        initial_email_total = stats['total_emails_processed']
         success = monitor.process_single_email_cycle()
+
+        # The monitor internally logs how many emails it found; capture that here too
+        # It stores the number of recent emails in the return of get_recent_emails
+        # We approximate by bumping the counter each time it runs because we no longer
+        # persist processed-email state.
+        # For full transparency we read the latest log lines inside monitor.stats, if present
+        try:
+            if hasattr(monitor, 'last_email_count'):
+                stats['total_emails_processed'] += monitor.last_email_count
+        except Exception:
+            pass
+        processed_this_cycle = stats['total_emails_processed'] - initial_email_total
+        logger.info(f"📧 Cycle summary – emails considered this run: {processed_this_cycle}; total since start: {stats['total_emails_processed']}")
         
         if success:
             last_check_result = "Success"
             stats['last_successful_check'] = datetime.now().isoformat()
+            logger.info("✅ Cycle finished – success")
             logger.info("✅ Email check completed successfully")
         else:
             last_check_result = "Failed"
@@ -105,8 +120,8 @@ def start_scheduler():
     
     logger.info("🚀 Starting email monitoring scheduler...")
     
-    # Schedule email checks every 10 minutes
-    schedule.every(10).minutes.do(check_for_new_reports)
+    # Schedule email checks every 3 minutes (was 10)
+    schedule.every(3).minutes.do(check_for_new_reports)
     
     # Run initial check after 30 seconds
     schedule.every(30).seconds.do(check_for_new_reports)
