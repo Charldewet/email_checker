@@ -1,0 +1,56 @@
+[
+  {
+    "file": "dispensary_summary_1554_20250806-15h54m09s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-06",
+    "script_total": 114,
+    "disp_turnover_including_vat": 38255.05,
+    "disp_turnover_excluding_vat": 33265.26086956522,
+    "avg_script_value": 291.80053394355457
+  },
+  {
+    "file": "dispensary_summary_1553_20250806-15h53m44s-Complete-1.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-01",
+    "script_total": 150,
+    "disp_turnover_including_vat": 49529.63,
+    "disp_turnover_excluding_vat": 43069.24347826087,
+    "avg_script_value": 287.12828985507247
+  },
+  {
+    "file": "dispensary_summary_1554_20250806-15h54m00s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-02",
+    "script_total": 62,
+    "disp_turnover_including_vat": 20060.56,
+    "disp_turnover_excluding_vat": 17443.965217391305,
+    "avg_script_value": 281.3542776998598
+  },
+  {
+    "file": "dispensary_summary_1433_20250806-14h33m25s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-05",
+    "script_total": 159,
+    "disp_turnover_including_vat": 64267.47,
+    "disp_turnover_excluding_vat": 55884.75652173914,
+    "avg_script_value": 351.4764561115669
+  },
+  {
+    "file": "dispensary_summary_1140_20250805-11h40m53s-Complete.pdf",
+    "pharmacy": "TLC WINTERTON",
+    "date": "2025-08-04",
+    "script_total": 104,
+    "disp_turnover_including_vat": 46078.0,
+    "disp_turnover_excluding_vat": 40067.82608695653,
+    "avg_script_value": 385.26755852842814
+  },
+  {
+    "file": "dispensary_summary_1007_20250805-10h07m09s-Complete.pdf",
+    "pharmacy": "REITZ",
+    "date": "2025-08-04",
+    "script_total": 155,
+    "disp_turnover_including_vat": 60381.1,
+    "disp_turnover_excluding_vat": 52505.30434782609,
+    "avg_script_value": 338.7438990182328
+  }
+]

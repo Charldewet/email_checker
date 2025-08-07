@@ -72,6 +72,7 @@ def insert_data_to_database():
             # Extract turnover summary data (overrides trading summary turnover)
             if 'turnover_summary' in pharmacy_data:
                 turnover = pharmacy_data['turnover_summary']
+                print(f"   📊 Turnover Summary Data: {turnover}")
                 insert_data.update({
                     'turnover': turnover.get('turnover'),
                     'sales_cash': turnover.get('sales_cash'),
@@ -82,6 +83,7 @@ def insert_data_to_database():
             # Extract transaction summary data
             if 'transaction_summary' in pharmacy_data:
                 transaction = pharmacy_data['transaction_summary']
+                print(f"   📊 Transaction Summary Data: {transaction}")
                 insert_data.update({
                     'transactions_total': transaction.get('transactions_total'),
                     'avg_basket_value': transaction.get('avg_basket_value')
@@ -90,11 +92,15 @@ def insert_data_to_database():
             # Extract dispensary summary data
             if 'dispensary_summary' in pharmacy_data:
                 dispensary = pharmacy_data['dispensary_summary']
+                print(f"   📊 Dispensary Summary Data: {dispensary}")
                 insert_data.update({
                     'script_total': dispensary.get('script_total'),
                     'disp_turnover': dispensary.get('disp_turnover_excluding_vat'),
                     'avg_script_value': dispensary.get('avg_script_value')
                 })
+            
+            # Log what we're about to insert
+            print(f"   🗄️ Final insert data: turnover={insert_data.get('turnover')}, pharmacy_code={insert_data.get('pharmacy_code')}")
             
             # Calculate average basket size if we have the data
             if 'gross_profit' in pharmacy_data and insert_data['transactions_total']:

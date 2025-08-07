@@ -40,7 +40,15 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
         'turnover': [
             # Match TOTAL TURNOVER line with 3rd number (Nett Exclusive)
             r'\*\*\s*TOTAL TURNOVER\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})',
-            r'TURNOVER SUMMARY.*?(\d{1,3}(?:,\d{3})*\.\d{2})\s+Nett\s+\(Exclusive\)'
+            # More flexible TOTAL TURNOVER pattern
+            r'TOTAL TURNOVER.*?(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})',
+            # Alternative TOTAL TURNOVER patterns for different formats
+            r'TOTAL TURNOVER.*?(\d{1,3}(?:,\d{3})*\.\d{2})',
+            # TURNOVER SUMMARY pattern
+            r'TURNOVER SUMMARY.*?(\d{1,3}(?:,\d{3})*\.\d{2})\s+Nett\s+\(Exclusive\)',
+            # Generic turnover patterns as fallbacks
+            r'TURNOVER.*?(\d{1,3}(?:,\d{3})*\.\d{2})',
+            r'Total.*?(\d{1,3}(?:,\d{3})*\.\d{2})'
         ],
         'sales_cash': [
             # Match CASH TOTALS line with 3rd number (Nett Exclusive)
@@ -58,13 +66,19 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
     
     # Extract each field using regex patterns
     for field, field_patterns in patterns.items():
-        for pattern in field_patterns:
+        for i, pattern in enumerate(field_patterns):
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 try:
-                    if field == 'turnover' and len(match.groups()) == 1:
-                        # Special case for TURNOVER SUMMARY line
-                        value_str = match.group(1).replace(',', '')
+                    if field == 'turnover':
+                        if len(match.groups()) >= 3:
+                            # Use the 3rd group (Nett Exclusive value)
+                            value_str = match.group(3).replace(',', '')
+                        elif len(match.groups()) >= 1:
+                            # Use the first group as fallback
+                            value_str = match.group(1).replace(',', '')
+                        else:
+                            continue
                     else:
                         # Use the 3rd group (Nett Exclusive value)
                         value_str = match.group(3).replace(',', '')
@@ -75,9 +89,19 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
                         result[field] = -float(value_str)
                     else:
                         result[field] = float(value_str)
+                    
+                    # Debug logging for successful extraction
+                    if field == 'turnover':
+                        print(f"DEBUG: Extracted {field} = {result[field]} using pattern {i+1}")
+                    
                     break  # Stop after first successful match for this field
-                except (ValueError, IndexError):
+                except (ValueError, IndexError) as e:
+                    print(f"DEBUG: Pattern {i+1} for {field} failed: {e}")
                     continue
+        
+        # Debug logging for failed extraction
+        if field not in result or result[field] is None:
+            print(f"DEBUG: Failed to extract {field} from PDF")
     
     return result
 
