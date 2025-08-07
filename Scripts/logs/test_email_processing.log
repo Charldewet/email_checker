@@ -1,0 +1,8 @@
+2025-08-07 17:02:50,657 - INFO - 🚀 STARTING EMAIL PROCESSING TESTS
+2025-08-07 17:02:50,657 - INFO - ==================================================
+2025-08-07 17:02:50,657 - INFO - 🧪 TESTING EMAIL SEARCH
+2025-08-07 17:02:50,657 - INFO - ==================================================
+2025-08-07 17:02:52,834 - INFO - ✅ Connected to Gmail IMAP
+2025-08-07 17:02:52,834 - INFO - 
+📧 Testing email search for last 1 days:
+2025-08-07 17:02:52,835 - INFO -   Cutoff date: 06-Aug-2025

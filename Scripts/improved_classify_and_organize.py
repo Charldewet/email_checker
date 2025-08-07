@@ -73,9 +73,12 @@ class ImprovedPDFClassifier:
             # Select inbox
             mail.select('INBOX')
             
-            # Calculate date range (last N days)
-            cutoff_date = datetime.now() - timedelta(days=days)
+            # Calculate date range (last N days) - Account for GMT+2 timezone
+            # Add 2 hours to ensure we capture emails from today in GMT+2
+            cutoff_date = datetime.now() - timedelta(days=days) + timedelta(hours=2)
             date_str = cutoff_date.strftime('%d-%b-%Y')
+            
+            logger.info(f"Searching for emails since {date_str} (accounting for GMT+2 timezone)")
             
             # Search for emails since cutoff date
             status, messages = mail.search(None, f'SINCE {date_str}')
