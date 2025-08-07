@@ -42,6 +42,12 @@ def calculate_basket_size(transactions_total: int, total_products_sold: float) -
         return round(total_products_sold / transactions_total, 2)
     return 0.0
 
+def calculate_basket_value(turnover: float, transactions_total: int) -> float:
+    """Calculate average basket value from turnover and transactions"""
+    if transactions_total > 0 and turnover > 0:
+        return round(turnover / transactions_total, 2)
+    return 0.0
+
 def combine_all_data() -> Dict[str, Dict[str, Any]]:
     """
     Combine all extracted data into a comprehensive dataset
@@ -115,8 +121,12 @@ def combine_all_data() -> Dict[str, Dict[str, Any]]:
         # Use turnover from turnover summary (as requested)
         calculated['turnover'] = turnover.get('turnover', 0)
         
-        # Get other metrics
-        calculated['avg_basket_value'] = transaction.get('avg_basket_value', 0)
+        # Calculate basket value from turnover and transactions
+        calculated['avg_basket_value'] = calculate_basket_value(calculated['turnover'], transactions_total)
+        
+        # Debug logging for basket value calculation
+        if calculated['turnover'] > 0 and transactions_total > 0:
+            print(f"DEBUG: {key[0]} - {key[1]}: Turnover R{calculated['turnover']:,.2f} / {transactions_total} transactions = R{calculated['avg_basket_value']:,.2f} per basket")
         calculated['transactions_total'] = transactions_total
         calculated['script_total'] = dispensary.get('script_total', 0)
         calculated['disp_turnover'] = dispensary.get('disp_turnover_excluding_vat', 0)
