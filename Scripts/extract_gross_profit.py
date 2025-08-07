@@ -24,18 +24,16 @@ def extract_pharmacy_and_date(pdf_path: str) -> tuple[str, str]:
     
     # Extract date
     date_patterns = [
-        r'FROM:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+TO:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
-        r'From:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+TO:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
+        r'from:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+to:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
         r'(\d{4})/(\d{1,2})/(\d{1,2})\s*-\s*(\d{4})/(\d{1,2})/(\d{1,2})',
-        r'RANGE.*FROM:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+TO:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
-        r'RANGE.*From:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+TO:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
-        r'PERIOD.*FROM:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+TO:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
-        r'DATE FROM\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+DATE TO\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})'
+        r'range.*from:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+to:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
+        r'period.*from:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+to:\s*(\d{4})/(\d{1,2})/(\d{1,2})',
+        r'date from\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})\s+date to\s*:\s*(\d{4})/(\d{1,2})/(\d{1,2})'
     ]
     
     date_str = None
     for pattern in date_patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, text, re.IGNORECASE)
         if match:
             # Use the end date (last 3 values)
             if len(match.groups()) == 6:
