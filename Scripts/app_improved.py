@@ -133,8 +133,8 @@ def start_scheduler():
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
     scheduler_thread.start()
     
-    # Run initial check immediately
-    run_improved_pipeline()
+    # Don't run initial check immediately - let the scheduler handle it
+    logger.info("✅ Scheduler started - pipeline will run in 5 minutes")
 
 def stop_scheduler():
     """Stop the scheduler"""
