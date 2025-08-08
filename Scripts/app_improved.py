@@ -125,12 +125,6 @@ def start_scheduler():
     schedule.every(5).minutes.do(run_improved_pipeline)
     
     def run_scheduler():
-        # Wait 30 seconds for Flask app to start, then run initial pipeline
-        time.sleep(30)
-        logger.info("🔄 Running initial pipeline check...")
-        run_improved_pipeline()
-        
-        # Continue with regular 5-minute schedule
         while is_running:
             schedule.run_pending()
             time.sleep(30)  # Check every 30 seconds
@@ -139,7 +133,8 @@ def start_scheduler():
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
     scheduler_thread.start()
     
-    logger.info("✅ Scheduler started - initial pipeline will run in 30 seconds, then every 5 minutes")
+    # Run initial check immediately
+    run_improved_pipeline()
 
 def stop_scheduler():
     """Stop the scheduler"""
