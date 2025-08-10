@@ -133,8 +133,15 @@ def start_scheduler():
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
     scheduler_thread.start()
     
-    # Run initial check immediately
-    run_improved_pipeline()
+    # Kick off initial run in the background so startup is non-blocking
+    def kick_off_initial():
+        try:
+            # Small delay to let the web server bind to the port first
+            time.sleep(2)
+            run_improved_pipeline()
+        except Exception as e:
+            logger.error(f"Initial pipeline run failed: {e}")
+    threading.Thread(target=kick_off_initial, daemon=True).start()
 
 def stop_scheduler():
     """Stop the scheduler"""
