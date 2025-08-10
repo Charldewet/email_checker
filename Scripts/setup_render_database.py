@@ -234,9 +234,12 @@ def create_database_schema(conn):
     $$ LANGUAGE plpgsql;
 
     -- Step 7: Ensure gp_percent is computed consistently from gp_value/turnover
-    CREATE OR REPLACE FUNCTION compute_gp_percent()
+    CREATE OR REPLACE FUNCTION compute_gp_fields()
     RETURNS trigger AS $$
     BEGIN
+        -- Compute GP value from turnover - cost_of_sales
+        NEW.gp_value := COALESCE(NEW.turnover, 0) - COALESCE(NEW.cost_of_sales, 0);
+        -- Compute GP percent safely
         IF COALESCE(NEW.turnover, 0) = 0 THEN
             NEW.gp_percent := 0;
         ELSE
@@ -248,17 +251,18 @@ def create_database_schema(conn):
 
     DROP TRIGGER IF EXISTS daily_summary_compute_gp ON daily_summary;
     CREATE TRIGGER daily_summary_compute_gp
-    BEFORE INSERT OR UPDATE OF turnover, gp_value
+    BEFORE INSERT OR UPDATE OF turnover, cost_of_sales
     ON daily_summary
     FOR EACH ROW
-    EXECUTE FUNCTION compute_gp_percent();
+    EXECUTE FUNCTION compute_gp_fields();
 
-    -- One-time backfill to correct existing rows
+    -- One-time backfill to correct existing rows (gp_value and gp_percent)
     UPDATE daily_summary
-    SET gp_percent = ROUND(
-        CASE WHEN COALESCE(turnover,0) = 0 THEN 0
-             ELSE (COALESCE(gp_value,0) / NULLIF(turnover,0)) * 100 END
-    , 2);
+    SET gp_value = COALESCE(turnover,0) - COALESCE(cost_of_sales,0),
+        gp_percent = ROUND(
+            CASE WHEN COALESCE(turnover,0) = 0 THEN 0
+                 ELSE ( (COALESCE(turnover,0) - COALESCE(cost_of_sales,0)) / NULLIF(turnover,0) ) * 100 END
+        , 2);
 
     -- Compute avg_basket_value from turnover / transactions_total
     CREATE OR REPLACE FUNCTION compute_avg_basket_value()
