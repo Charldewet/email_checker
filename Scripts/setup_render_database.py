@@ -259,6 +259,33 @@ def create_database_schema(conn):
         CASE WHEN COALESCE(turnover,0) = 0 THEN 0
              ELSE (COALESCE(gp_value,0) / NULLIF(turnover,0)) * 100 END
     , 2);
+
+    -- Compute avg_basket_value from turnover / transactions_total
+    CREATE OR REPLACE FUNCTION compute_avg_basket_value()
+    RETURNS trigger AS $$
+    BEGIN
+        IF COALESCE(NEW.transactions_total, 0) = 0 THEN
+            NEW.avg_basket_value := 0;
+        ELSE
+            NEW.avg_basket_value := ROUND(COALESCE(NEW.turnover, 0) / NULLIF(NEW.transactions_total, 0), 2);
+        END IF;
+        RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    DROP TRIGGER IF EXISTS daily_summary_compute_abv ON daily_summary;
+    CREATE TRIGGER daily_summary_compute_abv
+    BEFORE INSERT OR UPDATE OF turnover, transactions_total
+    ON daily_summary
+    FOR EACH ROW
+    EXECUTE FUNCTION compute_avg_basket_value();
+
+    -- Backfill existing avg_basket_value
+    UPDATE daily_summary
+    SET avg_basket_value = ROUND(
+        CASE WHEN COALESCE(transactions_total,0) = 0 THEN 0
+             ELSE COALESCE(turnover,0) / NULLIF(transactions_total,0) END
+    , 2);
     """
     
     try:

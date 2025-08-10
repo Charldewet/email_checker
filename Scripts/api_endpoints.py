@@ -219,31 +219,36 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
                 SELECT COALESCE(SUM(turnover),0) AS turnover,
                        COALESCE(SUM(gp_value),0) AS gp_value,
                        COALESCE(SUM(purchases),0) AS purchases,
-                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales
+                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales,
+                       COALESCE(SUM(transactions_total),0) AS transactions_total
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('month', %s::date)::date
                   AND report_date <= %s::date
             """
             mtd = db.execute_query(mtd_q, (pharmacy_id, as_of, as_of))[0]
+            # Compute MTD avg_basket_value = turnover / transactions_total
+            mtd_abv = float(mtd['turnover']) / mtd['transactions_total'] if mtd['transactions_total'] else 0.0
 
             # YTD (sum up to as_of inclusive)
             ytd_q = """
                 SELECT COALESCE(SUM(turnover),0) AS turnover,
                        COALESCE(SUM(gp_value),0) AS gp_value,
                        COALESCE(SUM(purchases),0) AS purchases,
-                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales
+                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales,
+                       COALESCE(SUM(transactions_total),0) AS transactions_total
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('year', %s::date)::date
                   AND report_date <= %s::date
             """
             ytd = db.execute_query(ytd_q, (pharmacy_id, as_of, as_of))[0]
+            ytd_abv = float(ytd['turnover']) / ytd['transactions_total'] if ytd['transactions_total'] else 0.0
 
             return {
                 'daily': {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()} if daily else {},
-                'mtd': {k: float(v) for k, v in mtd.items()},
-                'ytd': {k: float(v) for k, v in ytd.items()},
+                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2)},
+                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2)},
                 'as_of': as_of
             }
 
