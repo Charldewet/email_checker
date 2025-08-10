@@ -233,82 +233,32 @@ def create_database_schema(conn):
     END;
     $$ LANGUAGE plpgsql;
 
-    -- Step 6: Rollup refresh for MTD/YTD
-    CREATE OR REPLACE FUNCTION refresh_rollups(p_pharmacy_code TEXT, p_as_of_date DATE)
-    RETURNS VOID AS $$
-    DECLARE
-        v_pharmacy_id INTEGER;
-        v_month_start DATE;
-        v_month_end DATE;
-        v_year_start DATE;
-        v_year_end DATE;
+    -- Step 7: Ensure gp_percent is computed consistently from gp_value/turnover
+    CREATE OR REPLACE FUNCTION compute_gp_percent()
+    RETURNS trigger AS $$
     BEGIN
-        SELECT id INTO v_pharmacy_id FROM pharmacies WHERE pharmacy_code = p_pharmacy_code;
-        IF v_pharmacy_id IS NULL THEN
-            RAISE NOTICE 'Pharmacy % not found', p_pharmacy_code;
-            RETURN;
+        IF COALESCE(NEW.turnover, 0) = 0 THEN
+            NEW.gp_percent := 0;
+        ELSE
+            NEW.gp_percent := ROUND(100 * COALESCE(NEW.gp_value, 0) / NULLIF(NEW.turnover, 0), 2);
         END IF;
-
-        v_month_start := date_trunc('month', p_as_of_date)::date;
-        v_month_end := (v_month_start + INTERVAL '1 month')::date;
-        v_year_start := date_trunc('year', p_as_of_date)::date;
-        v_year_end := (v_year_start + INTERVAL '1 year')::date;
-
-        -- Ensure monthly row exists
-        INSERT INTO monthly_kpis (pharmacy_id, month_start, turnover, gp_value, purchases, updated_at)
-        VALUES (v_pharmacy_id, v_month_start, 0, 0, 0, now())
-        ON CONFLICT (pharmacy_id, month_start) DO NOTHING;
-
-        -- Update monthly aggregates for the window
-        UPDATE monthly_kpis mk
-        SET (turnover, gp_value, purchases, updated_at) = (
-            COALESCE((
-                SELECT SUM(turnover) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_month_start AND report_date < v_month_end
-            ), 0),
-            COALESCE((
-                SELECT SUM(gp_value) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_month_start AND report_date < v_month_end
-            ), 0),
-            COALESCE((
-                SELECT SUM(purchases) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_month_start AND report_date < v_month_end
-            ), 0),
-            now()
-        )
-        WHERE mk.pharmacy_id = v_pharmacy_id AND mk.month_start = v_month_start;
-
-        -- Ensure yearly row exists
-        INSERT INTO yearly_kpis (pharmacy_id, year_start, turnover, gp_value, purchases, updated_at)
-        VALUES (v_pharmacy_id, v_year_start, 0, 0, 0, now())
-        ON CONFLICT (pharmacy_id, year_start) DO NOTHING;
-
-        -- Update yearly aggregates for the window
-        UPDATE yearly_kpis yk
-        SET (turnover, gp_value, purchases, updated_at) = (
-            COALESCE((
-                SELECT SUM(turnover) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_year_start AND report_date < v_year_end
-            ), 0),
-            COALESCE((
-                SELECT SUM(gp_value) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_year_start AND report_date < v_year_end
-            ), 0),
-            COALESCE((
-                SELECT SUM(purchases) FROM daily_summary
-                WHERE pharmacy_id = v_pharmacy_id
-                AND report_date >= v_year_start AND report_date < v_year_end
-            ), 0),
-            now()
-        )
-        WHERE yk.pharmacy_id = v_pharmacy_id AND yk.year_start = v_year_start;
+        RETURN NEW;
     END;
     $$ LANGUAGE plpgsql;
+
+    DROP TRIGGER IF EXISTS daily_summary_compute_gp ON daily_summary;
+    CREATE TRIGGER daily_summary_compute_gp
+    BEFORE INSERT OR UPDATE OF turnover, gp_value
+    ON daily_summary
+    FOR EACH ROW
+    EXECUTE FUNCTION compute_gp_percent();
+
+    -- One-time backfill to correct existing rows
+    UPDATE daily_summary
+    SET gp_percent = ROUND(
+        CASE WHEN COALESCE(turnover,0) = 0 THEN 0
+             ELSE (COALESCE(gp_value,0) / NULLIF(turnover,0)) * 100 END
+    , 2);
     """
     
     try:
