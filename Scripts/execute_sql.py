@@ -17,8 +17,10 @@ def execute_sql_file():
     """Execute the SQL file to insert today's data"""
     print("🚀 Executing SQL file to insert today's Winterton data...")
     
-    # Set environment variables
-    os.environ['DATABASE_URL'] = 'postgresql://pharmacy_user:PzL1HpYNaYOrmcfImjeZm8LitHTd4d7F@dpg-d28vb1muk2gs73frrns0-a.oregon-postgres.render.com/pharmacy_reports'
+    # Use DATABASE_URL from environment; ensure it is set
+    if not os.getenv('DATABASE_URL'):
+        print("❌ DATABASE_URL not set in environment")
+        return
     
     try:
         from render_database_connection import RenderPharmacyDatabase

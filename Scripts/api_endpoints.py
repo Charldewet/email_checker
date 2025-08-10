@@ -15,6 +15,19 @@ from render_database_connection import RenderPharmacyDatabase
 
 logger = logging.getLogger(__name__)
 
+# Simple in-memory cache with TTL
+_cache_store = {}
+_cache_ttl_seconds = 60
+
+def _cache_get_or_set(key: str, compute_fn):
+    now = datetime.utcnow()
+    entry = _cache_store.get(key)
+    if entry and (now - entry['ts']).total_seconds() < _cache_ttl_seconds:
+        return entry['value']
+    value = compute_fn()
+    _cache_store[key] = {'value': value, 'ts': now}
+    return value
+
 def get_pharmacy_header():
     """Get pharmacy code from X-Pharmacy header"""
     return request.headers.get('X-Pharmacy', 'REITZ')  # Default to REITZ if not provided
@@ -167,6 +180,63 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
         return jsonify({
             'total_cost_of_sales': float(result[0]['total_cost_of_sales']) if result[0]['total_cost_of_sales'] else 0
         })
+
+    @app.route('/api/kpis/summary', methods=['GET'])
+    def get_kpis_summary():
+        """Return Daily, MTD, YTD summaries in one call."""
+        pharmacy_code = get_pharmacy_header()
+        pharmacy_id = db.get_pharmacy_id_by_code(pharmacy_code)
+        if not pharmacy_id:
+            return jsonify({'error': 'Pharmacy not found'}), 404
+
+        as_of = request.args.get('as_of')
+        if not as_of:
+            # Default to latest available date for this pharmacy
+            latest = db.execute_query(
+                "SELECT MAX(report_date) AS d FROM daily_summary WHERE pharmacy_id = %s",
+                (pharmacy_id,)
+            )
+            if not latest or not latest[0]['d']:
+                return jsonify({'daily': {}, 'mtd': {}, 'ytd': {}, 'insights': []})
+            as_of = latest[0]['d'].strftime('%Y-%m-%d')
+        else:
+            as_of = format_date(as_of)
+
+        cache_key = f"kpis_summary:{pharmacy_id}:{as_of}"
+
+        def compute():
+            # Daily
+            daily_q = """
+                SELECT turnover, gp_value, purchases, gp_percent, transactions_total,
+                       avg_basket_value, disp_turnover, sales_cash, sales_account, sales_cod
+                FROM daily_summary WHERE pharmacy_id = %s AND report_date = %s
+            """
+            daily_r = db.execute_query(daily_q, (pharmacy_id, as_of))
+            daily = daily_r[0] if daily_r else {}
+
+            # MTD
+            m_start_q = "SELECT date_trunc('month', %s::date)::date AS m"
+            m_start = db.execute_query(m_start_q, (as_of,))[0]['m']
+            mtd_q = "SELECT turnover, gp_value, purchases FROM monthly_kpis WHERE pharmacy_id = %s AND month_start = %s"
+            mtd_r = db.execute_query(mtd_q, (pharmacy_id, m_start))
+            mtd = mtd_r[0] if mtd_r else {'turnover': 0, 'gp_value': 0, 'purchases': 0}
+
+            # YTD
+            y_start_q = "SELECT date_trunc('year', %s::date)::date AS y"
+            y_start = db.execute_query(y_start_q, (as_of,))[0]['y']
+            ytd_q = "SELECT turnover, gp_value, purchases FROM yearly_kpis WHERE pharmacy_id = %s AND year_start = %s"
+            ytd_r = db.execute_query(ytd_q, (pharmacy_id, y_start))
+            ytd = ytd_r[0] if ytd_r else {'turnover': 0, 'gp_value': 0, 'purchases': 0}
+
+            return {
+                'daily': {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()} if daily else {},
+                'mtd': {k: float(v) for k, v in mtd.items()},
+                'ytd': {k: float(v) for k, v in ytd.items()},
+                'as_of': as_of
+            }
+
+        payload = _cache_get_or_set(cache_key, compute)
+        return jsonify(payload)
 
 def register_transaction_endpoints(app: Flask, db: RenderPharmacyDatabase):
     """Register transaction and basket analytics endpoints"""

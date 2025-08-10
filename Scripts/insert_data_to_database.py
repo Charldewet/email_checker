@@ -113,6 +113,12 @@ def insert_data_to_database():
             if db.insert_daily_summary(**insert_data):
                 success_count += 1
                 print(f"✅ Successfully inserted data for {pharmacy} - {date}")
+                # Refresh pre-aggregations (MTD/YTD)
+                try:
+                    db.refresh_rollups(pharmacy, date)
+                    print("   ♻️  Rollups refreshed")
+                except Exception as e:
+                    print(f"   ⚠️  Rollup refresh skipped/failed: {e}")
                 
                 # Print summary of inserted data
                 print(f"   💰 Turnover: R{insert_data['turnover']:,.2f}" if insert_data['turnover'] else "   💰 Turnover: N/A")

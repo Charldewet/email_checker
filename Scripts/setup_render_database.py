@@ -121,6 +121,8 @@ def create_database_schema(conn):
     CREATE INDEX IF NOT EXISTS idx_daily_summary_date ON daily_summary(report_date);
     CREATE INDEX IF NOT EXISTS idx_sales_details_stock_code ON sales_details(stock_code);
     CREATE INDEX IF NOT EXISTS idx_sales_details_department ON sales_details(department_code);
+    -- Optional index to speed up latest-first scans
+    CREATE INDEX IF NOT EXISTS idx_daily_summary_pharmacy_date_desc ON daily_summary(pharmacy_id, report_date DESC);
 
     -- Step 3: Insert Sample Data
     INSERT INTO pharmacies (pharmacy_code, name) 
@@ -147,6 +149,33 @@ def create_database_schema(conn):
     FROM sales_details sd
     JOIN pharmacies p ON sd.pharmacy_id = p.id
     LEFT JOIN department_codes dc ON sd.department_code = dc.department_code;
+
+    -- Step 4.1: Pre-aggregations
+    CREATE TABLE IF NOT EXISTS monthly_kpis (
+        id SERIAL PRIMARY KEY,
+        pharmacy_id INTEGER NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
+        month_start DATE NOT NULL,
+        turnover NUMERIC DEFAULT 0,
+        gp_value NUMERIC DEFAULT 0,
+        purchases NUMERIC DEFAULT 0,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (pharmacy_id, month_start)
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_monthly_kpis_pharmacy_month ON monthly_kpis(pharmacy_id, month_start);
+
+    CREATE TABLE IF NOT EXISTS yearly_kpis (
+        id SERIAL PRIMARY KEY,
+        pharmacy_id INTEGER NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
+        year_start DATE NOT NULL,
+        turnover NUMERIC DEFAULT 0,
+        gp_value NUMERIC DEFAULT 0,
+        purchases NUMERIC DEFAULT 0,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (pharmacy_id, year_start)
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_yearly_kpis_pharmacy_year ON yearly_kpis(pharmacy_id, year_start);
 
     -- Step 5: Create Functions for Common Queries
     CREATE OR REPLACE FUNCTION get_pharmacy_performance(
@@ -201,6 +230,83 @@ def create_database_schema(conn):
         AND sd.report_date = p_date
         ORDER BY sd.sales_qty DESC
         LIMIT p_limit;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    -- Step 6: Rollup refresh for MTD/YTD
+    CREATE OR REPLACE FUNCTION refresh_rollups(p_pharmacy_code TEXT, p_as_of_date DATE)
+    RETURNS VOID AS $$
+    DECLARE
+        v_pharmacy_id INTEGER;
+        v_month_start DATE;
+        v_month_end DATE;
+        v_year_start DATE;
+        v_year_end DATE;
+    BEGIN
+        SELECT id INTO v_pharmacy_id FROM pharmacies WHERE pharmacy_code = p_pharmacy_code;
+        IF v_pharmacy_id IS NULL THEN
+            RAISE NOTICE 'Pharmacy % not found', p_pharmacy_code;
+            RETURN;
+        END IF;
+
+        v_month_start := date_trunc('month', p_as_of_date)::date;
+        v_month_end := (v_month_start + INTERVAL '1 month')::date;
+        v_year_start := date_trunc('year', p_as_of_date)::date;
+        v_year_end := (v_year_start + INTERVAL '1 year')::date;
+
+        -- Ensure monthly row exists
+        INSERT INTO monthly_kpis (pharmacy_id, month_start, turnover, gp_value, purchases, updated_at)
+        VALUES (v_pharmacy_id, v_month_start, 0, 0, 0, now())
+        ON CONFLICT (pharmacy_id, month_start) DO NOTHING;
+
+        -- Update monthly aggregates for the window
+        UPDATE monthly_kpis mk
+        SET (turnover, gp_value, purchases, updated_at) = (
+            COALESCE((
+                SELECT SUM(turnover) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_month_start AND report_date < v_month_end
+            ), 0),
+            COALESCE((
+                SELECT SUM(gp_value) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_month_start AND report_date < v_month_end
+            ), 0),
+            COALESCE((
+                SELECT SUM(purchases) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_month_start AND report_date < v_month_end
+            ), 0),
+            now()
+        )
+        WHERE mk.pharmacy_id = v_pharmacy_id AND mk.month_start = v_month_start;
+
+        -- Ensure yearly row exists
+        INSERT INTO yearly_kpis (pharmacy_id, year_start, turnover, gp_value, purchases, updated_at)
+        VALUES (v_pharmacy_id, v_year_start, 0, 0, 0, now())
+        ON CONFLICT (pharmacy_id, year_start) DO NOTHING;
+
+        -- Update yearly aggregates for the window
+        UPDATE yearly_kpis yk
+        SET (turnover, gp_value, purchases, updated_at) = (
+            COALESCE((
+                SELECT SUM(turnover) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_year_start AND report_date < v_year_end
+            ), 0),
+            COALESCE((
+                SELECT SUM(gp_value) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_year_start AND report_date < v_year_end
+            ), 0),
+            COALESCE((
+                SELECT SUM(purchases) FROM daily_summary
+                WHERE pharmacy_id = v_pharmacy_id
+                AND report_date >= v_year_start AND report_date < v_year_end
+            ), 0),
+            now()
+        )
+        WHERE yk.pharmacy_id = v_pharmacy_id AND yk.year_start = v_year_start;
     END;
     $$ LANGUAGE plpgsql;
     """

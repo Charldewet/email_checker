@@ -428,6 +428,12 @@ class ImprovedDataPipeline:
             
             self.db.execute_query(query, params)
             logger.info(f"✅ Updated database record for {pharmacy} - {date}")
+            # Refresh rollups for this pharmacy/date
+            try:
+                self.db.refresh_rollups(pharmacy, date)
+                logger.info("♻️  Rollups refreshed")
+            except Exception as e:
+                logger.warning(f"Rollup refresh failed: {e}")
             
         except Exception as e:
             logger.error(f"❌ Error updating database for {pharmacy} - {date}: {e}")

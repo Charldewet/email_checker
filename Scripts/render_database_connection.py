@@ -60,6 +60,15 @@ class RenderPharmacyDatabase:
         query = "SELECT pharmacy_code FROM pharmacies WHERE id = %s"
         result = self.execute_query(query, (pharmacy_id,))
         return result[0]['pharmacy_code'] if result else None
+
+    def refresh_rollups(self, pharmacy_code: str, as_of_date: str) -> None:
+        """Refresh monthly and yearly rollups for a pharmacy and date."""
+        try:
+            # Use SELECT to invoke function and ignore returned rows
+            self.execute_query("SELECT refresh_rollups(%s, %s)", (pharmacy_code, as_of_date))
+        except Exception as e:
+            # Do not fail ingestion on rollup refresh issues
+            print(f"⚠️  Warning: rollup refresh failed for {pharmacy_code} {as_of_date}: {e}")
     
     def insert_daily_summary(self, **kwargs) -> bool:
         """Insert or update daily summary data"""
