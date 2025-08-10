@@ -214,6 +214,15 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             """
             daily_r = db.execute_query(daily_q, (pharmacy_id, as_of))
             daily = daily_r[0] if daily_r else {}
+            # Daily dispensary/frontshop split
+            try:
+                d_turn = float(daily.get('turnover', 0) or 0)
+                d_disp = float(daily.get('disp_turnover', 0) or 0)
+            except Exception:
+                d_turn = 0.0
+                d_disp = 0.0
+            daily_disp_pct = (100.0 * d_disp / d_turn) if d_turn else 0.0
+            daily_front_pct = max(0.0, 100.0 - daily_disp_pct)
 
             # MTD (sum up to as_of inclusive)
             mtd_q = """
@@ -236,6 +245,9 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             mtd_asv = float(mtd['disp_turnover']) / mtd['script_total'] if mtd['script_total'] else 0.0
             # Compute MTD gp_percent = 100 * gp_value / turnover
             mtd_gp = 100.0 * float(mtd['gp_value']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
+            # Compute MTD dispensary/frontshop split
+            mtd_disp_pct = 100.0 * float(mtd['disp_turnover']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
+            mtd_front_pct = max(0.0, 100.0 - mtd_disp_pct)
 
             # YTD (sum up to as_of inclusive)
             ytd_q = """
@@ -255,11 +267,15 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             ytd_abv = float(ytd['turnover']) / ytd['transactions_total'] if ytd['transactions_total'] else 0.0
             ytd_asv = float(ytd['disp_turnover']) / ytd['script_total'] if ytd['script_total'] else 0.0
             ytd_gp = 100.0 * float(ytd['gp_value']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
+            ytd_disp_pct = 100.0 * float(ytd['disp_turnover']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
+            ytd_front_pct = max(0.0, 100.0 - ytd_disp_pct)
 
             return {
-                'daily': {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()} if daily else {},
-                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2), 'gp_percent': round(mtd_gp, 2)},
-                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2), 'gp_percent': round(ytd_gp, 2)},
+                'daily': ({**{k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()},
+                           'dispensary_pct': round(daily_disp_pct, 2), 'frontshop_pct': round(daily_front_pct, 2)}
+                          if daily else {}),
+                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2), 'gp_percent': round(mtd_gp, 2), 'dispensary_pct': round(mtd_disp_pct, 2), 'frontshop_pct': round(mtd_front_pct, 2)},
+                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2), 'gp_percent': round(ytd_gp, 2), 'dispensary_pct': round(ytd_disp_pct, 2), 'frontshop_pct': round(ytd_front_pct, 2)},
                 'as_of': as_of
             }
 
