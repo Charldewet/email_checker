@@ -234,6 +234,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             mtd_abv = float(mtd['turnover']) / mtd['transactions_total'] if mtd['transactions_total'] else 0.0
             # Compute MTD avg_script_value = disp_turnover / script_total
             mtd_asv = float(mtd['disp_turnover']) / mtd['script_total'] if mtd['script_total'] else 0.0
+            # Compute MTD gp_percent = 100 * gp_value / turnover
+            mtd_gp = 100.0 * float(mtd['gp_value']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
 
             # YTD (sum up to as_of inclusive)
             ytd_q = """
@@ -252,11 +254,12 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             ytd = db.execute_query(ytd_q, (pharmacy_id, as_of, as_of))[0]
             ytd_abv = float(ytd['turnover']) / ytd['transactions_total'] if ytd['transactions_total'] else 0.0
             ytd_asv = float(ytd['disp_turnover']) / ytd['script_total'] if ytd['script_total'] else 0.0
+            ytd_gp = 100.0 * float(ytd['gp_value']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
 
             return {
                 'daily': {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()} if daily else {},
-                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2)},
-                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2)},
+                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2), 'gp_percent': round(mtd_gp, 2)},
+                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2), 'gp_percent': round(ytd_gp, 2)},
                 'as_of': as_of
             }
 
