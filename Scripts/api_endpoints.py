@@ -214,19 +214,29 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             daily_r = db.execute_query(daily_q, (pharmacy_id, as_of))
             daily = daily_r[0] if daily_r else {}
 
-            # MTD
-            m_start_q = "SELECT date_trunc('month', %s::date)::date AS m"
-            m_start = db.execute_query(m_start_q, (as_of,))[0]['m']
-            mtd_q = "SELECT turnover, gp_value, purchases FROM monthly_kpis WHERE pharmacy_id = %s AND month_start = %s"
-            mtd_r = db.execute_query(mtd_q, (pharmacy_id, m_start))
-            mtd = mtd_r[0] if mtd_r else {'turnover': 0, 'gp_value': 0, 'purchases': 0}
+            # MTD (sum up to as_of inclusive)
+            mtd_q = """
+                SELECT COALESCE(SUM(turnover),0) AS turnover,
+                       COALESCE(SUM(gp_value),0) AS gp_value,
+                       COALESCE(SUM(purchases),0) AS purchases
+                FROM daily_summary
+                WHERE pharmacy_id = %s
+                  AND report_date >= date_trunc('month', %s::date)::date
+                  AND report_date <= %s::date
+            """
+            mtd = db.execute_query(mtd_q, (pharmacy_id, as_of, as_of))[0]
 
-            # YTD
-            y_start_q = "SELECT date_trunc('year', %s::date)::date AS y"
-            y_start = db.execute_query(y_start_q, (as_of,))[0]['y']
-            ytd_q = "SELECT turnover, gp_value, purchases FROM yearly_kpis WHERE pharmacy_id = %s AND year_start = %s"
-            ytd_r = db.execute_query(ytd_q, (pharmacy_id, y_start))
-            ytd = ytd_r[0] if ytd_r else {'turnover': 0, 'gp_value': 0, 'purchases': 0}
+            # YTD (sum up to as_of inclusive)
+            ytd_q = """
+                SELECT COALESCE(SUM(turnover),0) AS turnover,
+                       COALESCE(SUM(gp_value),0) AS gp_value,
+                       COALESCE(SUM(purchases),0) AS purchases
+                FROM daily_summary
+                WHERE pharmacy_id = %s
+                  AND report_date >= date_trunc('year', %s::date)::date
+                  AND report_date <= %s::date
+            """
+            ytd = db.execute_query(ytd_q, (pharmacy_id, as_of, as_of))[0]
 
             return {
                 'daily': {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()} if daily else {},
