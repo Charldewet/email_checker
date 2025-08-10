@@ -207,7 +207,7 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
         def compute():
             # Daily
             daily_q = """
-                SELECT turnover, gp_value, purchases, gp_percent, transactions_total,
+                SELECT turnover, gp_value, purchases, cost_of_sales, gp_percent, transactions_total,
                        avg_basket_value, disp_turnover, sales_cash, sales_account, sales_cod
                 FROM daily_summary WHERE pharmacy_id = %s AND report_date = %s
             """
@@ -218,7 +218,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             mtd_q = """
                 SELECT COALESCE(SUM(turnover),0) AS turnover,
                        COALESCE(SUM(gp_value),0) AS gp_value,
-                       COALESCE(SUM(purchases),0) AS purchases
+                       COALESCE(SUM(purchases),0) AS purchases,
+                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('month', %s::date)::date
@@ -230,7 +231,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             ytd_q = """
                 SELECT COALESCE(SUM(turnover),0) AS turnover,
                        COALESCE(SUM(gp_value),0) AS gp_value,
-                       COALESCE(SUM(purchases),0) AS purchases
+                       COALESCE(SUM(purchases),0) AS purchases,
+                       COALESCE(SUM(cost_of_sales),0) AS cost_of_sales
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('year', %s::date)::date
