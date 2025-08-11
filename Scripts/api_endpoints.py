@@ -209,6 +209,7 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             daily_q = """
                 SELECT turnover, gp_value, purchases, cost_of_sales, gp_percent, transactions_total,
                        avg_basket_value, disp_turnover, script_total, avg_script_value,
+                       type_r_sales,
                        sales_cash, sales_account, sales_cod
                 FROM daily_summary WHERE pharmacy_id = %s AND report_date = %s
             """
@@ -232,7 +233,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
                        COALESCE(SUM(cost_of_sales),0) AS cost_of_sales,
                        COALESCE(SUM(transactions_total),0) AS transactions_total,
                        COALESCE(SUM(disp_turnover),0) AS disp_turnover,
-                       COALESCE(SUM(script_total),0) AS script_total
+                       COALESCE(SUM(script_total),0) AS script_total,
+                       COALESCE(SUM(type_r_sales),0) AS type_r_sales
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('month', %s::date)::date
@@ -248,6 +250,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             # Compute MTD dispensary/frontshop split
             mtd_disp_pct = 100.0 * float(mtd['disp_turnover']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
             mtd_front_pct = max(0.0, 100.0 - mtd_disp_pct)
+            # Compute MTD Type R percentage of turnover
+            mtd_type_r_pct = 100.0 * float(mtd['type_r_sales']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
 
             # YTD (sum up to as_of inclusive)
             ytd_q = """
@@ -257,7 +261,8 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
                        COALESCE(SUM(cost_of_sales),0) AS cost_of_sales,
                        COALESCE(SUM(transactions_total),0) AS transactions_total,
                        COALESCE(SUM(disp_turnover),0) AS disp_turnover,
-                       COALESCE(SUM(script_total),0) AS script_total
+                       COALESCE(SUM(script_total),0) AS script_total,
+                       COALESCE(SUM(type_r_sales),0) AS type_r_sales
                 FROM daily_summary
                 WHERE pharmacy_id = %s
                   AND report_date >= date_trunc('year', %s::date)::date
@@ -269,13 +274,14 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             ytd_gp = 100.0 * float(ytd['gp_value']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
             ytd_disp_pct = 100.0 * float(ytd['disp_turnover']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
             ytd_front_pct = max(0.0, 100.0 - ytd_disp_pct)
+            ytd_type_r_pct = 100.0 * float(ytd['type_r_sales']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
 
             return {
                 'daily': ({**{k: (float(v) if isinstance(v, (int, float)) else v) for k, v in daily.items()},
                            'dispensary_pct': round(daily_disp_pct, 2), 'frontshop_pct': round(daily_front_pct, 2)}
                           if daily else {}),
-                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2), 'gp_percent': round(mtd_gp, 2), 'dispensary_pct': round(mtd_disp_pct, 2), 'frontshop_pct': round(mtd_front_pct, 2)},
-                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2), 'gp_percent': round(ytd_gp, 2), 'dispensary_pct': round(ytd_disp_pct, 2), 'frontshop_pct': round(ytd_front_pct, 2)},
+                'mtd': {**{k: float(v) for k, v in mtd.items()}, 'avg_basket_value': round(mtd_abv, 2), 'avg_script_value': round(mtd_asv, 2), 'gp_percent': round(mtd_gp, 2), 'dispensary_pct': round(mtd_disp_pct, 2), 'frontshop_pct': round(mtd_front_pct, 2), 'type_r_pct': round(mtd_type_r_pct, 2)},
+                'ytd': {**{k: float(v) for k, v in ytd.items()}, 'avg_basket_value': round(ytd_abv, 2), 'avg_script_value': round(ytd_asv, 2), 'gp_percent': round(ytd_gp, 2), 'dispensary_pct': round(ytd_disp_pct, 2), 'frontshop_pct': round(ytd_front_pct, 2), 'type_r_pct': round(ytd_type_r_pct, 2)},
                 'as_of': as_of
             }
 

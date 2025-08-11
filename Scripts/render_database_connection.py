@@ -78,10 +78,10 @@ class RenderPharmacyDatabase:
             cost_of_sales, purchases, avg_basket_value, avg_basket_size, 
             transactions_total, script_total, avg_script_value, disp_turnover,
             stock_opening, stock_closing, adjustments, sales_cash, 
-            sales_cod, sales_account
+            sales_cod, sales_account, type_r_sales
         ) VALUES (
             (SELECT id FROM pharmacies WHERE pharmacy_code = %s),
-            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
         ) ON CONFLICT (pharmacy_id, report_date) DO UPDATE SET
             turnover = EXCLUDED.turnover,
             gp_percent = EXCLUDED.gp_percent,
@@ -99,7 +99,8 @@ class RenderPharmacyDatabase:
             adjustments = EXCLUDED.adjustments,
             sales_cash = EXCLUDED.sales_cash,
             sales_cod = EXCLUDED.sales_cod,
-            sales_account = EXCLUDED.sales_account
+            sales_account = EXCLUDED.sales_account,
+            type_r_sales = EXCLUDED.type_r_sales
         """
         
         params = (
@@ -121,7 +122,8 @@ class RenderPharmacyDatabase:
             kwargs.get('adjustments'),
             kwargs.get('sales_cash'),
             kwargs.get('sales_cod'),
-            kwargs.get('sales_account')
+            kwargs.get('sales_account'),
+            kwargs.get('type_r_sales')
         )
         
         try:

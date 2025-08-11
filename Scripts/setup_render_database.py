@@ -59,6 +59,7 @@ def create_database_schema(conn):
         gp_value NUMERIC,
         cost_of_sales NUMERIC,
         purchases NUMERIC,
+        type_r_sales NUMERIC,
         
         -- Transaction metrics
         avg_basket_value NUMERIC,
@@ -123,6 +124,9 @@ def create_database_schema(conn):
     CREATE INDEX IF NOT EXISTS idx_sales_details_department ON sales_details(department_code);
     -- Optional index to speed up latest-first scans
     CREATE INDEX IF NOT EXISTS idx_daily_summary_pharmacy_date_desc ON daily_summary(pharmacy_id, report_date DESC);
+
+    -- Ensure new columns exist on existing databases
+    ALTER TABLE daily_summary ADD COLUMN IF NOT EXISTS type_r_sales NUMERIC;
 
     -- Step 3: Insert Sample Data
     INSERT INTO pharmacies (pharmacy_code, name) 

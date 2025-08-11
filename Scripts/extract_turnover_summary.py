@@ -30,7 +30,8 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
         'turnover': None,
         'sales_cash': None,
         'sales_account': None,
-        'sales_cod': None
+        'sales_cod': None,
+        'type_r_sales': None
     }
     
     # Define regex patterns for each field (focusing on Nett Excl column - 3rd number)
@@ -61,6 +62,12 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
         'sales_cod': [
             # Match C.O.D. ACCOUNTS line with 3rd number (Nett Exclusive)
             r'\*\*\s*C\.O\.D\.\s*ACCOUNTS\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})'
+        ],
+        'type_r_sales': [
+            # Match TYPE 'R' SALES line and capture the Nett Exclusive (3rd number)
+            r"TYPE\s*'?R'?\s*SALES\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})",
+            # Match ** 'R' TOTALS row (also shows the Nett Exclusive as the 3rd number)
+            r"\*\*\s*'?R'?\s*TOTALS\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})"
         ]
     }
     
@@ -70,7 +77,7 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 try:
-                    if field == 'turnover':
+                    if field in ('turnover', 'type_r_sales'):
                         if len(match.groups()) >= 3:
                             # Use the 3rd group (Nett Exclusive value)
                             value_str = match.group(3).replace(',', '')
@@ -91,7 +98,7 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
                         result[field] = float(value_str)
                     
                     # Debug logging for successful extraction
-                    if field == 'turnover':
+                    if field in ('turnover', 'type_r_sales'):
                         print(f"DEBUG: Extracted {field} = {result[field]} using pattern {i+1}")
                     
                     break  # Stop after first successful match for this field

@@ -77,7 +77,8 @@ def insert_data_to_database():
                     'turnover': turnover.get('turnover'),
                     'sales_cash': turnover.get('sales_cash'),
                     'sales_account': turnover.get('sales_account'),
-                    'sales_cod': turnover.get('sales_cod')
+                    'sales_cod': turnover.get('sales_cod'),
+                    'type_r_sales': turnover.get('type_r_sales')
                 })
             
             # Extract transaction summary data
