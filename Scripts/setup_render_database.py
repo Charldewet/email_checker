@@ -136,11 +136,32 @@ def create_database_schema(conn):
     ON CONFLICT (pharmacy_code) DO NOTHING;
 
     -- Step 4: Create Views for Easy Querying
-    CREATE OR REPLACE VIEW daily_summary_view AS
+    DROP VIEW IF EXISTS daily_summary_view;
+    CREATE VIEW daily_summary_view AS
     SELECT 
-        ds.*,
+        ds.id,
         p.pharmacy_code,
-        p.name as pharmacy_name
+        p.name as pharmacy_name,
+        ds.report_date,
+        ds.upload_time,
+        ds.turnover,
+        ds.gp_percent,
+        ds.gp_value,
+        ds.cost_of_sales,
+        ds.purchases,
+        ds.type_r_sales,
+        ds.avg_basket_value,
+        ds.avg_basket_size,
+        ds.transactions_total,
+        ds.script_total,
+        ds.avg_script_value,
+        ds.disp_turnover,
+        ds.stock_opening,
+        ds.stock_closing,
+        ds.adjustments,
+        ds.sales_cash,
+        ds.sales_cod,
+        ds.sales_account
     FROM daily_summary ds
     JOIN pharmacies p ON ds.pharmacy_id = p.id;
 
