@@ -11,6 +11,7 @@ import os
 import time
 import threading
 import logging
+import sys
 from datetime import datetime
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -22,10 +23,12 @@ from improved_data_pipeline import ImprovedDataPipeline
 from render_database_connection import RenderPharmacyDatabase
 from api_endpoints import register_all_endpoints
 
-# Configure logging
+# Configure logging (force stdout so logs are visible in Render)
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)],
+    force=True,
 )
 logger = logging.getLogger(__name__)
 
@@ -126,6 +129,7 @@ def start_scheduler():
     
     def run_scheduler():
         while is_running:
+            logger.info("⏱️ Scheduler heartbeat - checking pending jobs")
             schedule.run_pending()
             time.sleep(30)  # Check every 30 seconds
     
@@ -138,6 +142,7 @@ def start_scheduler():
         try:
             # Small delay to let the web server bind to the port first
             time.sleep(2)
+            logger.info("🚦 Initial pipeline run starting")
             run_improved_pipeline()
         except Exception as e:
             logger.error(f"Initial pipeline run failed: {e}")

@@ -24,14 +24,8 @@ logs_dir = Path("logs")
 logs_dir.mkdir(exist_ok=True)
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('logs/classification.log'),
-        logging.StreamHandler()
-    ]
-)
+# Inherit app logger configuration; keep a file handler if needed
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Define keywords for each report type
