@@ -257,6 +257,8 @@ class ImprovedDataPipeline:
             calculated['sales_cash'] = turnover.get('sales_cash', 0)
             calculated['sales_account'] = turnover.get('sales_account', 0)
             calculated['sales_cod'] = turnover.get('sales_cod', 0)
+            # Type R sales from turnover summary
+            calculated['type_r_sales'] = turnover.get('type_r_sales', 0)
     
     def compare_with_database_and_update(self, combined_data: Dict[str, Dict[str, Any]]):
         """
@@ -361,6 +363,13 @@ class ImprovedDataPipeline:
                 'COD Sales'
             )
             
+            # Type R sales - keep largest
+            final_metrics['type_r_sales'] = self.compare_and_keep_largest(
+                existing_data.get('type_r_sales', 0), 
+                calculated.get('type_r_sales', 0), 
+                'Type R Sales'
+            )
+            
             # For percentages and averages, use the value from the record with higher turnover
             if final_metrics['turnover'] == calculated.get('turnover', 0):
                 # Use new values if turnover is from new data
@@ -392,10 +401,11 @@ class ImprovedDataPipeline:
             INSERT INTO daily_summary (
                 pharmacy_id, report_date, turnover, gp_percent, gp_value, cost_of_sales, purchases,
                 avg_basket_value, avg_basket_size, transactions_total, script_total, avg_script_value,
-                disp_turnover, stock_opening, stock_closing, adjustments, sales_cash, sales_cod, sales_account
+                disp_turnover, stock_opening, stock_closing, adjustments, sales_cash, sales_cod, sales_account,
+                type_r_sales
             ) VALUES (
                 (SELECT id FROM pharmacies WHERE pharmacy_code = %s),
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             ) ON CONFLICT (pharmacy_id, report_date) DO UPDATE SET
                 turnover = EXCLUDED.turnover,
                 gp_percent = EXCLUDED.gp_percent,
@@ -413,7 +423,8 @@ class ImprovedDataPipeline:
                 adjustments = EXCLUDED.adjustments,
                 sales_cash = EXCLUDED.sales_cash,
                 sales_cod = EXCLUDED.sales_cod,
-                sales_account = EXCLUDED.sales_account
+                sales_account = EXCLUDED.sales_account,
+                type_r_sales = EXCLUDED.type_r_sales
             """
             
             params = (
@@ -423,7 +434,7 @@ class ImprovedDataPipeline:
                 metrics['avg_basket_size'], metrics['transactions_total'], metrics['script_total'],
                 metrics['avg_script_value'], metrics['disp_turnover'], metrics['stock_opening'],
                 metrics['stock_closing'], metrics['adjustments'], metrics['sales_cash'],
-                metrics['sales_cod'], metrics['sales_account']
+                metrics['sales_cod'], metrics['sales_account'], metrics.get('type_r_sales', 0)
             )
             
             self.db.execute_query(query, params)
