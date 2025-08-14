@@ -1173,42 +1173,162 @@ def register_basic_stock_analytics_endpoints(app: Flask, db: RenderPharmacyDatab
     
     @app.route('/api/stock/low_gp_products/<int:pharmacy_id>/<date>', methods=['GET'])
     def get_low_gp_products(pharmacy_id, date):
-        """Get products with low gross profit"""
+        """Get products with low gross profit percentage for a pharmacy"""
         date = format_date(date)
-        threshold = request.args.get('threshold', 20, type=float)
+        
+        # Get pharmacy info
+        pharmacy_query = "SELECT pharmacy_code, name FROM pharmacies WHERE id = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_id,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_code = pharmacy_result[0]['pharmacy_code']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get products with low GP% (default threshold: 15%)
+        threshold = request.args.get('threshold', 15, type=float)
+        limit = request.args.get('limit', 20, type=int)
         
         query = """
         SELECT 
-            stock_code,
-            description,
-            sales_qty,
-            sales_value,
-            gross_profit,
-            gross_profit_percent,
-            department_code
+            sd.department_code,
+            sd.stock_code,
+            sd.description,
+            sd.sales_qty,
+            sd.sales_value,
+            sd.sales_cost,
+            sd.gross_profit,
+            sd.gross_profit_percent,
+            sd.soh
         FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
         WHERE sd.pharmacy_id = %s 
         AND sd.report_date = %s
         AND sd.gross_profit_percent < %s
-        AND sd.sales_qty > 0
-        ORDER BY sd.sales_value DESC
+        AND sd.sales_value > 0
+        ORDER BY sd.gross_profit_percent ASC, sd.sales_value DESC
+        LIMIT %s
         """
         
-        result = db.execute_query(query, (pharmacy_id, date, threshold))
+        result = db.execute_query(query, (pharmacy_id, date, threshold, limit))
         
-        data = []
-        for row in result:
-            data.append({
-                'stock_code': row['stock_code'],
-                'description': row['description'],
-                'sales_qty': int(row['sales_qty']) if row['sales_qty'] else 0,
-                'sales_value': float(row['sales_value']) if row['sales_value'] else 0,
-                'gross_profit': float(row['gross_profit']) if row['gross_profit'] else 0,
-                'gross_profit_percent': float(row['gross_profit_percent']) if row['gross_profit_percent'] else 0,
-                'department_code': row['department_code']
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_id": pharmacy_id,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "threshold": threshold,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_sales_value": 0,
+                    "average_gp_percent": 0,
+                    "lowest_gp_percent": 0,
+                    "highest_gp_percent": 0
+                }
             })
         
-        return jsonify(data)
+        # Calculate summary statistics
+        total_sales_value = sum(p['sales_value'] for p in result)
+        gp_percentages = [p['gross_profit_percent'] for p in result if p['gross_profit_percent'] is not None]
+        
+        summary = {
+            "product_count": len(result),
+            "total_sales_value": total_sales_value,
+            "average_gp_percent": round(sum(gp_percentages) / len(gp_percentages), 2) if gp_percentages else 0,
+            "lowest_gp_percent": min(gp_percentages) if gp_percentages else 0,
+            "highest_gp_percent": max(gp_percentages) if gp_percentages else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_id": pharmacy_id,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "threshold": threshold,
+            "products": result,
+            "summary": summary
+        })
+    
+    @app.route('/api/stock/low_gp_products_pharmacy/<pharmacy_code>/<date>', methods=['GET'])
+    def get_low_gp_products_pharmacy(pharmacy_code, date):
+        """Get products with low gross profit percentage using pharmacy code"""
+        date = format_date(date)
+        
+        # Get pharmacy ID
+        pharmacy_query = "SELECT id, name FROM pharmacies WHERE pharmacy_code = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_code,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_id = pharmacy_result[0]['id']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get products with low GP% (default threshold: 15%)
+        threshold = request.args.get('threshold', 15, type=float)
+        limit = request.args.get('limit', 20, type=int)
+        
+        query = """
+        SELECT 
+            sd.department_code,
+            sd.stock_code,
+            sd.description,
+            sd.sales_qty,
+            sd.sales_value,
+            sd.sales_cost,
+            sd.gross_profit,
+            sd.gross_profit_percent,
+            sd.soh
+        FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
+        WHERE p.pharmacy_code = %s 
+        AND sd.report_date = %s
+        AND sd.gross_profit_percent < %s
+        AND sd.sales_value > 0
+        ORDER BY sd.gross_profit_percent ASC, sd.sales_value DESC
+        LIMIT %s
+        """
+        
+        result = db.execute_query(query, (pharmacy_code, date, threshold, limit))
+        
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "threshold": threshold,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_sales_value": 0,
+                    "average_gp_percent": 0,
+                    "lowest_gp_percent": 0,
+                    "highest_gp_percent": 0
+                }
+            })
+        
+        # Calculate summary statistics
+        total_sales_value = sum(p['sales_value'] for p in result)
+        gp_percentages = [p['gross_profit_percent'] for p in result if p['gross_profit_percent'] is not None]
+        
+        summary = {
+            "product_count": len(result),
+            "total_sales_value": total_sales_value,
+            "average_gp_percent": round(sum(gp_percentages) / len(gp_percentages), 2) if gp_percentages else 0,
+            "highest_gp_percent": max(gp_percentages) if gp_percentages else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "threshold": threshold,
+            "products": result,
+            "summary": summary
+        })
     
     @app.route('/api/stock/health', methods=['GET'])
     def stock_health():
