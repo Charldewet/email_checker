@@ -1325,7 +1325,6 @@ def register_basic_stock_analytics_endpoints(app: Flask, db: RenderPharmacyDatab
             "date": date,
             "pharmacy_code": pharmacy_code,
             "pharmacy_name": pharmacy_name,
-            "threshold": threshold,
             "products": result,
             "summary": summary
         })
@@ -1460,6 +1459,152 @@ def register_basic_stock_analytics_endpoints(app: Flask, db: RenderPharmacyDatab
             "total_transaction_value": total_transaction_value,
             "highest_qty": max(quantities) if quantities else 0,
             "lowest_qty": min(quantities) if quantities else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "products": result,
+            "summary": summary
+        })
+    
+    @app.route('/api/stock/worst_gp_products/<int:pharmacy_id>/<date>', methods=['GET'])
+    def get_worst_gp_products(pharmacy_id, date):
+        """Get products with the worst gross profit percentage for a pharmacy"""
+        date = format_date(date)
+        
+        # Get pharmacy info
+        pharmacy_query = "SELECT pharmacy_code, name FROM pharmacies WHERE id = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_id,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_code = pharmacy_result[0]['pharmacy_code']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get top 200 products with worst GP% (lowest GP% first)
+        query = """
+        SELECT 
+            sd.description as name,
+            sd.stock_code,
+            sd.sales_qty as items_sold,
+            sd.sales_value as transaction_value,
+            sd.gross_profit_percent as gp_percent,
+            sd.gross_profit as gp_value,
+            sd.sales_cost as cost_price
+        FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
+        WHERE sd.pharmacy_id = %s 
+        AND sd.report_date = %s
+        AND sd.sales_value > 0
+        AND sd.gross_profit_percent IS NOT NULL
+        ORDER BY sd.gross_profit_percent ASC, sd.sales_value DESC
+        LIMIT 200
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, date))
+        
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_id": pharmacy_id,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_transaction_value": 0,
+                    "average_gp_percent": 0,
+                    "worst_gp_percent": 0,
+                    "best_gp_percent": 0
+                }
+            })
+        
+        # Calculate summary statistics
+        total_transaction_value = sum(p['transaction_value'] for p in result)
+        gp_percentages = [p['gp_percent'] for p in result if p['gp_percent'] is not None]
+        
+        summary = {
+            "product_count": len(result),
+            "total_transaction_value": total_transaction_value,
+            "average_gp_percent": round(sum(gp_percentages) / len(gp_percentages), 2) if gp_percentages else 0,
+            "worst_gp_percent": min(gp_percentages) if gp_percentages else 0,
+            "best_gp_percent": max(gp_percentages) if gp_percentages else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_id": pharmacy_id,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "products": result,
+            "summary": summary
+        })
+    
+    @app.route('/api/stock/worst_gp_products_pharmacy/<pharmacy_code>/<date>', methods=['GET'])
+    def get_worst_gp_products_pharmacy(pharmacy_code, date):
+        """Get products with the worst gross profit percentage using pharmacy code"""
+        date = format_date(date)
+        
+        # Get pharmacy ID
+        pharmacy_query = "SELECT id, name FROM pharmacies WHERE pharmacy_code = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_code,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_id = pharmacy_result[0]['id']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get top 200 products with worst GP% (lowest GP% first)
+        query = """
+        SELECT 
+            sd.description as name,
+            sd.stock_code,
+            sd.sales_qty as items_sold,
+            sd.sales_value as transaction_value,
+            sd.gross_profit_percent as gp_percent,
+            sd.gross_profit as gp_value,
+            sd.sales_cost as cost_price
+        FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
+        WHERE p.pharmacy_code = %s 
+        AND sd.report_date = %s
+        AND sd.sales_value > 0
+        AND sd.gross_profit_percent IS NOT NULL
+        ORDER BY sd.gross_profit_percent ASC, sd.sales_value DESC
+        LIMIT 200
+        """
+        
+        result = db.execute_query(query, (pharmacy_code, date))
+        
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_transaction_value": 0,
+                    "average_gp_percent": 0,
+                    "worst_gp_percent": 0,
+                    "best_gp_percent": 0
+                }
+            })
+        
+        # Calculate summary statistics
+        total_transaction_value = sum(p['transaction_value'] for p in result)
+        gp_percentages = [p['gp_percent'] for p in result if p['gp_percent'] is not None]
+        
+        summary = {
+            "product_count": len(result),
+            "total_transaction_value": total_transaction_value,
+            "average_gp_percent": round(sum(gp_percentages) / len(gp_percentages), 2) if gp_percentages else 0,
+            "worst_gp_percent": min(gp_percentages) if gp_percentages else 0,
+            "best_gp_percent": max(gp_percentages) if gp_percentages else 0
         }
         
         return jsonify({
