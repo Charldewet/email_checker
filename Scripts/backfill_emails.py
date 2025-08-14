@@ -20,6 +20,7 @@ import sys
 import argparse
 import imaplib
 import email
+from email.message import Message
 from datetime import datetime, timedelta, date
 from pathlib import Path
 import logging
@@ -48,11 +49,29 @@ def connect_imap(user: str, app_password: str):
     return mail
 
 
+def resolve_mailbox(mail: imaplib.IMAP4_SSL, requested: str) -> str:
+    """Return a mailbox name acceptable to Gmail IMAP for the requested folder.
+    Supports 'INBOX' and 'AllMail' (maps to '[Gmail]/All Mail'). Falls back to INBOX.
+    """
+    if requested.upper() == 'INBOX':
+        return 'INBOX'
+    candidates = ['[Gmail]/All Mail', '[Google Mail]/All Mail', 'All Mail']
+    for cand in candidates:
+        try:
+            typ, _ = mail.status(cand, '(MESSAGES)')
+            if typ == 'OK':
+                return cand
+        except Exception:
+            continue
+    return 'INBOX'
+
+
 def search_pdf_uids(mail: imaplib.IMAP4_SSL, folder: str, start: date, end_exclusive: date):
     """Search for PDF messages in [folder] between [start, end_exclusive). Returns list of ids."""
     # Prefer Gmail X-GM-RAW for precise range
     try:
-        mail.select(folder)
+        mbox = resolve_mailbox(mail, folder)
+        mail.select(mbox)
         # Gmail after/before use YYYY/MM/DD format
         q = f"X-GM-RAW \"after:{start.strftime('%Y/%m/%d')} before:{end_exclusive.strftime('%Y/%m/%d')} filename:pdf\""
         status, data = mail.search(None, q)
@@ -61,14 +80,15 @@ def search_pdf_uids(mail: imaplib.IMAP4_SSL, folder: str, start: date, end_exclu
         raise RuntimeError('X-GM-RAW returned no results')
     except Exception:
         # Fallback to SINCE/BEFORE (day granularity)
-        mail.select(folder)
+        mbox = resolve_mailbox(mail, folder)
+        mail.select(mbox)
         since = ymd_to_gmail(start)
         before = ymd_to_gmail(end_exclusive)
         status, data = mail.search(None, f'SINCE {since} BEFORE {before}')
         return data[0].split() if status == 'OK' and data else []
 
 
-def extract_pdf_attachments(msg: email.message.Message) -> list[Path]:
+def extract_pdf_attachments(msg: Message) -> list[Path]:
     files: list[Path] = []
     for part in msg.walk():
         if part.get_content_maintype() == 'multipart':
