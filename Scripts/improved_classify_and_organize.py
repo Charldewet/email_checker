@@ -18,6 +18,7 @@ import email
 import imaplib
 import tempfile
 import logging
+import sys
 
 # Create logs directory if it doesn't exist
 logs_dir = Path("logs")
@@ -48,6 +49,9 @@ class ImprovedPDFClassifier:
         self.imap_server = 'imap.gmail.com'
         self.temp_dir = Path("temp_classified_test")
         self.temp_dir.mkdir(exist_ok=True)
+        # Auto mode time window and date guard
+        self.lookback_hours = int(os.getenv('EMAIL_LOOKBACK_HOURS', '2'))
+        self.auto_date_guard_days = int(os.getenv('AUTO_DATE_GUARD_DAYS', '7'))
         
     def connect_imap(self):
         """Connect to Gmail IMAP server"""
@@ -64,18 +68,22 @@ class ImprovedPDFClassifier:
         recent_emails = []
         
         try:
-            # Select inbox
-            mail.select('INBOX')
-            
-            # Calculate date range (last N days) - Account for GMT+2 timezone
-            # Add 2 hours to ensure we capture emails from today in GMT+2
-            cutoff_date = datetime.now() - timedelta(days=days) + timedelta(hours=2)
-            date_str = cutoff_date.strftime('%d-%b-%Y')
-            
-            logger.info(f"Searching for emails since {date_str} (accounting for GMT+2 timezone)")
-            
-            # Search for emails since cutoff date
-            status, messages = mail.search(None, f'SINCE {date_str}')
+            # Prefer Gmail X-GM-RAW newer_than: lookback_hours with PDF filter
+            # Fallback to INBOX/SINCE if X-GM-RAW not supported
+            try:
+                mail.select('INBOX')
+                query = f'X-GM-RAW "newer_than:{self.lookback_hours}h filename:pdf"'
+                status, messages = mail.search(None, query)
+                logger.info(f"IMAP search with {query} status={status}")
+                if status != 'OK' or not messages[0]:
+                    raise RuntimeError('X-GM-RAW returned no results')
+            except Exception as _e:
+                # Fallback: SINCE date (day granularity)
+                mail.select('INBOX')
+                cutoff_date = datetime.now() - timedelta(days=days)
+                date_str = cutoff_date.strftime('%d-%b-%Y')
+                logger.info(f"Fallback SINCE {date_str}")
+                status, messages = mail.search(None, f'SINCE {date_str}')
             
             if status != 'OK':
                 logger.error("Failed to search emails")
@@ -96,7 +104,9 @@ class ImprovedPDFClassifier:
                     for part in email_message.walk():
                         if part.get_content_maintype() == 'multipart':
                             continue
-                        if part.get('Content-Disposition') is None:
+                        # accept inline PDFs too
+                        cd = part.get('Content-Disposition')
+                        if cd is None and part.get_content_type() != 'application/pdf':
                             continue
                         
                         filename = part.get_filename()
@@ -291,8 +301,17 @@ class ImprovedPDFClassifier:
                 logger.info("No emails with PDF attachments found")
                 return True
             
+            # Connect to DB to track processed UIDs
+            from render_database_connection import RenderPharmacyDatabase
+            db = RenderPharmacyDatabase()
+            existing_uids = set(u['uid'] for u in db.execute_query('SELECT uid FROM processed_emails'))
+            logger.info(f"Loaded {len(existing_uids)} processed UIDs")
+            
             # Process each email
             for email_data in recent_emails:
+                uid = email_data['id'].decode('utf-8') if isinstance(email_data['id'], bytes) else str(email_data['id'])
+                if uid in existing_uids:
+                    continue
                 logger.info(f"Processing email: {email_data['subject']}")
                 
                 # Extract PDF attachments
@@ -358,6 +377,10 @@ class ImprovedPDFClassifier:
                         except:
                             pass
             
+            # Enforce auto-mode date guard: skip data older than guard window
+            if self.auto_date_guard_days > 0:
+                guard_date = (datetime.now() - timedelta(days=self.auto_date_guard_days)).date()
+                logger.info(f"Auto date guard active: ignoring records before {guard_date}")
             logger.info("Email processing and classification complete!")
             return True
             

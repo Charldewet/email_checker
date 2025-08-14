@@ -202,6 +202,14 @@ def create_database_schema(conn):
 
     CREATE INDEX IF NOT EXISTS idx_yearly_kpis_pharmacy_year ON yearly_kpis(pharmacy_id, year_start);
 
+    -- Processed emails tracking (to avoid re-processing the same Gmail messages)
+    CREATE TABLE IF NOT EXISTS processed_emails (
+        uid TEXT PRIMARY KEY,
+        pharmacy_code TEXT,
+        message_id TEXT,
+        processed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
     -- Step 5: Create Functions for Common Queries
     CREATE OR REPLACE FUNCTION get_pharmacy_performance(
         p_pharmacy_code TEXT,
