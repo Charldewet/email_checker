@@ -64,17 +64,17 @@ def extract_turnover_summary_data(pdf_path: str) -> Dict[str, Any]:
             r'\*\*\s*C\.O\.D\.\s*ACCOUNTS\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})'
         ],
         'type_r_sales': [
-            # Match TYPE 'R' SALES line and capture the Nett Exclusive (3rd number)
-            r"TYPE\s*'?R'?\s*SALES\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})",
-            # Match ** 'R' TOTALS row (also shows the Nett Exclusive as the 3rd number)
-            r"\*\*\s*'?R'?\s*TOTALS\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}[-]?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})"
+            # Match TYPE 'R' SALES (numbers may be on the next line; allow any whitespace/newlines between label and numbers)
+            r"TYPE\s*['’]?\s*R\s*['’]?\s*SALES[\s\S]*?(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}-?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})",
+            # Match ** 'R' TOTALS row (numbers may be on same line)
+            r"\*\*\s*['’]?\s*R\s*['’]?\s*TOTALS\s+(\d{1,3}(?:,\d{3})*\.\d{2})\s+(\d{1,3}(?:,\d{3})*\.\d{2}-?)\s+(\d{1,3}(?:,\d{3})*\.\d{2})"
         ]
     }
     
     # Extract each field using regex patterns
     for field, field_patterns in patterns.items():
         for i, pattern in enumerate(field_patterns):
-            match = re.search(pattern, text, re.IGNORECASE)
+            match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
             if match:
                 try:
                     if field in ('turnover', 'type_r_sales'):
