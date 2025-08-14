@@ -262,13 +262,13 @@ def create_database_schema(conn):
     CREATE OR REPLACE FUNCTION compute_gp_fields()
     RETURNS trigger AS $$
     BEGIN
-        -- Compute GP value from turnover - cost_of_sales
-        NEW.gp_value := COALESCE(NEW.turnover, 0) - COALESCE(NEW.cost_of_sales, 0);
-        -- Compute GP percent safely
-        IF COALESCE(NEW.turnover, 0) = 0 THEN
+        -- Compute GP value excluding Type R sales
+        NEW.gp_value := COALESCE(NEW.turnover, 0) - COALESCE(NEW.cost_of_sales, 0) - COALESCE(NEW.type_r_sales, 0);
+        -- Compute GP percent: 100 * (turnover - cost_of_sales - type_r_sales) / (turnover - type_r_sales)
+        IF COALESCE(NEW.turnover, 0) - COALESCE(NEW.type_r_sales, 0) <= 0 THEN
             NEW.gp_percent := 0;
         ELSE
-            NEW.gp_percent := ROUND(100 * COALESCE(NEW.gp_value, 0) / NULLIF(NEW.turnover, 0), 2);
+            NEW.gp_percent := ROUND(100 * COALESCE(NEW.gp_value, 0) / NULLIF(COALESCE(NEW.turnover,0) - COALESCE(NEW.type_r_sales,0), 0), 2);
         END IF;
         RETURN NEW;
     END;
@@ -283,10 +283,10 @@ def create_database_schema(conn):
 
     -- One-time backfill to correct existing rows (gp_value and gp_percent)
     UPDATE daily_summary
-    SET gp_value = COALESCE(turnover,0) - COALESCE(cost_of_sales,0),
+    SET gp_value = COALESCE(turnover,0) - COALESCE(cost_of_sales,0) - COALESCE(type_r_sales,0),
         gp_percent = ROUND(
-            CASE WHEN COALESCE(turnover,0) = 0 THEN 0
-                 ELSE ( (COALESCE(turnover,0) - COALESCE(cost_of_sales,0)) / NULLIF(turnover,0) ) * 100 END
+            CASE WHEN (COALESCE(turnover,0) - COALESCE(type_r_sales,0)) <= 0 THEN 0
+                 ELSE ((COALESCE(turnover,0) - COALESCE(cost_of_sales,0) - COALESCE(type_r_sales,0)) / NULLIF(COALESCE(turnover,0) - COALESCE(type_r_sales,0),0)) * 100 END
         , 2);
 
     -- Compute avg_basket_value from turnover / transactions_total

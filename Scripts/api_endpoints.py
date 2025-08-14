@@ -246,7 +246,9 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             # Compute MTD avg_script_value = disp_turnover / script_total
             mtd_asv = float(mtd['disp_turnover']) / mtd['script_total'] if mtd['script_total'] else 0.0
             # Compute MTD gp_percent = 100 * gp_value / turnover
-            mtd_gp = 100.0 * float(mtd['gp_value']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
+            mtd_base_turnover = float(mtd['turnover']) - float(mtd.get('type_r_sales', 0) or 0)
+            mtd_gp_value_excl_r = float(mtd['turnover']) - float(mtd['cost_of_sales']) - float(mtd.get('type_r_sales', 0) or 0)
+            mtd_gp = 100.0 * mtd_gp_value_excl_r / mtd_base_turnover if mtd_base_turnover else 0.0
             # Compute MTD dispensary/frontshop split
             mtd_disp_pct = 100.0 * float(mtd['disp_turnover']) / float(mtd['turnover']) if float(mtd['turnover']) else 0.0
             mtd_front_pct = max(0.0, 100.0 - mtd_disp_pct)
@@ -271,7 +273,9 @@ def register_financial_endpoints(app: Flask, db: RenderPharmacyDatabase):
             ytd = db.execute_query(ytd_q, (pharmacy_id, as_of, as_of))[0]
             ytd_abv = float(ytd['turnover']) / ytd['transactions_total'] if ytd['transactions_total'] else 0.0
             ytd_asv = float(ytd['disp_turnover']) / ytd['script_total'] if ytd['script_total'] else 0.0
-            ytd_gp = 100.0 * float(ytd['gp_value']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
+            ytd_base_turnover = float(ytd['turnover']) - float(ytd.get('type_r_sales', 0) or 0)
+            ytd_gp_value_excl_r = float(ytd['turnover']) - float(ytd['cost_of_sales']) - float(ytd.get('type_r_sales', 0) or 0)
+            ytd_gp = 100.0 * ytd_gp_value_excl_r / ytd_base_turnover if ytd_base_turnover else 0.0
             ytd_disp_pct = 100.0 * float(ytd['disp_turnover']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
             ytd_front_pct = max(0.0, 100.0 - ytd_disp_pct)
             ytd_type_r_pct = 100.0 * float(ytd['type_r_sales']) / float(ytd['turnover']) if float(ytd['turnover']) else 0.0
