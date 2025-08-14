@@ -104,7 +104,7 @@ def extract_pdf_attachments(msg: Message) -> list[Path]:
     return files
 
 
-def classify_and_store(pdf_file: Path, classifier: ImprovedPDFClassifier, base_dir: Path) -> Path | None:
+def classify_and_store(pdf_file: Path, classifier: ImprovedPDFClassifier, base_dir: Path, filter_pharmacy: str | None = None) -> Path | None:
     import fitz
     import re
     try:
@@ -131,6 +131,9 @@ def classify_and_store(pdf_file: Path, classifier: ImprovedPDFClassifier, base_d
         pharm_folder.mkdir(parents=True, exist_ok=True)
         dest = pharm_folder / f"{report_type}_{pdf_file.name}"
         dest.write_bytes(pdf_file.read_bytes())
+        if filter_pharmacy and pharmacy_name.upper() != filter_pharmacy.upper():
+            # Skip non-matching pharmacy
+            return None
         return dest
     except Exception as e:
         logger.error(f"Classify/store failed for {pdf_file}: {e}")
@@ -192,7 +195,7 @@ def run_backfill(args: argparse.Namespace) -> int:
                 if not pdfs:
                     continue
                 for p in pdfs:
-                    dest = classify_and_store(p, classifier, base_dir)
+                    dest = classify_and_store(p, classifier, base_dir, args.pharmacy)
                     try:
                         p.unlink()
                     except Exception:
