@@ -1330,6 +1330,146 @@ def register_basic_stock_analytics_endpoints(app: Flask, db: RenderPharmacyDatab
             "summary": summary
         })
     
+    @app.route('/api/stock/top_products_by_qty/<int:pharmacy_id>/<date>', methods=['GET'])
+    def get_top_products_by_qty(pharmacy_id, date):
+        """Get top products by quantity sold for a pharmacy"""
+        date = format_date(date)
+        
+        # Get pharmacy info
+        pharmacy_query = "SELECT pharmacy_code, name FROM pharmacies WHERE id = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_id,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_code = pharmacy_result[0]['pharmacy_code']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get top 100 products by quantity sold
+        query = """
+        SELECT 
+            sd.description as name,
+            sd.stock_code,
+            sd.sales_qty as items_sold,
+            sd.sales_value as transaction_value
+        FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
+        WHERE sd.pharmacy_id = %s 
+        AND sd.report_date = %s
+        AND sd.sales_qty > 0
+        ORDER BY sd.sales_qty DESC, sd.sales_value DESC
+        LIMIT 100
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, date))
+        
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_id": pharmacy_id,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_items_sold": 0,
+                    "total_transaction_value": 0,
+                    "highest_qty": 0,
+                    "lowest_qty": 0
+                }
+            })
+        
+        # Calculate summary statistics
+        total_items_sold = sum(p['items_sold'] for p in result)
+        total_transaction_value = sum(p['transaction_value'] for p in result)
+        quantities = [p['items_sold'] for p in result]
+        
+        summary = {
+            "product_count": len(result),
+            "total_items_sold": total_items_sold,
+            "total_transaction_value": total_transaction_value,
+            "highest_qty": max(quantities) if quantities else 0,
+            "lowest_qty": min(quantities) if quantities else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_id": pharmacy_id,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "products": result,
+            "summary": summary
+        })
+    
+    @app.route('/api/stock/top_products_by_qty_pharmacy/<pharmacy_code>/<date>', methods=['GET'])
+    def get_top_products_by_qty_pharmacy(pharmacy_code, date):
+        """Get top products by quantity sold using pharmacy code"""
+        date = format_date(date)
+        
+        # Get pharmacy ID
+        pharmacy_query = "SELECT id, name FROM pharmacies WHERE pharmacy_code = %s"
+        pharmacy_result = db.execute_query(pharmacy_query, (pharmacy_code,))
+        
+        if not pharmacy_result:
+            return jsonify({"error": "Pharmacy not found"}), 404
+        
+        pharmacy_id = pharmacy_result[0]['id']
+        pharmacy_name = pharmacy_result[0]['name']
+        
+        # Get top 100 products by quantity sold
+        query = """
+        SELECT 
+            sd.description as name,
+            sd.stock_code,
+            sd.sales_qty as items_sold,
+            sd.sales_value as transaction_value
+        FROM sales_details sd
+        JOIN pharmacies p ON sd.pharmacy_id = p.id
+        WHERE p.pharmacy_code = %s 
+        AND sd.report_date = %s
+        AND sd.sales_qty > 0
+        ORDER BY sd.sales_qty DESC, sd.sales_value DESC
+        LIMIT 100
+        """
+        
+        result = db.execute_query(query, (pharmacy_code, date))
+        
+        if not result:
+            return jsonify({
+                "date": date,
+                "pharmacy_code": pharmacy_code,
+                "pharmacy_name": pharmacy_name,
+                "products": [],
+                "summary": {
+                    "product_count": 0,
+                    "total_items_sold": 0,
+                    "total_transaction_value": 0,
+                    "highest_qty": 0,
+                    "lowest_qty": 0
+                }
+            })
+        
+        # Calculate summary statistics
+        total_items_sold = sum(p['items_sold'] for p in result)
+        total_transaction_value = sum(p['transaction_value'] for p in result)
+        quantities = [p['items_sold'] for p in result]
+        
+        summary = {
+            "product_count": len(result),
+            "total_items_sold": total_items_sold,
+            "total_transaction_value": total_transaction_value,
+            "highest_qty": max(quantities) if quantities else 0,
+            "lowest_qty": min(quantities) if quantities else 0
+        }
+        
+        return jsonify({
+            "date": date,
+            "pharmacy_code": pharmacy_code,
+            "pharmacy_name": pharmacy_name,
+            "products": result,
+            "summary": summary
+        })
+    
     @app.route('/api/stock/health', methods=['GET'])
     def stock_health():
         """Stock service health check"""
