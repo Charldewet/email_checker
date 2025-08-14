@@ -439,6 +439,31 @@ class ImprovedDataPipeline:
             
             self.db.execute_query(query, params)
             logger.info(f"✅ Updated database record for {pharmacy} - {date}")
+            
+            # --- NEW: Insert sales details for this pharmacy/date ---
+            # Get the original data to access gross_profit_summary
+            original_data = None
+            for key, data in self.combined_data.items():
+                if data.get('pharmacy') == pharmacy and data.get('date') == date:
+                    original_data = data
+                    break
+            
+            if original_data and 'gross_profit_summary' in original_data and 'sales_details' in original_data['gross_profit_summary']:
+                sales_details = original_data['gross_profit_summary']['sales_details']
+                
+                if sales_details:
+                    logger.info(f"📦 Inserting {len(sales_details)} products for {pharmacy} - {date}")
+                    
+                    # Insert sales details using the database connection
+                    if self.db.insert_sales_details(pharmacy, date, sales_details):
+                        logger.info(f"✅ Successfully inserted {len(sales_details)} products")
+                    else:
+                        logger.warning(f"⚠️ Failed to insert products for {pharmacy} - {date}")
+                else:
+                    logger.info(f"⚠️ No sales details found for {pharmacy} - {date}")
+            else:
+                logger.info(f"⚠️ No gross_profit_summary or sales_details found for {pharmacy} - {date}")
+            
             # Refresh rollups for this pharmacy/date
             try:
                 self.db.refresh_rollups(pharmacy, date)
@@ -502,29 +527,29 @@ class ImprovedDataPipeline:
         try:
             # Step 1: Extract and process all data
             logger.info("\n--- Step 1: Extracting and processing data ---")
-            combined_data = self.extract_and_process_all_data()
+            self.combined_data = self.extract_and_process_all_data()
             
-            if not combined_data:
+            if not self.combined_data:
                 logger.warning("No data found to process")
                 return
             
             # Step 2: Calculate derived metrics
             logger.info("\n--- Step 2: Calculating derived metrics ---")
-            self.calculate_derived_metrics(combined_data)
+            self.calculate_derived_metrics(self.combined_data)
             
             # Step 3: Compare with database and update with largest values
             logger.info("\n--- Step 3: Comparing with database and updating ---")
-            self.compare_with_database_and_update(combined_data)
+            self.compare_with_database_and_update(self.combined_data)
             
             # Step 4: Display final summary
             logger.info("\n--- Step 4: Displaying final summary ---")
-            self.display_final_summary(combined_data)
+            self.display_final_summary(self.combined_data)
             
             # Step 5: Save processed data to file
             logger.info("\n--- Step 5: Saving processed data ---")
             with open('improved_pipeline_data.json', 'w') as f:
                 # Convert tuple keys to string keys for JSON compatibility
-                json.dump({f"{k[0]}_{k[1]}": v for k, v in combined_data.items()}, f, indent=2, default=str)
+                json.dump({f"{k[0]}_{k[1]}": v for k, v in self.combined_data.items()}, f, indent=2, default=str)
             
             logger.info("✅ Processed data saved to improved_pipeline_data.json")
             logger.info("\n🎉 IMPROVED DATA PIPELINE COMPLETED SUCCESSFULLY!")

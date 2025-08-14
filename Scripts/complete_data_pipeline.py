@@ -337,13 +337,41 @@ def run_complete_pipeline(classified_pdfs_dir="temp_classified_pdfs"):
         sql_content = sql_content.replace('None,', 'NULL,')
         sql_content = sql_content.replace('None\n', 'NULL\n')
         
-        # Execute the SQL
+        # Execute the SQL for daily_summary
         db.execute_query(sql_content)
-        print("✅ Data successfully inserted into database!")
+        print("✅ Daily summary data successfully inserted into database!")
+        
+        # --- NEW: Insert sales details for each pharmacy/date combination ---
+        print("\n--- Step 7b: Inserting sales details into database ---")
+        sales_details_count = 0
+        
+        for key, data in combined_data.items():
+            pharmacy, date = key
+            
+            # Check if gross_profit_summary exists and has sales_details
+            if 'gross_profit_summary' in data and 'sales_details' in data['gross_profit_summary']:
+                sales_details = data['gross_profit_summary']['sales_details']
+                
+                if sales_details:
+                    print(f"   📦 Inserting {len(sales_details)} products for {pharmacy} - {date}")
+                    
+                    # Insert sales details using the database connection
+                    if db.insert_sales_details(pharmacy, date, sales_details):
+                        sales_details_count += len(sales_details)
+                        print(f"   ✅ Successfully inserted {len(sales_details)} products")
+                    else:
+                        print(f"   ❌ Failed to insert products for {pharmacy} - {date}")
+                else:
+                    print(f"   ⚠️  No sales details found for {pharmacy} - {date}")
+            else:
+                print(f"   ⚠️  No gross_profit_summary or sales_details found for {pharmacy} - {date}")
+        
+        print(f"✅ Sales details insertion completed! Total products: {sales_details_count}")
         
         # Display summary of what was inserted
         print(f"\n📊 Database Insertion Summary:")
-        print(f"   • Records processed: {len(combined_data)}")
+        print(f"   • Daily summaries processed: {len(combined_data)}")
+        print(f"   • Total products inserted: {sales_details_count}")
         for key, data in combined_data.items():
             pharmacy, date = key
             calculated = data['calculated_metrics']
