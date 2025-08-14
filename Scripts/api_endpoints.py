@@ -967,6 +967,135 @@ def register_basic_stock_analytics_endpoints(app: Flask, db: RenderPharmacyDatab
             'stock_closing': float(row['stock_closing']) if row['stock_closing'] else 0
         })
     
+    @app.route('/api/stock/top_products_by_value/<int:pharmacy_id>/<date>', methods=['GET'])
+    def get_top_products_by_value(pharmacy_id, date):
+        """Get top products by sales value for a specific date"""
+        date = format_date(date)
+        limit = request.args.get('limit', 20, type=int)
+        
+        query = """
+        SELECT 
+            stock_code,
+            description,
+            sales_qty,
+            sales_value,
+            sales_cost,
+            gross_profit,
+            gross_profit_percent,
+            department_code,
+            soh
+        FROM sales_details sd
+        WHERE sd.pharmacy_id = %s 
+        AND sd.report_date = %s
+        AND sd.sales_value > 0
+        ORDER BY sd.sales_value DESC
+        LIMIT %s
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, date, limit))
+        
+        data = []
+        total_sales = 0
+        
+        for row in result:
+            sales_value = float(row['sales_value']) if row['sales_value'] else 0
+            total_sales += sales_value
+            
+            data.append({
+                'stock_code': row['stock_code'],
+                'description': row['description'],
+                'sales_qty': float(row['sales_qty']) if row['sales_qty'] else 0,
+                'sales_value': sales_value,
+                'sales_cost': float(row['sales_cost']) if row['sales_cost'] else 0,
+                'gross_profit': float(row['gross_profit']) if row['gross_profit'] else 0,
+                'gross_profit_percent': float(row['gross_profit_percent']) if row['gross_profit_percent'] else 0,
+                'department_code': row['department_code'],
+                'soh': float(row['soh']) if row['soh'] else 0
+            })
+        
+        # Calculate summary statistics
+        summary = {
+            'total_sales_value': total_sales,
+            'product_count': len(data),
+            'average_sales_value': total_sales / len(data) if data else 0,
+            'highest_sales_value': max([p['sales_value'] for p in data]) if data else 0,
+            'lowest_sales_value': min([p['sales_value'] for p in data]) if data else 0
+        }
+        
+        return jsonify({
+            'products': data,
+            'summary': summary,
+            'pharmacy_id': pharmacy_id,
+            'date': date
+        })
+    
+    @app.route('/api/stock/top_products_by_value_pharmacy/<pharmacy_code>/<date>', methods=['GET'])
+    def get_top_products_by_value_pharmacy(pharmacy_code, date):
+        """Get top products by sales value using pharmacy code instead of ID"""
+        date = format_date(date)
+        limit = request.args.get('limit', 20, type=int)
+        
+        # First get pharmacy ID
+        pharmacy_id = db.get_pharmacy_id_by_code(pharmacy_code)
+        if not pharmacy_id:
+            return jsonify({'error': 'Pharmacy not found'}), 404
+        
+        query = """
+        SELECT 
+            stock_code,
+            description,
+            sales_qty,
+            sales_value,
+            sales_cost,
+            gross_profit,
+            gross_profit_percent,
+            department_code,
+            soh
+        FROM sales_details sd
+        WHERE sd.pharmacy_id = %s 
+        AND sd.report_date = %s
+        AND sd.sales_value > 0
+        ORDER BY sd.sales_value DESC
+        LIMIT %s
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, date, limit))
+        
+        data = []
+        total_sales = 0
+        
+        for row in result:
+            sales_value = float(row['sales_value']) if row['sales_value'] else 0
+            total_sales += sales_value
+            
+            data.append({
+                'stock_code': row['stock_code'],
+                'description': row['description'],
+                'sales_qty': float(row['sales_qty']) if row['sales_qty'] else 0,
+                'sales_value': sales_value,
+                'sales_cost': float(row['sales_cost']) if row['sales_cost'] else 0,
+                'gross_profit': float(row['gross_profit']) if row['gross_profit'] else 0,
+                'gross_profit_percent': float(row['gross_profit_percent']) if row['gross_profit_percent'] else 0,
+                'department_code': row['department_code'],
+                'soh': float(row['soh']) if row['soh'] else 0
+            })
+        
+        # Calculate summary statistics
+        summary = {
+            'total_sales_value': total_sales,
+            'product_count': len(data),
+            'average_sales_value': total_sales / len(data) if data else 0,
+            'highest_sales_value': max([p['sales_value'] for p in data]) if data else 0,
+            'lowest_sales_value': min([p['sales_value'] for p in data]) if data else 0
+        }
+        
+        return jsonify({
+            'products': data,
+            'summary': summary,
+            'pharmacy_code': pharmacy_code,
+            'date': date
+        })
+    
     @app.route('/api/stock/top_moving/<int:pharmacy_id>/<date>', methods=['GET'])
     def get_top_moving(pharmacy_id, date):
         """Get top moving products for a specific date"""
@@ -1136,6 +1265,38 @@ def register_status_endpoints(app: Flask, db: RenderPharmacyDatabase):
     def api_health_check():
         """API health check endpoint"""
         return jsonify({'status': 'healthy', 'service': 'api'})
+    
+    @app.route('/api/db_test', methods=['GET'])
+    def test_database_connection():
+        """Test database connection with a simple query"""
+        try:
+            # Simple query to test connection
+            test_query = "SELECT 1 as test"
+            result = db.execute_query(test_query)
+            
+            if result and result[0]['test'] == 1:
+                return jsonify({
+                    'status': 'healthy',
+                    'database': 'connected',
+                    'message': 'Database connection successful',
+                    'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                })
+            else:
+                return jsonify({
+                    'status': 'error',
+                    'database': 'query_failed',
+                    'message': 'Database query returned unexpected result',
+                    'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                }), 500
+                
+        except Exception as e:
+            return jsonify({
+                'status': 'error',
+                'database': 'connection_failed',
+                'error': str(e),
+                'message': 'Database connection failed',
+                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }), 500
 
 def register_all_endpoints(app: Flask, db: RenderPharmacyDatabase):
     """Register all Phase 1 API endpoints"""
