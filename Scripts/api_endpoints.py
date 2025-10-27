@@ -1703,6 +1703,156 @@ def register_status_endpoints(app: Flask, db: RenderPharmacyDatabase):
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }), 500
 
+def register_stock_activity_endpoints(app: Flask, db: RenderPharmacyDatabase):
+    """Register stock activity endpoints for date range queries"""
+    
+    @app.route('/pharmacies/<int:pharmacy_id>/stock-activity/by-quantity/range', methods=['GET'])
+    def get_best_sellers_by_quantity_range(pharmacy_id):
+        """
+        Get best selling products by quantity for a date range
+        Returns aggregated sales data across all days in the range
+        """
+        # Get query parameters
+        from_date = request.args.get('from')
+        to_date = request.args.get('to')
+        limit = request.args.get('limit', 20, type=int)
+        
+        # Validate required parameters
+        if not from_date or not to_date:
+            return jsonify({
+                'error': 'Missing required parameters',
+                'message': 'Both "from" and "to" date parameters (YYYY-MM-DD) are required'
+            }), 400
+        
+        # Format dates
+        from_date = format_date(from_date)
+        to_date = format_date(to_date)
+        
+        # Query to aggregate sales across date range
+        # We use stock_code as the identifier (assuming same product = same stock_code)
+        query = """
+        SELECT 
+            description as product_name,
+            stock_code as nappi_code,
+            SUM(sales_qty)::INTEGER as quantity_sold,
+            SUM(sales_value) as total_sales,
+            AVG(gross_profit_percent) as gp_percent
+        FROM sales_details
+        WHERE pharmacy_id = %s 
+        AND report_date BETWEEN %s AND %s
+        AND sales_qty > 0
+        GROUP BY stock_code, description
+        ORDER BY SUM(sales_qty) DESC
+        LIMIT %s
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, from_date, to_date, limit))
+        
+        if not result:
+            return jsonify([])
+        
+        # Format response
+        data = []
+        for row in result:
+            data.append({
+                'product_name': row['product_name'],
+                'nappi_code': row['nappi_code'],
+                'quantity_sold': int(row['quantity_sold']) if row['quantity_sold'] else 0,
+                'total_sales': float(row['total_sales']) if row['total_sales'] else 0.0,
+                'gp_percent': round(float(row['gp_percent']), 2) if row['gp_percent'] else 0.0
+            })
+        
+        return jsonify(data)
+    
+    @app.route('/pharmacies/<int:pharmacy_id>/stock-activity/low-gp/range', methods=['GET'])
+    def get_low_gp_products_range(pharmacy_id):
+        """
+        Get products with low gross profit percentage for a date range
+        Aggregates sales across all days in the range
+        """
+        # Get query parameters
+        from_date = request.args.get('from')
+        to_date = request.args.get('to')
+        threshold = request.args.get('threshold')
+        limit = request.args.get('limit', 100, type=int)
+        exclude_pdst = request.args.get('exclude_pdst', 'false').lower() == 'true'
+        
+        # Validate required parameters
+        if not from_date or not to_date:
+            return jsonify({
+                'error': 'Missing required parameters',
+                'message': 'Both "from" and "to" date parameters (YYYY-MM-DD) are required'
+            }), 400
+        
+        if not threshold:
+            return jsonify({
+                'error': 'Missing required parameter',
+                'message': 'Threshold parameter (maximum GP%) is required'
+            }), 400
+        
+        try:
+            threshold = float(threshold)
+        except ValueError:
+            return jsonify({
+                'error': 'Invalid threshold',
+                'message': 'Threshold must be a numeric value'
+            }), 400
+        
+        # Format dates
+        from_date = format_date(from_date)
+        to_date = format_date(to_date)
+        
+        # Build query with optional PDST/KSAA exclusion
+        # Note: We need to identify PDST/KSAA by their department_code or description
+        exclusion_filter = ""
+        if exclude_pdst:
+            # Filter out products where department_code or description contains PDST or KSAA
+            exclusion_filter = """
+            AND (department_code IS NULL OR department_code NOT IN ('PDST', 'KSAA'))
+            AND (description IS NULL OR description NOT ILIKE '%PDST%' AND description NOT ILIKE '%KSAA%')
+            """
+        
+        query = f"""
+        SELECT 
+            description as product_name,
+            stock_code as nappi_code,
+            SUM(sales_qty)::INTEGER as quantity_sold,
+            SUM(sales_value) as total_sales,
+            SUM(sales_cost) as total_cost,
+            SUM(gross_profit) as gp_value,
+            AVG(gross_profit_percent) as gp_percent
+        FROM sales_details
+        WHERE pharmacy_id = %s 
+        AND report_date BETWEEN %s AND %s
+        AND sales_value > 0
+        AND gross_profit_percent IS NOT NULL
+        AND gross_profit_percent <= %s
+        {exclusion_filter}
+        GROUP BY stock_code, description
+        ORDER BY AVG(gross_profit_percent) ASC
+        LIMIT %s
+        """
+        
+        result = db.execute_query(query, (pharmacy_id, from_date, to_date, threshold, limit))
+        
+        if not result:
+            return jsonify([])
+        
+        # Format response
+        data = []
+        for row in result:
+            data.append({
+                'product_name': row['product_name'],
+                'nappi_code': row['nappi_code'],
+                'quantity_sold': int(row['quantity_sold']) if row['quantity_sold'] else 0,
+                'total_sales': float(row['total_sales']) if row['total_sales'] else 0.0,
+                'total_cost': float(row['total_cost']) if row['total_cost'] else 0.0,
+                'gp_value': float(row['gp_value']) if row['gp_value'] else 0.0,
+                'gp_percent': round(float(row['gp_percent']), 2) if row['gp_percent'] else 0.0
+            })
+        
+        return jsonify(data)
+
 def register_all_endpoints(app: Flask, db: RenderPharmacyDatabase):
     """Register all Phase 1 API endpoints"""
     register_financial_endpoints(app, db)
@@ -1712,6 +1862,7 @@ def register_all_endpoints(app: Flask, db: RenderPharmacyDatabase):
     register_stock_endpoints(app, db)
     register_performance_endpoints(app, db)
     register_basic_stock_analytics_endpoints(app, db)
+    register_stock_activity_endpoints(app, db)
     register_status_endpoints(app, db)
     
     logger.info("✅ All Phase 1 API endpoints registered successfully") 
